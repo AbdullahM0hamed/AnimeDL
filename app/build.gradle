@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
     defaultConfig {
         applicationId "com.anime.dl"
         minSdkVersion 21
