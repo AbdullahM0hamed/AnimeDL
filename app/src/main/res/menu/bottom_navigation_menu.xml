@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/group_feature">
+        <item
+            android:checked="true"
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_selector_24dp"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_search_read_selector_24dp"
+            android:title="@string/search" />
+        <item
+            android:id="@+id/nav_download"
+            android:icon="@drawable/ic_download_selector_24dp"
+            android:title="@string/download" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_selector_24dp"
+            android:title="@string/settings" />
+    </group>
+</menu>

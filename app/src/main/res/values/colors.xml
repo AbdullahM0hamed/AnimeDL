@@ -1,0 +1,4 @@
+<resources>
+<color name="colorPrimary">@android:color/black</color>
+<color name="white">@android:color/white</color>
+</resources>
