@@ -53,6 +53,11 @@ jobs:
           keyStorePassword: ${{ secrets.PASSWORD }}
           keyPassword: ${{ secrets.PASSWORD }}
 
+      - name: Rename Artifact
+        run: |
+          cd app/build/outputs/apk/release
+          mv app-release-unsigned-signed.apk AnimeDL.apk
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
