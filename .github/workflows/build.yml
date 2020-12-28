@@ -62,4 +62,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: AnimeDL
-          path: app/build/outputs/apk/release/*-signed.apk
+          path: app/build/outputs/apk/release/AnimeDL.apk
