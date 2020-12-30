@@ -7,7 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity"
     >
-  <FrameLayout
+
+    <com.google.android.material.appbar.AppBarLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+    
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@id/topAppBar" 
+            android:background="@android:color/black"
+            android:layout_width="fill_parent" 
+            android:layout_height="?actionBarSize" 
+            app:title="@string/app_name" 
+            app:titleTextColor="@android:color/white"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" 
+            />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:id="@+id/container"
@@ -24,7 +41,5 @@
         app:menu="@menu/bottom_navigation_menu"
         app:labelVisibilityMode="labeled"
         />
-
   </FrameLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
