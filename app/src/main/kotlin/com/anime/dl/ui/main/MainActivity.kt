@@ -1,7 +1,7 @@
 package com.anime.dl.ui.main
 
-import android.app.Activity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.databinding.MainBinding
 import com.anime.dl.R
 import com.anime.dl.ui.browse.BrowseController
@@ -9,7 +9,7 @@ import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction.with
 
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: MainBinding
     private lateinit var router: Router

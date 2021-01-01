@@ -6,13 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import com.anime.dl.databinding.BrowseControllerBinding
 import com.anime.dl.ui.base.controller.BaseController
+import com.anime.dl.ui.base.controller.TabbedController
 
-class BrowseController : BaseController() {
+class BrowseController : 
+    BaseController<BrowseControllerBinding>,
+    TabbedController {
+
     override fun inflateView(
         inflater: LayoutInflater,
         container: ViewGroup
     ): View {
-        val binding = BrowseControllerBinding.inflate(inflater)
+        binding = BrowseControllerBinding.inflate(inflater)
         return binding.root
+    }
+
+    override fun getTitle(): String? {
+        return "Placeholder"
     }
 }
