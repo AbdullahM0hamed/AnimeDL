@@ -29,7 +29,7 @@ class BrowseController :
         return resources!!.getString(R.string.browse)
     }
 
-    override onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
+    override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
         super.onChangeStarted(handler, type)
         if (type.isEnter) {
             (activity as? MainActivity)?.binding?.tabs?.apply {

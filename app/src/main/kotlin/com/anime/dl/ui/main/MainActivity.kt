@@ -11,7 +11,7 @@ import com.bluelinelabs.conductor.RouterTransaction.with
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: MainBinding
+    public lateinit var binding: MainBinding
     private lateinit var router: Router
 
     override fun onCreate(savedInstance: Bundle?) {
