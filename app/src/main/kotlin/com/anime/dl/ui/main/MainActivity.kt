@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.topAppBar)
 
         router = Conductor.attachRouter(this, binding.controllerContainer, savedInstance)
 
