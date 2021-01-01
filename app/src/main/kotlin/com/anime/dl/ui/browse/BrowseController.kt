@@ -9,7 +9,7 @@ import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.base.controller.TabbedController
 
 class BrowseController : 
-    BaseController<BrowseControllerBinding>,
+    BaseController<BrowseControllerBinding>(),
     TabbedController {
 
     override fun inflateView(
