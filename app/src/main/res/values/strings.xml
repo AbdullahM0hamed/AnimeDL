@@ -7,4 +7,8 @@
     <string name="browse">Browse</string>
     <string name="download">Downloads</string>
     <string name="settings">Settings</string>
+
+    <!-- TabLayout Strings -->
+    <string name="extensions">Extensions</string>
+    <string name="sources">Sources</string>
 </resources>
