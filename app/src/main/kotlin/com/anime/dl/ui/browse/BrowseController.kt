@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.anime.dl.R
 import com.anime.dl.databinding.BrowseControllerBinding
 import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.base.controller.TabbedController
@@ -21,6 +22,6 @@ class BrowseController :
     }
 
     override fun getTitle(): String? {
-        return "Placeholder"
+        return resources!!.getString(R.string.browse)
     }
 }
