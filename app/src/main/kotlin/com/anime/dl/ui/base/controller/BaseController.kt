@@ -16,11 +16,23 @@ abstract class BaseController<VB: ViewBinding>(bundle: Bundle? = null) : Restore
 
     lateinit var binding: VB
 
+    init {
+        addLifecycleListener {
+            object : LifecycleListener() {
+                override fun postCreateView(controller: Controller, view: View) {
+                    onViewCreated(view)
+                }
+            }
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedViewState: Bundle?): View {
         return inflateView(inflater, container)
     }
 
     abstract fun inflateView(inflater: LayoutInflater, container: ViewGroup): View
+
+    open fun onViewCreated(view: View) {}
 
     override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
         if (type.isEnter) {

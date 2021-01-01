@@ -83,7 +83,7 @@ class BrowseController :
    }
 
    companion object {
-       const SOURCES_CONTROLLER = 0
-       const EXTENSIONS_CONTROLLER = 1
+       const val SOURCES_CONTROLLER = 0
+       const val EXTENSIONS_CONTROLLER = 1
    }
 }
