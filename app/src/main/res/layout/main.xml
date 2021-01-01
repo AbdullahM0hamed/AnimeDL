@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity"
-    >
+    tools:context=".ui.main.MainActivity">
 
     <com.bluelinelabs.conductor.ChangeHandlerFrameLayout
         android:id="@+id/controller_container"
@@ -23,8 +22,7 @@
 
     <com.google.android.material.appbar.AppBarLayout 
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
     
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar" 
@@ -33,15 +31,19 @@
             android:layout_height="?actionBarSize" 
             app:title="@string/app_name" 
             app:titleTextColor="@android:color/white"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary" 
-            />
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            style="@style/Theme.Widget.Tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:id="@+id/container"
-      >
+      android:id="@+id/container">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -52,7 +54,6 @@
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/bottom_navigation_menu"
-        app:labelVisibilityMode="labeled"
-        />
+        app:labelVisibilityMode="labeled" />
   </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
