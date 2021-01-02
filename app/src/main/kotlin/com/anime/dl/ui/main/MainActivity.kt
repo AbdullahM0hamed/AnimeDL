@@ -29,10 +29,6 @@ class MainActivity : AppCompatActivity() {
 
         router = Conductor.attachRouter(this, binding.controllerContainer, savedInstance)
 
-        if (!router.hasRootController()) {
-            router.setRoot(with(PlaceholderController()))
-        }
-
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             val id = item.itemId
 
@@ -46,6 +42,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             true
+        }
+
+        if (!router.hasRootController()) {
+            binding.bottomNavigation.selectedItemId = R.id.nav_home)
         }
     }
 }
