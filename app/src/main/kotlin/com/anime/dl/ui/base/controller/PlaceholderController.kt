@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.anime.dl.databinding.PlaceholderBinding
 import com.anime.dl.ui.main.MainActivity
+import com.bluelinelabs.conductor.ControllerChangeHandler
+import com.bluelinelabs.conductor.ControllerChangeType
 
 class PlaceholderController : BaseController<PlaceholderBinding>() {
     override fun inflateView(
