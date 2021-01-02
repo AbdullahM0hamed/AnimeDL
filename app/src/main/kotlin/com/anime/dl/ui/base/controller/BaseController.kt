@@ -17,13 +17,13 @@ abstract class BaseController<VB: ViewBinding>(bundle: Bundle? = null) : Restore
     lateinit var binding: VB
 
     init {
-        addLifecycleListener {
+        addLifecycleListener(
             object : LifecycleListener() {
                 override fun postCreateView(controller: Controller, view: View) {
                     onViewCreated(view)
                 }
             }
-        }
+        )
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedViewState: Bundle?): View {
