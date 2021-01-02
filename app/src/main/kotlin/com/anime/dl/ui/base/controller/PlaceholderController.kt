@@ -1,6 +1,8 @@
 package com.anime.dl.ui.base.controller
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.anime.dl.databinding.PlaceholderBinding
 import com.anime.dl.ui.main.MainActivity
 
@@ -9,7 +11,7 @@ class PlaceholderController : BaseController<PlaceholderBinding>() {
         inflater: LayoutInflater,
         container: ViewGroup
     ): View {
-        binding = BrowseControllerBinding.inflate(inflater)
+        binding = PlaceholderBinding.inflate(inflater)
         return binding.root
     }
 
