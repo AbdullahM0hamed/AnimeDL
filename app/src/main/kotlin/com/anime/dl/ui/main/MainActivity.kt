@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (!router.hasRootController()) {
-            binding.bottomNavigation.selectedItemId = R.id.nav_home)
+            binding.bottomNavigation.selectedItemId = R.id.nav_home
         }
     }
 }
