@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.anime.dl.databinding.PlaceholderBinding
+import com.anime.dl.R
 import com.anime.dl.ui.main.MainActivity
 import com.bluelinelabs.conductor.ControllerChangeHandler
 import com.bluelinelabs.conductor.ControllerChangeType
