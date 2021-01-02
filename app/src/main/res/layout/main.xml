@@ -38,7 +38,7 @@
             android:background="#000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TabLayout" />
+            style="@style/Theme.Widget.Tabs" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
