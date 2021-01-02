@@ -65,8 +65,8 @@ class BrowseController :
    private inner class BrowseAdapter : RouterPagerAdapter(this@BrowseController) {
 
        private val tabTitles = listOf(
-           R.string.extensions,
-           R.string.sources
+           R.string.sources,
+           R.string.extensions
        )
        .map { resources!!.getString(it) }
 
@@ -84,7 +84,7 @@ class BrowseController :
    }
 
    companion object {
-       const val SOURCES_CONTROLLER = 0
-       const val EXTENSIONS_CONTROLLER = 1
+       const val EXTENSIONS_CONTROLLER = 0
+       const val SOURCES_CONTROLLER = 1
    }
 }
