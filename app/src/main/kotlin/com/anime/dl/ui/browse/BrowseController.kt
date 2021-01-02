@@ -61,7 +61,7 @@ class BrowseController :
         adapter = null
     }
 
-   private inner class BrowseAdapter : RouterPageAdapter(this@BrowseController) {
+   private inner class BrowseAdapter : RouterPagerAdapter(this@BrowseController) {
 
        private val tabTitles = listOf(
            R.string.extensions,
