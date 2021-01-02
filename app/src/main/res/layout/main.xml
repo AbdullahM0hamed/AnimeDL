@@ -38,6 +38,7 @@
             android:background="#000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
             style="@style/Theme.Widget.Tabs" />
     </com.google.android.material.appbar.AppBarLayout>
 
