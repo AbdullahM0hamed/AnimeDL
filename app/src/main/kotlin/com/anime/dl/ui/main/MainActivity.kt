@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.databinding.MainBinding
 import com.anime.dl.R
+import com.anime.dl.ui.base.controller.PlaceholderController
 import com.anime.dl.ui.browse.BrowseController
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
@@ -37,6 +38,9 @@ class MainActivity : AppCompatActivity() {
             if (currentRoot?.tag()?.toIntOrNull() != id) {
                 when (id) {
                     R.id.nav_browse -> router.setRoot(with(BrowseController()))
+                    R.id.nav_home -> router.setRoot(PlaceholderController())
+                    R.id.nav_downloads -> router.setRoot(PlaceholderController())
+                    R.id.nav_settings -> router.setRoot(PlaceholderController())
                 }
             }
             true
