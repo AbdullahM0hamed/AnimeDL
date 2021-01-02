@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
             if (currentRoot?.tag()?.toIntOrNull() != id) {
                 when (id) {
                     R.id.nav_browse -> router.setRoot(with(BrowseController()))
-                    R.id.nav_home -> router.setRoot(PlaceholderController())
-                    R.id.nav_downloads -> router.setRoot(PlaceholderController())
-                    R.id.nav_settings -> router.setRoot(PlaceholderController())
+                    R.id.nav_home -> router.setRoot(with(PlaceholderController()))
+                    R.id.nav_downloads -> router.setRoot(with(PlaceholderController()))
+                    R.id.nav_settings -> router.setRoot(with(PlaceholderController()))
                 }
             }
             true
