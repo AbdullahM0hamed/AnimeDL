@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         router = Conductor.attachRouter(this, binding.controllerContainer, savedInstance)
 
         if (router.hasRootController()) {
-            router.setRoot(with(PlaceholderController()))
+            binding.bottomNavigation.selectedItemId = R.id.nav_home
         }
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
