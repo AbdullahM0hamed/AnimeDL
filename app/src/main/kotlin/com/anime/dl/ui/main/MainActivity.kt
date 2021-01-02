@@ -29,7 +29,9 @@ class MainActivity : AppCompatActivity() {
 
         router = Conductor.attachRouter(this, binding.controllerContainer, savedInstance)
 
-        var continueSwitchingTabs = false
+        if (router.hasRootController()) {
+            router.setRoot(with(PlaceholderController()))
+        }
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             val id = item.itemId
