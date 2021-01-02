@@ -36,6 +36,7 @@ class BrowseController :
     override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
         super.onChangeStarted(handler, type)
         if (type.isEnter) {
+            (activity as? MainActivity)?.binding?.tabs?.setVisibility(View.VISIBLE)
             (activity as? MainActivity)?.binding?.tabs?.apply {
                 setupWithViewPager(binding.pager)
             }

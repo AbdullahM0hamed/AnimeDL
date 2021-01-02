@@ -17,6 +17,10 @@ class PlaceholderController : BaseController<PlaceholderBinding>() {
         return binding.root
     }
 
+    override fun getTitle(): String? {
+        return resources!!.getString(R.string.app_name)
+    }
+
     override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
         super.onChangeStarted(handler, type)
         if (type.isEnter) {
