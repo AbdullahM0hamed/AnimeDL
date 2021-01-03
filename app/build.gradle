@@ -34,4 +34,5 @@ dependencies {
         exclude group: "com.android.support"
     }
     implementation 'org.rekotlin:rekotlin:1.0.4'
+    implementation 'androidx.preference:preference-ktx:1.1.1'
 }
