@@ -11,4 +11,7 @@
     <!-- TabLayout Strings -->
     <string name="extensions">Extensions</string>
     <string name="sources">Sources</string>
+      
+    <!-- Tutorial Strings -->
+    <string name="tutorial_extension">Tutorial Extension</string>
 </resources>
