@@ -17,6 +17,7 @@ class ExtensionManager(private val context: Context) {
                 Extension.Installed(
                     name = context.resources!!.getString(R.string.tutorial_extension),
                     pkgName = "com.anime.dl.tutorial",
+                    lang = "all",
                     versionName = "0.0",
                     versionCode = 1
                 )
@@ -26,6 +27,7 @@ class ExtensionManager(private val context: Context) {
                 Extension.Available(
                     name = context.resources!!.getString(R.string.tutorial_extension),
                     pkgName = "com.anime.dl.tutorial",
+                    lang = "all",
                     versionName = "0.0",
                     versionCode = 1
                 )
