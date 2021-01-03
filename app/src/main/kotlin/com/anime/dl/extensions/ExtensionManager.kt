@@ -2,7 +2,7 @@ package com.anime.dl.extensions
 
 import android.content.Context
 import androidx.preference.PreferenceManager
-import com.anime.dl.extensions.models.Extensio
+import com.anime.dl.extensions.models.Extension
 import com.anime.dl.R
 
 class ExtensionManager(private val context: Context) {
