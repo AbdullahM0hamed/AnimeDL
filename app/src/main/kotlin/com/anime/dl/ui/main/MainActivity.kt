@@ -4,13 +4,22 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.databinding.MainBinding
 import com.anime.dl.R
+import com.anime.dl.reducers.extensionListReducer
+import com.anime.dl.states.AppState
 import com.anime.dl.ui.base.controller.PlaceholderController
 import com.anime.dl.ui.browse.BrowseController
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction.with
+import org.rekotlin.Store
+import org.rekotlin.StoreSubscriber
 
-class MainActivity : AppCompatActivity() {
+val mainStore = Store(
+    reducer = ::extensionListReducer,
+    state = null
+)
+
+class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
 
     public lateinit var binding: MainBinding
     private lateinit var router: Router
@@ -47,5 +56,8 @@ class MainActivity : AppCompatActivity() {
         if (!router.hasRootController()) {
             binding.bottomNavigation.selectedItemId = R.id.nav_home
         }
+    }
+
+    override fun newState(state: AppState) {
     }
 }

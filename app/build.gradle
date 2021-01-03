@@ -33,4 +33,5 @@ dependencies {
     implementation("com.bluelinelabs:conductor-support:2.1.5") {
         exclude group: "com.android.support"
     }
+    implementation 'org.rekotlin:rekotlin:1.0.4'
 }
