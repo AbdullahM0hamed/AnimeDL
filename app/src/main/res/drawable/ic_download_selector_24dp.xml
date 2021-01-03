@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item 
         android:state_checked="true"
-        android:drawable="@drawable/ic_settings_fill_24dp/>
+        android:drawable="@drawable/ic_download_fill_24dp"/>
     <item 
-        android:drawable="@drawable/ic_settings_outline_24dp"  />
+        android:drawable="@drawable/ic_download_outline_24dp"  />
 </selector>
