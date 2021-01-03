@@ -11,6 +11,7 @@ sealed class Extension {
     data class Installed(
         override val name: String,
         override val pkgName: String,
+        override val lang: String,
         override val versionName: String,
         override val versionCode: Int,
         val hasUpdate: Boolean = false,
@@ -20,7 +21,8 @@ sealed class Extension {
     data class Available(
         override val name: String,
         override val pkgName: String,
+        override val lang: String,
         override val versionName: String,
-        override val versionCode: Int,
+        override val versionCode: Int
     ) : Extension()
 }
