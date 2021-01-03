@@ -15,7 +15,7 @@ sealed class Extension {
         override val versionName: String,
         override val versionCode: Int,
         val hasUpdate: Boolean = false,
-        val isObsolete: Boolean = false,
+        val isObsolete: Boolean = false
     ) : Extension()
 
     data class Available(
