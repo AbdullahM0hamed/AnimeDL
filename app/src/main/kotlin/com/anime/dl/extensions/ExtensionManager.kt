@@ -12,7 +12,7 @@ class ExtensionManager(private val context: Context) {
     var prefs = PreferenceManager.getDefaultSharedPreferences(context)
 
     private fun initTutorialExtension() {
-        if (prefs.getBoolean("tutorial_installed", false) {
+        if (prefs.getBoolean("tutorial_installed", false)) {
             installedExtensions = listOf(
                 Extension.Installed(
                     name = context.resources!!.getString(R.string.tutorial_extension),
@@ -34,7 +34,8 @@ class ExtensionManager(private val context: Context) {
     }
 
     private fun initExtensions() {
-        if (!prefs.getBoolean("tutorial_complete", false) {
+        if (!prefs.getBoolean("tutorial_complete", false)) {
             initTutorialExtension()
         }
     }
+}
