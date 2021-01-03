@@ -1,4 +1,4 @@
-import com.anime.dl.states
+package com.anime.dl.states
 
 import org.rekotlin.StateType
 
