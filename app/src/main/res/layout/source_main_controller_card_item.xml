@@ -27,7 +27,6 @@
         android:maxLines="1"
         android:paddingStart="0dp"
         android:paddingEnd="8dp"
-        android:textAppearance="@style/TextAppearance.Regular.SubHeading"
         app:layout_constraintBottom_toTopOf="@id/subtitle"
         app:layout_constraintEnd_toStartOf="@+id/source_latest"
         app:layout_constraintStart_toEndOf="@+id/image"
@@ -37,7 +36,6 @@
 
     <TextView
         android:id="@+id/subtitle"
-        style="@style/TextAppearance.Regular.Body1.Secondary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="1"
@@ -49,23 +47,6 @@
         app:layout_constraintTop_toBottomOf="@+id/title"
         tools:text="English"
         tools:visibility="visible"/>
-
-    <Button
-        android:id="@+id/source_latest"
-        style="@style/Theme.Widget.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxHeight="48dp"
-        android:minWidth="0dp"
-        android:minHeight="48dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="@string/latest"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/pin"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
 
     <ImageButton
         android:id="@+id/pin"
