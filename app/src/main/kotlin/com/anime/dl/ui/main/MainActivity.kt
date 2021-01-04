@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
     override fun newState(state: AppState) {
     }
 
-    private fun tutorial(List<Pair<View, String>> viewsAndTutorialStrings) {
+    private fun tutorial(viewsAndTutorialStrings: List<Pair<View, String>>) {
         val config: ShowcaseConfig = ShowcaseConfig()
         config.setDelay(500)
 
