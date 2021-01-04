@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
             binding.bottomNavigation.selectedItemId = R.id.nav_home
         }
 
-        highlightView(binding.bottomNavigation.nav_browse)
+        highlightView(binding.bottomNavigation.getMenuView().findItemView(R.id.nav_browse))
     }
 
     override fun newState(state: AppState) {
