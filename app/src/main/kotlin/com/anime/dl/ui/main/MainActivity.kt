@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<ExtensionListState> {
         )
     }
 
-    override fun newState(state: ExtensionListState {
+    override fun newState(state: ExtensionListState) {
     }
 
     private fun tutorial(viewsAndTutorialStrings: List<Pair<View, String>>) {
