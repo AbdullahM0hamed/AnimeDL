@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
 		    .setDismissText("GOT IT")
 		    .setContentText("This is a test")
 		    .setDelay(5)
-		    .singleUse(1)
+		    .singleUse("1")
 		    .show();
     }
 }
