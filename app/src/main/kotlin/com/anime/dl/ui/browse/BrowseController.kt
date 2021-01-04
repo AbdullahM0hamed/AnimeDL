@@ -8,7 +8,7 @@ import com.anime.dl.R
 import com.anime.dl.databinding.BrowseControllerBinding
 import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.base.controller.TabbedController
-//import com.anime.dl.ui.browse.extension.ExtensionController
+import com.anime.dl.ui.browse.extension.ExtensionController
 import com.anime.dl.ui.main.MainActivity
 import com.bluelinelabs.conductor.Controller
 import com.bluelinelabs.conductor.ControllerChangeHandler
@@ -81,12 +81,11 @@ class BrowseController :
        }
 
        override fun configureRouter(router: Router, position: Int) {
-           /*if (!router.hasController()) {
+           if (!router.hasController()) {
                val controller: Controller = when(position) {
                    EXTENSIONS_CONTROLLER -> ExtensionController()
                }
-           }*/
-           return
+           }
        }
    }
 

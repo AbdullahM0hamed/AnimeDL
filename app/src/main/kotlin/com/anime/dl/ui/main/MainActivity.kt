@@ -64,6 +64,8 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
             binding.bottomNavigation.selectedItemId = R.id.nav_home
         }
 
+        mainStore.subscribe(this)
+
         tutorial(
             listOf(
                 Pair(
