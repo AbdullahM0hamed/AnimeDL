@@ -62,17 +62,17 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
             binding.bottomNavigation.selectedItemId = R.id.nav_home
         }
 
-        highlightView(binding.bottomNavigation)
+        highlightView(binding.bottomNavigation.getChildAt(0), resources!!.getString(R.string.tutorial_browse))
     }
 
     override fun newState(state: AppState) {
     }
 
-    private fun highlightView(view: View) {
+    private fun highlightView(view: View, text: String) {
         MaterialShowcaseView.Builder(this)
 		    .setTarget(view)
-		    .setDismissText("GOT IT")
-		    .setContentText("This is a test")
+		    .setDismissText(resources!!.getString(R.string.tutorial_understood)
+		    .setContentText(text)
 		    .setDelay(5)
 		    .singleUse("1")
 		    .show();
