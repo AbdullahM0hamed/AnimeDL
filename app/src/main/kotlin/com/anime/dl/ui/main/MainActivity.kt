@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
         tutorial(
             listOf(
                 Pair(
-                    binding.bottomNavigation,
+                    binding.bottomNavigation.findViewById(R.id.nav_browse),
                     resources!!.getString(R.string.tutorial_browse)
                 )
             )
