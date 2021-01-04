@@ -16,6 +16,7 @@ import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction.with
 import org.rekotlin.Store
 import org.rekotlin.StoreSubscriber
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
 
 val mainStore = Store(
     reducer = ::extensionListReducer,
@@ -68,12 +69,12 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
     }
 
     private fun highlightView(view: View) {
-        new MaterialShowcaseView.Builder(this)
-		.setTarget(mButtonShow)
-		.setDismissText("GOT IT")
-		.setContentText("This is a test")
-		.setDelay(5)
-		.singleUse(1)
-		.show();
+        MaterialShowcaseView.Builder(this)
+		    .setTarget(view)
+		    .setDismissText("GOT IT")
+		    .setContentText("This is a test")
+		    .setDelay(5)
+		    .singleUse(1)
+		    .show();
     }
 }
