@@ -16,7 +16,9 @@ import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction.with
 import org.rekotlin.Store
 import org.rekotlin.StoreSubscriber
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
+import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
 
 val mainStore = Store(
     reducer = ::extensionListReducer,
@@ -62,19 +64,34 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
             binding.bottomNavigation.selectedItemId = R.id.nav_home
         }
 
-        highlightView(binding.bottomNavigation.findViewById(R.id.nav_browse), resources!!.getString(R.string.tutorial_browse))
+        tutorial(
+            listOf(
+                Pair(
+                    binding.bottomNavigation,
+                    resources!!.getString(R.string.tutorial_browse)
+                )
+            )
+        )
     }
 
     override fun newState(state: AppState) {
     }
 
-    private fun highlightView(view: View, text: String) {
-        MaterialShowcaseView.Builder(this)
-		    .setTarget(view)
-		    .setDismissText(resources!!.getString(R.string.tutorial_understood))
-		    .setContentText(text)
-		    .setDelay(5)
-		    .singleUse("1")
-		    .show();
+    private fun tutorial(List<Pair<View, String>> viewsAndTutorialStrings) {
+        val config: ShowcaseConfig = ShowcaseConfig()
+        config.setDelay(500)
+
+        val sequence: MaterialShowcaseSequence = MaterialShowcaseSequence(this@MainActivity, "tutorial")
+        sequence.setConfig(config)
+
+        viewsAndTutorialStrings.forEach { item ->
+            sequence.addSequenceItem(
+                item.first,
+                item.second,
+                resources!!.getString(R.string.tutorial_understood)
+            )
+        }
+
+        sequence.start()
     }
 }
