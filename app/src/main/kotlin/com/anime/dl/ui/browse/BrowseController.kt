@@ -81,9 +81,10 @@ class BrowseController :
        }
 
        override fun configureRouter(router: Router, position: Int) {
-           if (!router.hasController()) {
+           if (!router.hasRootController()) {
                val controller: Controller = when(position) {
-                   EXTENSIONS_CONTROLLER -> ExtensionController()
+                   EXTENSIONS_CONTROLLER -> ExtensionController(),
+                   else -> ExtensionController()
                }
            }
        }

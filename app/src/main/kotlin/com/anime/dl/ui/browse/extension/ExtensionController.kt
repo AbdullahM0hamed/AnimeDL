@@ -3,8 +3,8 @@ package com.anime.dl.ui.browse.extension
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.anime.dl.base.controller.BaseController
-import com.anime.dl.databing.ExtensionControllerBinding
+import com.anime.dl.databinding.ExtensionControllerBinding
+import com.anime.dl.ui.base.controller.BaseController
 
 class ExtensionController : BaseController<ExtensionControllerBinding>() {
 

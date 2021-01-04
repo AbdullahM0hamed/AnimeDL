@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.databinding.MainBinding
 import com.anime.dl.R
 import com.anime.dl.reducers.extensionListReducer
-import com.anime.dl.states.AppState
+import com.anime.dl.states.ExtensionListState
 import com.anime.dl.ui.base.controller.PlaceholderController
 import com.anime.dl.ui.browse.BrowseController
 import com.bluelinelabs.conductor.Conductor
@@ -25,7 +25,7 @@ val mainStore = Store(
     state = null
 )
 
-class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
+class MainActivity : AppCompatActivity(), StoreSubscriber<ExtensionListState> {
 
     public lateinit var binding: MainBinding
     private lateinit var router: Router
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
         )
     }
 
-    override fun newState(state: AppState) {
+    override fun newState(state: ExtensionListState {
     }
 
     private fun tutorial(viewsAndTutorialStrings: List<Pair<View, String>>) {
