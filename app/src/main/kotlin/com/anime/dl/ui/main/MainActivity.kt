@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
     private fun highlightView(view: View, text: String) {
         MaterialShowcaseView.Builder(this)
 		    .setTarget(view)
-		    .setDismissText(resources!!.getString(R.string.tutorial_understood)
+		    .setDismissText(resources!!.getString(R.string.tutorial_understood))
 		    .setContentText(text)
 		    .setDelay(5)
 		    .singleUse("1")
