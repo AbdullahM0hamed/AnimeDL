@@ -16,4 +16,7 @@
     <string name="tutorial_extension">Tutorial Extension</string>
     <string name="tutorial_browse">Browse is where you can find sources/extensions</string>
     <string name="tutorial_understood">GOT IT</string>
+
+    <!-- Actions -->
+    <string name="action_pin">Pin</string>
 </resources>
