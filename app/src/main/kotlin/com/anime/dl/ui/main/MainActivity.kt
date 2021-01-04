@@ -1,6 +1,5 @@
 package com.anime.dl.ui.main
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.view.View
@@ -103,7 +102,6 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
 
         val spotlight = Spotlight.Builder(this@MainActivity)
             .setTargets(targets)
-            .setBackgroundColorRes(Color.BLACK)
             .setDuration(1000L)
             .setAnimation(DecelerateInterpolator(2f))
             .setOnSpotlightListener(object : OnSpotlightListener {
