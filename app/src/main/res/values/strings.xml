@@ -14,6 +14,6 @@
       
     <!-- Tutorial Strings -->
     <string name="tutorial_extension">Tutorial Extension</string>
-    <string name="tutorial_browse">Browse is where youcan find sources/extensions</string>
+    <string name="tutorial_browse">Browse is where you can find sources/extensions</string>
     <string name="tutorial_understood">GOT IT</string>
 </resources>
