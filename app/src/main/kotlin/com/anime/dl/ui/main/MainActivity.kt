@@ -68,5 +68,12 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
     }
 
     private fun highlightView(view: View) {
+        new MaterialShowcaseView.Builder(this)
+		.setTarget(mButtonShow)
+		.setDismissText("GOT IT")
+		.setContentText("This is a test")
+		.setDelay(5)
+		.singleUse(1)
+		.show();
     }
 }
