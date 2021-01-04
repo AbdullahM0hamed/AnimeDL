@@ -35,6 +35,4 @@ dependencies {
     }
     implementation 'org.rekotlin:rekotlin:1.0.4'
     implementation 'androidx.preference:preference-ktx:1.1.1'
-    implementation 'com.github.takusemba:spotlight:2.0.3'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.0'
 }

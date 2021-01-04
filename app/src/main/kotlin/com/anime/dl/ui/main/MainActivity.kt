@@ -14,11 +14,6 @@ import com.anime.dl.ui.browse.BrowseController
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction.with
-import com.takusemba.spotlight.OnSpotlightListener
-import com.takusemba.spotlight.OnTargetListener
-import com.takusemba.spotlight.Spotlight
-import com.takusemba.spotlight.Target
-import com.takusemba.spotlight.shape.Circle
 import org.rekotlin.Store
 import org.rekotlin.StoreSubscriber
 
@@ -73,60 +68,5 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<AppState> {
     }
 
     private fun highlightView(view: View) {
-        val targets: List<Target> = listOf(
-            Target.Builder()
-                .setShape(Circle(200f))
-                .setOnTargetListener(object : OnTargetListener {
-                    override fun onStarted() {
-                        currentToast?.cancel()
-                        currentToast = Toast.makeText(
-                            this@MainActivity,
-                            "this is a test",
-                            5
-                        )
-                        currentToast?.show()
-                    }
-
-                    override fun onEnded() {
-                        currentToast?.cancel()
-                        currentToast = Toast.makeText(
-                            this@MainActivity,
-                            "test",
-                            5
-                        )
-                        currentToast?.show()
-                    }
-                })
-                .build()
-            )
-
-        val spotlight = Spotlight.Builder(this@MainActivity)
-            .setTargets(targets)
-            .setDuration(1000L)
-            .setAnimation(DecelerateInterpolator(2f))
-            .setOnSpotlightListener(object : OnSpotlightListener {
-                override fun onStarted() {
-                    currentToast?.cancel()
-                    currentToast = Toast.makeText(
-                        this@MainActivity,
-                        "spotlight test",
-                        5
-                    )
-                    currentToast?.show()
-                }
-
-                override fun onEnded() {
-                    currentToast?.cancel()
-                    currentToast = Toast.makeText(
-                        this@MainActivity,
-                        "spotlight test end",
-                        5
-                    )
-                    currentToast?.show()
-                }
-            })
-            .build()
-
-            spotlight.start()
-        }
+    }
 }
