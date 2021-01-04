@@ -15,6 +15,7 @@ import com.bluelinelabs.conductor.ControllerChangeHandler
 import com.bluelinelabs.conductor.ControllerChangeType
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.support.RouterPagerAdapter
+import com.bluelinelabs.conductor.RouterTransaction.with
 import com.google.android.material.tabs.TabLayout
 
 class BrowseController : 
@@ -86,6 +87,7 @@ class BrowseController :
                    EXTENSIONS_CONTROLLER -> ExtensionController()
                    else -> ExtensionController()
                }
+               router.setRoot(with(controller))
            }
        }
    }
