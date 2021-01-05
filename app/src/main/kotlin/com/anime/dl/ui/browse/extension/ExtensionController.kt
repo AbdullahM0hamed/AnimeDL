@@ -10,10 +10,16 @@ import com.anime.dl.databinding.ExtensionControllerBinding
 import com.anime.dl.ui.main.mainStore
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.IFlexible
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import reactivecircus.flowbinding.swiperefreshlayout.refreshes
 
 class ExtensionController : 
     BaseController<ExtensionControllerBinding>(),
     ExtensionAdapter.OnButtonClickListener {
+
+    val scope = CoroutineScope(Job() + Dispatchers.Main)
 
     private var adapter: FlexibleAdapter<IFlexible<*>>? = null
 
