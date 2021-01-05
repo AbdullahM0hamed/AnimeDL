@@ -44,12 +44,4 @@ class ExtensionManager(private val context: Context) {
             initTutorialExtension()
         }
     }
-
-    public fun getInstalledExtensions(): List<Extension.Installed> {
-        return installedExtensions
-    }
-
-    public fun getAvailableExtensions(): List<Extension.Available> {
-        return availableExtensions
-    }
 }
