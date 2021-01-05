@@ -11,6 +11,10 @@ class ExtensionManager(private val context: Context) {
     var availableExtensions = emptyList<Extension.Available>()
     var prefs = PreferenceManager.getDefaultSharedPreferences(context)
 
+    init {
+        initExtensions()
+    }
+
     private fun initTutorialExtension() {
         if (prefs.getBoolean("tutorial_installed", false)) {
             installedExtensions = listOf(
@@ -39,5 +43,13 @@ class ExtensionManager(private val context: Context) {
         if (!prefs.getBoolean("tutorial_complete", false)) {
             initTutorialExtension()
         }
+    }
+
+    private fun getInstalledExtensions(): List<Extension.Installed> {
+        return installedExtensions
+    }
+
+    private fun getAvailableExtensions(): List<Extension.Available> {
+        return availableExtensions
     }
 }

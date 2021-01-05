@@ -15,7 +15,6 @@ import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction.with
 import org.rekotlin.Store
-import org.rekotlin.StoreSubscriber
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
 import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
@@ -25,7 +24,7 @@ val mainStore = Store(
     state = null
 )
 
-class MainActivity : AppCompatActivity(), StoreSubscriber<ExtensionListState> {
+class MainActivity : AppCompatActivity() {
 
     public lateinit var binding: MainBinding
     private lateinit var router: Router
@@ -64,8 +63,6 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<ExtensionListState> {
             binding.bottomNavigation.selectedItemId = R.id.nav_home
         }
 
-        mainStore.subscribe(this)
-
         tutorial(
             listOf(
                 Pair(
@@ -74,9 +71,6 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<ExtensionListState> {
                 )
             )
         )
-    }
-
-    override fun newState(state: ExtensionListState) {
     }
 
     private fun tutorial(viewsAndTutorialStrings: List<Pair<View, String>>) {
