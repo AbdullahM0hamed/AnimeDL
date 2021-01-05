@@ -45,7 +45,7 @@ class ExtensionController :
 
         binding.swipeRefresh.isRefreshing = true
         binding.swipeRefresh.refreshes()
-            .onEach { mainStore.dispatch(findAvailableExtensions() }
+            .onEach { mainStore.dispatch(findAvailableExtensions()) }
             .launchIn(scope)
 
         adapter = ExtensionAdapter(this)
