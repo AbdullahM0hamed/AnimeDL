@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.anime.dl.ui.action.DisplayExtensions
+import com.anime.dl.actions.findAvailableExtensions
 import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.databinding.ExtensionControllerBinding
 import com.anime.dl.ui.main.mainStore
@@ -28,7 +28,7 @@ class ExtensionController : BaseController<ExtensionControllerBinding>() {
 
         binding.swipeRefresh.isRefreshing = true
         binding.swipeRefresh.refreshes()
-            .onEach { mainStore.dispatch(DisplayActions) 
+            .onEach { mainStore.dispatch(findAvailableExtensions()) 
             .launchIn(scope)
 
         adapter = ExtensionAdapter(this)

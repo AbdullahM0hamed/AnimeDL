@@ -11,3 +11,4 @@ class App : Application() {
         super.onCreate()
         App.appContext = applicationContext
     }
+}
