@@ -43,7 +43,7 @@ class ExtensionController :
 
         binding.swipeRefresh.isRefreshing = true
         binding.swipeRefresh.refreshes()
-            .onEach { mainStore.dispatch(findAvailableExtensions()) }
+            .onEach { findExtensions() }
             .launchIn(scope)
 
         adapter = ExtensionAdapter(this)
@@ -56,4 +56,8 @@ class ExtensionController :
     override fun onButtonClick(position: Int) {}
 
     override fun newState(state: ExtensionListState) {}
+
+    fun findExtensions() {
+        mainStore.dispatch(findAvailableExtensions())
+    }
 }
