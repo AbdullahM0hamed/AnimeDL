@@ -11,7 +11,9 @@ import com.anime.dl.ui.main.mainStore
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.IFlexible
 
-class ExtensionController : BaseController<ExtensionControllerBinding>() {
+class ExtensionController : 
+    BaseController<ExtensionControllerBinding>(),
+    ExtensionAdapter.OnButtonClickListener {
 
     private var adapter: FlexibleAdapter<IFlexible<*>>? = null
 
@@ -28,7 +30,7 @@ class ExtensionController : BaseController<ExtensionControllerBinding>() {
 
         binding.swipeRefresh.isRefreshing = true
         binding.swipeRefresh.refreshes()
-            .onEach { mainStore.dispatch(findAvailableExtensions()) 
+            .onEach { mainStore.dispatch(findAvailableExtensions()) }
             .launchIn(scope)
 
         adapter = ExtensionAdapter(this)
@@ -37,4 +39,6 @@ class ExtensionController : BaseController<ExtensionControllerBinding>() {
         binding.recycler.adapter = adapter
         adapter?.fastScroller = binding.fastScroller
     }
+
+    override fun onButtonClick(position: Int) {}
 }

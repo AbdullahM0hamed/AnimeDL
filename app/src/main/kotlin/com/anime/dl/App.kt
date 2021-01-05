@@ -5,10 +5,10 @@ import android.content.Context
 
 class App : Application() {
 
-    lateinit var appContext: Context
+    public lateinit var appContext: Context
 
     override fun onCreate() {
         super.onCreate()
-        App.appContext = applicationContext
+        appContext = applicationContext
     }
 }
