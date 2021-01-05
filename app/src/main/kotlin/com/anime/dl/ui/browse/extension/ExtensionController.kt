@@ -14,6 +14,8 @@ import eu.davidea.flexibleadapter.items.IFlexible
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.rekotlin.StoreSubscriber
 import reactivecircus.flowbinding.swiperefreshlayout.refreshes
 
@@ -43,9 +45,7 @@ class ExtensionController :
 
         binding.swipeRefresh.isRefreshing = true
         binding.swipeRefresh.refreshes()
-            .onEach { _ ->
-                findExtensions()
-            }
+            .onEach { mainStore.dispatch(findAvailableExtensions() }
             .launchIn(scope)
 
         adapter = ExtensionAdapter(this)
@@ -58,8 +58,4 @@ class ExtensionController :
     override fun onButtonClick(position: Int) {}
 
     override fun newState(state: ExtensionListState) {}
-
-    fun findExtensions() {
-        mainStore.dispatch(findAvailableExtensions())
-    }
 }
