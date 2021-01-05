@@ -13,7 +13,7 @@ fun extensionListReducer(action: Action, extensionListState: ExtensionListState?
             val manager = ExtensionManager(App.applicationContext())
             state = state.copy(
                 installedExtensions = manager.installedExtensions,
-                availablinstalledExtensions = manager.availableExtensions
+                availableExtensions = manager.availableExtensions
             )
         }
     }
