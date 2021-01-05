@@ -10,7 +10,7 @@ fun extensionListReducer(action: Action, extensionListState: ExtensionListState?
     var state = extensionListState ?: ExtensionListState()
     when (action) {
         is findAvailableExtensions -> {
-            val manager = ExtensionManager(App.appContext)
+            val manager = ExtensionManager(App.applicationContext())
             state = state.copy(
                 installedExtensions = manager.getInstalledExtensions(),
                 availableExtensions = manager.getAvailableExtensions()
