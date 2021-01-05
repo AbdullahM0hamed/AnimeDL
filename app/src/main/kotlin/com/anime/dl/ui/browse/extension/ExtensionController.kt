@@ -5,19 +5,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anime.dl.actions.findAvailableExtensions
-import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.databinding.ExtensionControllerBinding
+import com.anime.dl.states.ExtensionListState
+import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.main.mainStore
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.IFlexible
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import org.rekotlin.StoreSubscriber
 import reactivecircus.flowbinding.swiperefreshlayout.refreshes
 
 class ExtensionController : 
     BaseController<ExtensionControllerBinding>(),
+    StoreSubscriber<ExtensionListState>,
     ExtensionAdapter.OnButtonClickListener {
+
+    init {
+        mainStore.subscribe(this)
+    }
 
     val scope = CoroutineScope(Job() + Dispatchers.Main)
 
@@ -47,4 +54,6 @@ class ExtensionController :
     }
 
     override fun onButtonClick(position: Int) {}
+
+    override fun newState(state: ExtensionListState) {}
 }
