@@ -6,12 +6,11 @@
 
     <TextView
         android:id="@+id/title"
-        style="@style/TextAppearance.Medium.SubHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/material_component_text_fields_padding_above_and_below_label"
+        android:paddingStart="16.0dip"
         android:paddingTop="8dp"
-        android:paddingEnd="@dimen/material_component_text_fields_padding_above_and_below_label"
+        android:paddingEnd="16.0dip"
         android:paddingBottom="8dp"
         tools:text="Title" />
 
