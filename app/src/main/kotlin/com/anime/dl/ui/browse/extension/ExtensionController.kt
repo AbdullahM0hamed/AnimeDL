@@ -70,12 +70,12 @@ class ExtensionController :
 
         extensions = mutableListOf<ExtensionItem>()
         
-        /*if (installedExtensions!!.isNotEmpty()) {
+        if (installedExtensions!!.isNotEmpty()) {
             val header = ExtensionGroupItem(context.getString(R.string.ext_installed))
             extensions += installedExtensions.map { extension ->
                 ExtensionItem(extension, header)
             }
-        }*/
+        }
 
         if (availableExtensions!!.isNotEmpty()) {
             val header = ExtensionGroupItem(context.getString(R.string.ext_available))
