@@ -8,6 +8,7 @@ import com.anime.dl.App
 import com.anime.dl.actions.findAvailableExtensions
 import com.anime.dl.databinding.ExtensionControllerBinding
 import com.anime.dl.extensions.models.Extension
+import com.anime.dl.R
 import com.anime.dl.states.ExtensionListState
 import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.main.mainStore
@@ -69,14 +70,14 @@ class ExtensionController :
 
         extensions = mutableListOf<ExtensionItem>()
         
-        if (installedExtensions.isNotEmpty()) {
+        if (installedExtensions?.isNotEmpty()) {
             val header = ExtensionGroupItem(context.getString(R.string.ext_installed))
             extensions += installedExtensions.map { extension ->
                 ExtensionItem(extension, header)
             }
         }
 
-        if (availableExtensions.isNotEmpty()) {
+        if (availableExtensions?.isNotEmpty()) {
             val header = ExtensionGroupItem(context.getString(R.string.ext_available))
             extensions += availableExtensions.map { extension ->
                 ExtensionItem(extension, header)

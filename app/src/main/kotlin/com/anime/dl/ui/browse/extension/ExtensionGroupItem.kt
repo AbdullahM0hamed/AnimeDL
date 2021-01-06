@@ -1,6 +1,6 @@
 package com.anime.dl.ui.browse.extension
 
-import android.
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.anime.dl.R
 import eu.davidea.flexibleadapter.FlexibleAdapter
