@@ -15,7 +15,7 @@ class ExtensionHolder(view: View, val adapter: ExtensionAdapter) :
             }
         }
 
-        fun bind(item: ItemExtension) {
+        fun bind(item: ExtensionItem) {
             val extension = item.extension
 
             binding.extTitle.text = extension.name
