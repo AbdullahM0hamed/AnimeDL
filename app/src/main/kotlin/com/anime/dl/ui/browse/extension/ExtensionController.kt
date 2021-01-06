@@ -12,6 +12,8 @@ import com.anime.dl.R
 import com.anime.dl.states.ExtensionListState
 import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.main.mainStore
+import com.bluelinelabs.conductor.ControllerChangeHandler
+import com.bluelinelabs.conductor.ControllerChangeType
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.IFlexible
 import kotlinx.coroutines.CoroutineScope
@@ -84,6 +86,13 @@ class ExtensionController :
             }
         }
         drawExtensions()
+    }
+
+    override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
+        super.onChangeStarted(handler, type)
+        if (!type.isPush) {
+            mainStore.dispatch(findAvailableExtensions())
+        }
     }
 
     private fun drawExtensions() {

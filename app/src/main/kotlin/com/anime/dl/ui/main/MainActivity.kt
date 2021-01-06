@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     public lateinit var binding: MainBinding
     private lateinit var router: Router
-    private var currentToast: Toast? = null
 
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
