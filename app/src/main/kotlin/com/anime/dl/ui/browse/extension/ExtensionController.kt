@@ -68,7 +68,7 @@ class ExtensionController :
         val availableExtensions = state?.availableExtensions
         val context = App.applicationContext()
 
-        extensions = mutableListOf<ExtensionItem>()
+        /*extensions = mutableListOf<ExtensionItem>()
         
         if (installedExtensions!!.isNotEmpty()) {
             val header = ExtensionGroupItem(context.getString(R.string.ext_installed))
@@ -83,7 +83,7 @@ class ExtensionController :
                 ExtensionItem(extension, header)
             }
         }
-        drawExtensions()
+        drawExtensions()*/
     }
 
     private fun drawExtensions() {
