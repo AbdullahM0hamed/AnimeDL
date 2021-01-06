@@ -1,6 +1,7 @@
 package com.anime.dl.extensions
 
 import android.content.Context
+import android.widget.Toast
 import androidx.preference.PreferenceManager
 import com.anime.dl.extensions.models.Extension
 import com.anime.dl.R
@@ -13,6 +14,7 @@ class ExtensionManager(private val context: Context) {
 
     init {
         initExtensions()
+        Toast.makeText(context, "this is a test", 5).show()
     }
 
     private fun initTutorialExtension() {
