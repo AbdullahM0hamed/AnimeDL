@@ -2,21 +2,25 @@
 <resources>
     <string name="app_name">AnimeDL</string>
 
-    <!-- Bottom Navigation Strings -->
+        <!-- Bottom Navigation Strings -->
     <string name="home">Home</string>
     <string name="browse">Browse</string>
     <string name="download">Downloads</string>
     <string name="settings">Settings</string>
 
-    <!-- TabLayout Strings -->
+        <!-- TabLayout Strings -->
     <string name="extensions">Extensions</string>
     <string name="sources">Sources</string>
-      
-    <!-- Tutorial Strings -->
+
+        <!-- Tutorial Strings -->
     <string name="tutorial_extension">Tutorial Extension</string>
     <string name="tutorial_browse">Browse is where you can find sources/extensions</string>
     <string name="tutorial_understood">GOT IT</string>
 
-    <!-- Actions -->
+        <!-- Actions -->
     <string name="action_pin">Pin</string>
+
+        <!-- Extensions -->
+    <string name="ext_installed">Installed</string>
+    <string name="ext_available">Available</string>
 </resources>

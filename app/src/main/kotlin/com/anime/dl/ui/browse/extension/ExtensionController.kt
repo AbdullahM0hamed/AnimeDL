@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.anime.dl.App
 import com.anime.dl.actions.findAvailableExtensions
 import com.anime.dl.databinding.ExtensionControllerBinding
+import com.anime.dl.extensions.models.Extension
 import com.anime.dl.states.ExtensionListState
 import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.main.mainStore
@@ -14,6 +16,7 @@ import eu.davidea.flexibleadapter.items.IFlexible
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.rekotlin.StoreSubscriber
@@ -31,6 +34,8 @@ class ExtensionController :
     val scope = CoroutineScope(Job() + Dispatchers.Main)
 
     private var adapter: FlexibleAdapter<IFlexible<*>>? = null
+
+    private var extensions: List<ExtensionItem> = emptyList()
 
     override fun inflateView(
         inflater: LayoutInflater,
@@ -57,5 +62,30 @@ class ExtensionController :
 
     override fun onButtonClick(position: Int) {}
 
-    override fun newState(state: ExtensionListState) {}
+    override fun newState(state: ExtensionListState) {
+        val installedExtensions = state.installedExtensions
+        val availableExtensions = state.availableExtensions
+        val context = App.applicationContext()
+
+        extensions = mutableListOf<ExtensionItem>()
+        
+        if (installedExtensions.isNotEmpty()) {
+            val header = ExtensionGroupItem(context.getString(R.string.ext_installed))
+            extensions += installedExtensions.map { extension ->
+                ExtensionItem(extension, header)
+            }
+        }
+
+        if (availableExtensions.isNotEmpty()) {
+            val header = ExtensionGroupItem(context.getString(R.string.ext_available))
+            extensions += availableExtensions.map { extension ->
+                ExtensionItem(extension, header)
+            }
+        }
+        drawExtensions()
+    }
+
+    private fun drawExtensions() {
+        adapter?.updateDataSet(extensions)
+    }
 }
