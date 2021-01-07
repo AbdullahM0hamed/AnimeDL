@@ -86,11 +86,6 @@ class ExtensionController :
                 ExtensionItem(extension, header)
             }
         }
-        Toast.makeText(
-            context,
-            this.extensions.toString(),
-            5
-        ).show()
         drawExtensions()
     }
 
@@ -102,6 +97,11 @@ class ExtensionController :
     }
 
     private fun drawExtensions() {
+        Toast.makeText(
+            App.applicationContext(),
+            this.extensions.toString(),
+            5
+        ).show()
         adapter?.updateDataSet(this.extensions)
     }
 }
