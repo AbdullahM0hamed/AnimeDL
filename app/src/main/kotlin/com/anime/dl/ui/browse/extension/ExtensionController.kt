@@ -91,7 +91,7 @@ class ExtensionController :
             extensions.toString(),
             5
         ).show()
-        drawExtensions()
+        drawExtensions(extensions)
     }
 
     override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
