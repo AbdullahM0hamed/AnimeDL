@@ -75,23 +75,23 @@ class ExtensionController :
         
         if (installedExtensions!!.isNotEmpty()) {
             val header = ExtensionGroupItem(context.getString(R.string.ext_installed))
-            extensions += installedExtensions.map { extension ->
+            this.extensions += installedExtensions.map { extension ->
                 ExtensionItem(extension, header)
             }
         }
 
         if (availableExtensions!!.isNotEmpty()) {
             val header = ExtensionGroupItem(context.getString(R.string.ext_available))
-            extensions += availableExtensions.map { extension ->
+            this.extensions += availableExtensions.map { extension ->
                 ExtensionItem(extension, header)
             }
         }
         Toast.makeText(
             context,
-            extensions.toString(),
+            this.extensions.toString(),
             5
         ).show()
-        drawExtensions(extensions)
+        drawExtensions()
     }
 
     override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
@@ -101,7 +101,7 @@ class ExtensionController :
         }
     }
 
-    private fun drawExtensions(extensions: List<ExtensionItem>) {
-        adapter?.updateDataSet(extensions)
+    private fun drawExtensions() {
+        adapter.updateDataSet(this.extensions)
     }
 }
