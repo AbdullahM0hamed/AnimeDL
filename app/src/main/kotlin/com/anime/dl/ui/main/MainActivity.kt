@@ -3,7 +3,6 @@ package com.anime.dl.ui.main
 import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.App
 import com.anime.dl.databinding.MainBinding
@@ -72,13 +71,6 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         )
-
-        val manager = ExtensionManager(App.applicationContext())
-        Toast.makeText(
-            this,
-            manager.availableExtensions.toString(),
-            5
-        ).show()
     }
 
     private fun tutorial(viewsAndTutorialStrings: List<Pair<View, String>>) {
