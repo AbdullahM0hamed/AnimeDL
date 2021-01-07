@@ -58,11 +58,6 @@ class ExtensionController :
             .launchIn(scope)
 
         this.adapter = ExtensionAdapter(this)
-        Toast.makeText(
-            App.applicationContext(),
-            this.adapter.toString(),
-            5
-        ).show()
 
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
@@ -102,6 +97,11 @@ class ExtensionController :
     }
 
     private fun drawExtensions() {
+        Toast.makeText(
+            App.applicationContext(),
+            this.adapter.toString(),
+            5
+        ).show()
         adapter?.updateDataSet(this.extensions)
     }
 }
