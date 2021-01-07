@@ -5,6 +5,7 @@ import android.view.animation.DecelerateInterpolator
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.anime.dl.App
 import com.anime.dl.databinding.MainBinding
 import com.anime.dl.extensions.ExtensionManager
 import com.anime.dl.R
@@ -72,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        val manager = ExtensionManager(this)
+        val manager = ExtensionManager(App.applicationContext())
         Toast.makeText(
             this,
             manager.availableExtensions.toString(),
