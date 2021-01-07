@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<ExtensionListState> {
 
     override fun newState(state: ExtensionListState) {
         Toast.makeText(
-            App.applicationContext(),
-            state.availableExtensions,
+            this,
+            state.availableExtensions.toString(),
             5
         ).show()
     }
