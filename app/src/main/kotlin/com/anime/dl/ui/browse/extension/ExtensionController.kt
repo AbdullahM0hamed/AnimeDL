@@ -104,7 +104,7 @@ class ExtensionController :
     private fun drawExtensions() {
         Toast.makeText(
             App.applicationContext(),
-            this.adapter.toString(),
+            binding.adapter.toString(),
             5
         ).show()
         adapter?.updateDataSet(this.extensions)
