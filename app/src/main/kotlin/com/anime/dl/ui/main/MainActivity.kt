@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.databinding.MainBinding
+import com.anime.dl.extensions.ExtensionManager
 import com.anime.dl.R
 import com.anime.dl.reducers.extensionListReducer
 import com.anime.dl.states.ExtensionListState
@@ -70,6 +71,13 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         )
+
+        val manager = ExtensionManager(this)
+        Toast.makeText(
+            this,
+            manager.availableExtensions.toString(),
+            5
+        ).show()
     }
 
     private fun tutorial(viewsAndTutorialStrings: List<Pair<View, String>>) {
