@@ -101,7 +101,7 @@ class ExtensionController :
         }
     }
 
-    private fun drawExtensions() {
+    private fun drawExtensions(extensions: List<ExtensionItem>) {
         adapter?.updateDataSet(extensions)
     }
 }
