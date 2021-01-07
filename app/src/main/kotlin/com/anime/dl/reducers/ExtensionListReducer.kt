@@ -1,6 +1,5 @@
 package com.anime.dl.reducers
 
-import android.widget.Toast
 import com.anime.dl.actions.findAvailableExtensions
 import com.anime.dl.App
 import com.anime.dl.extensions.ExtensionManager
@@ -12,11 +11,6 @@ fun extensionListReducer(action: Action, extensionListState: ExtensionListState?
     when (action) {
         is findAvailableExtensions -> {
             val manager = ExtensionManager(App.applicationContext())
-            Toast.makeText(
-                App.applicationContext(),
-                manager.availableExtensions.toString(),
-                5
-            ).show()
             state = state.copy(
                 installedExtensions = manager.installedExtensions,
                 availableExtensions = manager.availableExtensions
