@@ -64,6 +64,11 @@ class ExtensionController :
         adapter?.fastScroller = binding.fastScroller
     }
 
+    override fun onDestroyView(view: View) {
+        super.onDestroyView(view)
+        adapter = null
+    }
+
     override fun onButtonClick(position: Int) {}
 
     override fun newState(state: ExtensionListState) {
