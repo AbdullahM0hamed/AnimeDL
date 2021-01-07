@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.App
+import com.anime.dl.actions.findAvailableExtensions
 import com.anime.dl.databinding.MainBinding
 import com.anime.dl.extensions.ExtensionManager
 import com.anime.dl.R
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<ExtensionListState> {
         setSupportActionBar(binding.topAppBar)
 
         mainStore.subscribe(this)
+        mainStore.dispatch(findAvailableExtensions())
 
         router = Conductor.attachRouter(this, binding.controllerContainer, savedInstance)
 
