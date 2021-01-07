@@ -37,7 +37,7 @@ class ExtensionController :
 
     val scope = CoroutineScope(Job() + Dispatchers.Main)
 
-    private var adapter: FlexibleAdapter<IFlexible<*>> = ExtensionAdapter(this)
+    private var adapter: FlexibleAdapter<IFlexible<*>>? = null
 
     private var extensions: List<ExtensionItem> = emptyList()
 
