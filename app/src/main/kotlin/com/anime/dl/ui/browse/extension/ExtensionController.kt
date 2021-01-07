@@ -57,10 +57,10 @@ class ExtensionController :
             .onEach { mainStore.dispatch(findAvailableExtensions()) }
             .launchIn(scope)
 
-        adapter = ExtensionAdapter(this)
+        this.adapter = ExtensionAdapter(this)
         Toast.makeText(
             App.applicationContext(),
-            adapter.toString(),
+            this.adapter.toString(),
             5
         ).show()
 
