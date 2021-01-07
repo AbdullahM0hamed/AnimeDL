@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anime.dl.App
 import com.anime.dl.actions.findAvailableExtensions
 import com.anime.dl.databinding.ExtensionControllerBinding
+import com.anime.dl.extensions.ExtensionManager
 import com.anime.dl.extensions.models.Extension
 import com.anime.dl.R
 import com.anime.dl.states.ExtensionListState
@@ -58,7 +59,15 @@ class ExtensionController :
 
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
+
         adapter?.fastScroller = binding.fastScroller
+
+        val manager = ExtensionManager(App.applicationContext())
+        val header = ExtensionGroupItem(App.applicationContext().getString(R.string.ext_available))
+        this.extensions += manager.availableExtensions.map { extension ->
+            ExtensionItem(extension, header)
+        }
+        drawExtensions()
     }
 
     override fun onDestroyView(view: View) {
