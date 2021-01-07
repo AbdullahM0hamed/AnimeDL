@@ -31,10 +31,6 @@ class ExtensionController :
     StoreSubscriber<ExtensionListState>,
     ExtensionAdapter.OnButtonClickListener {
 
-    init {
-        mainStore.subscribe(this)
-    }
-
     val scope = CoroutineScope(Job() + Dispatchers.Main)
 
     private var adapter: FlexibleAdapter<IFlexible<*>>? = null
@@ -51,6 +47,7 @@ class ExtensionController :
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
+        mainStore.subscribe(this)
 
         binding.swipeRefresh.isRefreshing = true
         binding.swipeRefresh.refreshes()
@@ -67,6 +64,7 @@ class ExtensionController :
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
         adapter = null
+        mainStore.unsubscribe(this)
     }
 
     override fun onButtonClick(position: Int) {}
