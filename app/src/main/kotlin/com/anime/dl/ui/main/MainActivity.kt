@@ -97,7 +97,8 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<ExtensionListState> {
 
     private fun tutorial(viewsAndTutorialStrings: List<Pair<View, String>>) {
         val config: ShowcaseConfig = ShowcaseConfig()
-        config.setDelay(500)
+        config.delay = 500
+        config.renderOverNavigationBar = true
 
         val sequence: MaterialShowcaseSequence = MaterialShowcaseSequence(this@MainActivity, "tutorial")
         sequence.setConfig(config)
