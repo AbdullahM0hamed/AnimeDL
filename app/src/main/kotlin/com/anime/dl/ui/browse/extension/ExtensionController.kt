@@ -3,7 +3,6 @@ package com.anime.dl.ui.browse.extension
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anime.dl.App
 import com.anime.dl.actions.findAvailableExtensions
@@ -109,11 +108,6 @@ class ExtensionController :
     }
 
     private fun drawExtensions() {
-        Toast.makeText(
-            App.applicationContext(),
-            binding.recycler.adapter.toString(),
-            5
-        ).show()
         adapter?.updateDataSet(this.extensions)
     }
 }

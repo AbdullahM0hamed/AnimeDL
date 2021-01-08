@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.App
 import com.anime.dl.actions.findAvailableExtensions
@@ -35,11 +34,6 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<ExtensionListState> {
     private lateinit var router: Router
 
     override fun newState(state: ExtensionListState) {
-        Toast.makeText(
-            this,
-            state.availableExtensions.toString(),
-            5
-        ).show()
     }
 
     override fun onCreate(savedInstance: Bundle?) {
