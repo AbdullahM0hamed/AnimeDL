@@ -82,11 +82,6 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<ExtensionListState> {
     }
 
     private fun tutorial() {
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { _ ->
-            binding.bottomNavigation.selectedItemId = R.id.nav_browse
-            true
-        }
-
         binding.bottomNavigation.selectedItemId = R.id.nav_browse
 
         val controller: BrowseController = BrowseController()
