@@ -1,20 +1,21 @@
 package com.anime.dl.reducers
 
-import com.anime.dl.actions.findAvailableExtensions
+import com.anime.dl.actions.FindExtensions
 import com.anime.dl.App
 import com.anime.dl.extensions.ExtensionManager
 import com.anime.dl.states.ExtensionListState
-import org.rekotlin.Action
 
-fun extensionListReducer(action: Action, extensionListState: ExtensionListState?): ExtensionListState {
-    var state = extensionListState ?: ExtensionListState()
+fun extensionListReducer(state: ExtensionListState, action: Any): ExtensionListState {
     when (action) {
-        is findAvailableExtensions -> {
+        is FindExtensions -> {
             val manager = ExtensionManager(App.applicationContext())
+            var state = state ?: ExtensionListState()
             state = state.copy(
-                installedExtensions = manager.installedExtensions,
-                availableExtensions = manager.availableExtensions
+                manager.installedExtensions,
+                manager.availableExtensions
             )
+
+            return state
         }
     }
 

@@ -1,9 +1,8 @@
 package com.anime.dl.states
 
 import com.anime.dl.extensions.models.Extension
-import org.rekotlin.StateType
 
 data class ExtensionListState(
-    var installedExtensions: List<Extension.Installed> = emptyList(),
-    var availableExtensions: List<Extension.Available> = emptyList()
-) : StateType
+    val installedExtensions: List<Extension.Installed> = emptyList(),
+    val availableExtensions: List<Extension.Available> = emptyList()
+)

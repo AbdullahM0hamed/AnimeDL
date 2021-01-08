@@ -10,6 +10,7 @@ import com.bluelinelabs.conductor.ControllerChangeHandler
 import com.bluelinelabs.conductor.ControllerChangeType
 
 class PlaceholderController : BaseController<PlaceholderBinding>() {
+
     override fun inflateView(
         inflater: LayoutInflater,
         container: ViewGroup

@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.anime.dl.R
 import com.anime.dl.databinding.BrowseControllerBinding
+import com.anime.dl.R
 import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.base.controller.TabbedController
 import com.anime.dl.ui.browse.extension.ExtensionController
@@ -65,7 +65,7 @@ class BrowseController :
         adapter = null
     }
 
-   private inner class BrowseAdapter : RouterPagerAdapter(this@BrowseController) {
+    private inner class BrowseAdapter : RouterPagerAdapter(this@BrowseController) {
 
        private val tabTitles = listOf(
            R.string.sources,
@@ -77,23 +77,19 @@ class BrowseController :
            return tabTitles.size
        }
 
-       override fun getPageTitle(position: Int): CharSequence {
-           return tabTitles[position]
+       override fun configureRouter(router: Router, position: Int) {
+           if (position == EXTENSIONS_CONTROLLER) {
+               router.setRoot(with(ExtensionController()))
+           }
        }
 
-       override fun configureRouter(router: Router, position: Int) {
-           if (!router.hasRootController()) {
-               val controller: Controller = when(position) {
-                   EXTENSIONS_CONTROLLER -> ExtensionController()
-                   else -> ExtensionController()
-               }
-               router.setRoot(with(controller))
-           }
+       override fun getPageTitle(position: Int): CharSequence {
+           return tabTitles[position]
        }
    }
 
    companion object {
-       const val EXTENSIONS_CONTROLLER = 0
-       const val SOURCES_CONTROLLER = 1
+       const val SOURCES_CONTROLLER = 0
+       const val EXTENSIONS_CONTROLLER = 1
    }
 }

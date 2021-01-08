@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anime.dl.App
-import com.anime.dl.actions.findAvailableExtensions
+import com.anime.dl.actions.FindExtensions
 import com.anime.dl.databinding.ExtensionControllerBinding
 import com.anime.dl.extensions.ExtensionManager
 import com.anime.dl.extensions.models.Extension
@@ -23,12 +23,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.rekotlin.StoreSubscriber
+import org.reduxkotlin.StoreSubscription
 import reactivecircus.flowbinding.swiperefreshlayout.refreshes
 
 class ExtensionController : 
     BaseController<ExtensionControllerBinding>(),
-    StoreSubscriber<ExtensionListState>,
     ExtensionAdapter.OnButtonClickListener {
 
     val scope = CoroutineScope(Job() + Dispatchers.Main)
@@ -36,6 +35,8 @@ class ExtensionController :
     private var adapter: FlexibleAdapter<IFlexible<*>>? = null
 
     private var extensions: List<ExtensionItem> = emptyList()
+
+    private lateinit var storeSubscription: StoreSubscription
 
     override fun inflateView(
         inflater: LayoutInflater,
@@ -47,64 +48,55 @@ class ExtensionController :
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
-        mainStore.subscribe(this)
+        storeSubscription = mainStore.subscribe { newState(mainStore.state) }
 
         binding.swipeRefresh.isRefreshing = true
         binding.swipeRefresh.refreshes()
-            .onEach { mainStore.dispatch(findAvailableExtensions()) }
+            .onEach { mainStore.dispatch(FindExtensions()) }
             .launchIn(scope)
 
         this.adapter = ExtensionAdapter(this)
 
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
-
         adapter?.fastScroller = binding.fastScroller
-
-        val manager = ExtensionManager(App.applicationContext())
-        val header = ExtensionGroupItem(App.applicationContext().getString(R.string.ext_available))
-        this.extensions += manager.availableExtensions.map { extension ->
-            ExtensionItem(extension, header)
-        }
-        drawExtensions()
+        mainStore.dispatch(FindExtensions())
     }
 
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
-        adapter = null
-        mainStore.unsubscribe(this)
+
+        //Unsubscribe
+        storeSubscription()
     }
 
     override fun onButtonClick(position: Int) {}
 
-    override fun newState(state: ExtensionListState) {
-        val installedExtensions = state?.installedExtensions
-        val availableExtensions = state?.availableExtensions
-        val context = App.applicationContext()
-
-        extensions = mutableListOf<ExtensionItem>()
-        
-        if (installedExtensions!!.isNotEmpty()) {
-            val header = ExtensionGroupItem(context.getString(R.string.ext_installed))
-            this.extensions += installedExtensions.map { extension ->
-                ExtensionItem(extension, header)
-            }
-        }
-
-        if (availableExtensions!!.isNotEmpty()) {
-            val header = ExtensionGroupItem(context.getString(R.string.ext_available))
-            this.extensions += availableExtensions.map { extension ->
-                ExtensionItem(extension, header)
-            }
-        }
-        drawExtensions()
-    }
-
     override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
         super.onChangeStarted(handler, type)
-        if (!type.isPush) {
-            mainStore.dispatch(findAvailableExtensions())
+        if (type.isPush) {
+            mainStore.dispatch(FindExtensions())
         }
+    }
+
+    private fun newState(state: ExtensionListState) {
+        val context = App.applicationContext()
+
+        if (state.installedExtensions.isNotEmpty()) {
+            val header = ExtensionGroupItem(context.getString(R.string.ext_installed))
+            this.extensions += state.installedExtensions.map { extension ->
+                ExtensionItem(extension, header)
+            }
+        }
+
+        if (state.availableExtensions.isNotEmpty()) {
+            val header = ExtensionGroupItem(context.getString(R.string.ext_available))
+            this.extensions += state.availableExtensions.map { extension ->
+                ExtensionItem(extension, header)
+            }
+        }
+
+        drawExtensions()
     }
 
     private fun drawExtensions() {

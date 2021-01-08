@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.App
-import com.anime.dl.actions.findAvailableExtensions
 import com.anime.dl.databinding.MainBinding
 import com.anime.dl.extensions.ExtensionManager
 import com.anime.dl.R
@@ -17,24 +16,20 @@ import com.anime.dl.ui.browse.BrowseController
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction.with
-import org.rekotlin.Store
-import org.rekotlin.StoreSubscriber
+import org.reduxkotlin.createThreadSafeStore
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
 import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
 
-val mainStore = Store(
-    reducer = ::extensionListReducer,
-    state = null
+val mainStore = createThreadSafeStore(
+    ::extensionListReducer,
+    ExtensionListState()
 )
 
-class MainActivity : AppCompatActivity(), StoreSubscriber<ExtensionListState> {
+class MainActivity : AppCompatActivity() {
 
     public lateinit var binding: MainBinding
     private lateinit var router: Router
-
-    override fun newState(state: ExtensionListState) {
-    }
 
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
@@ -47,10 +42,6 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<ExtensionListState> {
         binding = MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.topAppBar)
-
-        mainStore.subscribe(this)
-        mainStore.dispatch(findAvailableExtensions())
-
         router = Conductor.attachRouter(this, binding.controllerContainer, savedInstance)
 
         tutorial()
