@@ -14,7 +14,7 @@ import com.bluelinelabs.conductor.RestoreViewOnCreateController
 
 abstract class BaseController<VB: ViewBinding>(bundle: Bundle? = null) : RestoreViewOnCreateController(bundle) {
 
-    lateinit var binding: VB
+    public lateinit var binding: VB
 
     init {
         addLifecycleListener(

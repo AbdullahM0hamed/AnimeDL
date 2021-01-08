@@ -3,6 +3,7 @@ package com.anime.dl.ui.main
 import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.App
@@ -58,6 +59,8 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<ExtensionListState> {
 
         router = Conductor.attachRouter(this, binding.controllerContainer, savedInstance)
 
+        tutorial()
+
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             val id = item.itemId
 
@@ -76,12 +79,28 @@ class MainActivity : AppCompatActivity(), StoreSubscriber<ExtensionListState> {
         if (!router.hasRootController()) {
             binding.bottomNavigation.selectedItemId = R.id.nav_home
         }
+    }
+
+    private fun tutorial() {
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { _ ->
+            binding.bottomNavigation.selectedItemId = R.id.nav_browse
+            true
+        }
+
+        binding.bottomNavigation.selectedItemId = R.id.nav_browse
+
+        val controller: BrowseController = BrowseController()
+        router.setRoot(with(controller))
 
         tutorial(
             listOf(
                 Pair(
                     binding.bottomNavigation.findViewById(R.id.nav_browse),
                     resources!!.getString(R.string.tutorial_browse)
+                ),
+                Pair(
+                    (binding.tabs.getChildAt(0) as ViewGroup).getChildAt(1),
+                    resources.getString(R.string.tutorial_extension_tab)
                 )
             )
         )
