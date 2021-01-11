@@ -43,6 +43,7 @@ class BrowseController :
             (activity as? MainActivity)?.binding?.tabs?.apply {
                 setupWithViewPager(binding.pager)
             }
+            configureTabs((activity as MainActivity)!!.binding!!.tabs)
         }
     }
 
