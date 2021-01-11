@@ -12,8 +12,11 @@ import com.anime.dl.R
 import com.anime.dl.reducers.extensionListReducer
 import com.anime.dl.states.ExtensionListState
 import com.anime.dl.ui.base.controller.PlaceholderController
+import com.anime.dl.ui.base.controller.TabbedController
 import com.anime.dl.ui.browse.BrowseController
 import com.bluelinelabs.conductor.Conductor
+import com.bluelinelabs.conductor.Controller
+import com.bluelinelabs.conductor.ControllerChangeHandler
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction.with
 import org.reduxkotlin.createThreadSafeStore
@@ -43,6 +46,28 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.topAppBar)
         router = Conductor.attachRouter(this, binding.controllerContainer, savedInstance)
+
+        router.addChangeListener(
+            object : ControllerChangeHandler.ControllerChangeListener {
+                override fun onChangeStarted(
+                    to: Controller?,
+                    from: Controller?,
+                    isPush: Boolean,
+                    container: ViewGroup,
+                    handler: ControllerChangeHandler
+                ) {
+                    syncActivityViewWithController(to, from)
+                }
+
+                override fun onChangeCompleted(
+                    to: Controller?,
+                    from: Controller?,
+                    isPush: Boolean,
+                    container: ViewGroup,
+                    handler: ControllerChangeHandler
+                ) {}
+            }
+        )
 
         tutorial()
 
@@ -103,5 +128,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         sequence.start()
+    }
+
+    private fun syncActivityViewWithController(to: Controller?, from: Controller?) {
+        if (to is TabbedController) {
+            to.configureTabs(binding.tabs)
+        }
     }
 }
