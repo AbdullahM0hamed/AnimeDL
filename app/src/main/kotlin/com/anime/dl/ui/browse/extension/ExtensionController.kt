@@ -64,6 +64,7 @@ class ExtensionController :
 
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
+        adapter = null
 
         //Unsubscribe
         storeSubscription()
