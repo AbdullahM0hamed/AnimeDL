@@ -60,7 +60,6 @@ class ExtensionController :
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
         adapter?.fastScroller = binding.fastScroller
-        mainStore.dispatch(FindExtensions())
     }
 
     override fun onDestroyView(view: View) {
