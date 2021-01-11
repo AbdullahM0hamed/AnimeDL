@@ -100,6 +100,7 @@ class ExtensionController :
     }
 
     private fun drawExtensions() {
+        binding.swipeRefresh.isRefreshing = false
         adapter?.updateDataSet(this.extensions)
     }
 }
