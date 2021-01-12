@@ -11,14 +11,24 @@
         android:id="@+id/controller_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0" />
 
-    </com.bluelinelabs.conductor.ChangeHandlerFrameLayout>
+    <com.bluelinelabs.conductor.ChangeHandlerFrameLayout                                                            android:id="@+id/browse_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="112dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.appbar.AppBarLayout 
         android:layout_width="fill_parent"
@@ -37,7 +47,7 @@
             android:id="@+id/tabs"
             android:background="#000"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?actionBarSize"
             app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
             style="@style/Theme.Widget.Tabs" />
     </com.google.android.material.appbar.AppBarLayout>

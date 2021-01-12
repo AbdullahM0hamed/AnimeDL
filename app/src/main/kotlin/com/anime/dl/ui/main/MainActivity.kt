@@ -47,28 +47,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.topAppBar)
         router = Conductor.attachRouter(this, binding.controllerContainer, savedInstance)
 
-        router.addChangeListener(
-            object : ControllerChangeHandler.ControllerChangeListener {
-                override fun onChangeStarted(
-                    to: Controller?,
-                    from: Controller?,
-                    isPush: Boolean,
-                    container: ViewGroup,
-                    handler: ControllerChangeHandler
-                ) {
-                    syncActivityViewWithController(to, from)
-                }
-
-                override fun onChangeCompleted(
-                    to: Controller?,
-                    from: Controller?,
-                    isPush: Boolean,
-                    container: ViewGroup,
-                    handler: ControllerChangeHandler
-                ) {}
-            }
-        )
-
         tutorial()
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
@@ -76,8 +54,12 @@ class MainActivity : AppCompatActivity() {
 
             val currentRoot = router.backstack.firstOrNull()
             if (currentRoot?.tag()?.toIntOrNull() != id) {
+                clearContainersAndChangeRouter(false)
                 when (id) {
-                    R.id.nav_browse -> router.setRoot(with(BrowseController()))
+                    R.id.nav_browse -> {
+                        router = Conductor.attachRouter(this, binding.browseContainer, savedInstance)
+                        router.setRoot(with(BrowseController()))
+                    }
                     R.id.nav_home -> router.setRoot(with(PlaceholderController()))
                     R.id.nav_downloads -> router.setRoot(with(PlaceholderController()))
                     R.id.nav_settings -> router.setRoot(with(PlaceholderController()))
@@ -93,6 +75,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun tutorial() {
         binding.bottomNavigation.selectedItemId = R.id.nav_browse
+        clearContainersAndChangeRouter(true)
 
         val controller: BrowseController = BrowseController()
         router.setRoot(with(controller))
@@ -130,9 +113,14 @@ class MainActivity : AppCompatActivity() {
         sequence.start()
     }
 
-    private fun syncActivityViewWithController(to: Controller?, from: Controller?) {
-        if (to is TabbedController) {
-            to.configureTabs(binding.tabs)
+    private fun clearContainersAndChangeRouter(isBrowse: Boolean) {
+        binding.controllerContainer.removeAllViews()
+        binding.browseContainer.removeAllViews()
+
+        if (isBrowse) {
+            router = Conductor.attachRouter(this, binding.browseContainer, null)
+        } else {
+            router = Conductor.attachRouter(this, binding.controllerContainer, null)
         }
     }
 }
