@@ -15,8 +15,13 @@ import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.main.mainStore
 import com.bluelinelabs.conductor.ControllerChangeHandler
 import com.bluelinelabs.conductor.ControllerChangeType
-import eu.davidea.flexibleadapter.FlexibleAdapter
-import eu.davidea.flexibleadapter.items.IFlexible
+import com.mikepenz.fastadapter.adapters.GenericItemAdapter
+import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
+import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
+import com.mikepenz.fastadapter.GenericFastAdapter
+import com.mikepenz.fastadapter.GenericItem
+import com.mikepenz.fastadapter.FastAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -27,14 +32,14 @@ import org.reduxkotlin.StoreSubscription
 import reactivecircus.flowbinding.swiperefreshlayout.refreshes
 
 class ExtensionController : 
-    BaseController<ExtensionControllerBinding>(),
-    ExtensionAdapter.OnButtonClickListener {
+    BaseController<ExtensionControllerBinding>() {
 
     val scope = CoroutineScope(Job() + Dispatchers.Main)
 
-    private var adapter: FlexibleAdapter<IFlexible<*>>? = null
+    private lateinit var itemAdapter: GenericItemAdapter
+    private lateinit var adapter: GenericFastAdapter
 
-    private var extensions: List<ExtensionItem> = emptyList()
+    private var extensions = mutableListOf<GenericItem>()
 
     private lateinit var storeSubscription: StoreSubscription
 
@@ -55,22 +60,22 @@ class ExtensionController :
             .onEach { mainStore.dispatch(FindExtensions()) }
             .launchIn(scope)
 
-        this.adapter = ExtensionAdapter(this)
+        itemAdapter = items()
+
+        adapter = FastAdapter.with(listOf(itemAdapter))
+        adapter?.setHasStableIds(true)
 
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
-        adapter?.fastScroller = binding.fastScroller
+        //adapter?.fastScroller = binding.fastScroller
     }
 
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
-        adapter = null
 
         //Unsubscribe
         storeSubscription()
     }
-
-    override fun onButtonClick(position: Int) {}
 
     override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
         super.onChangeStarted(handler, type)
@@ -83,24 +88,41 @@ class ExtensionController :
         val context = App.applicationContext()
 
         if (state.installedExtensions.isNotEmpty()) {
-            val header = ExtensionGroupItem(context.getString(R.string.ext_installed))
-            this.extensions += state.installedExtensions.map { extension ->
-                ExtensionItem(extension, header)
+            val header = ExtensionHeaderItem(context.getString(R.string.ext_installed))
+            header.identifier = 0
+
+            if (header !in extensions) extensions.add(header)
+            state.installedExtensions.mapIndexed { index, extension ->
+                val item = createItem(extension, (index + 1).toLong())
+                if (item !in extensions) extensions.add(item)
             }
         }
 
         if (state.availableExtensions.isNotEmpty()) {
-            val header = ExtensionGroupItem(context.getString(R.string.ext_available))
-            this.extensions += state.availableExtensions.map { extension ->
-                ExtensionItem(extension, header)
+            val header = ExtensionHeaderItem(context.getString(R.string.ext_available))
+            header.identifier = extensions.size.toLong()
+            
+            if (header !in extensions) extensions.add(header)
+            state.availableExtensions.mapIndexed { index, extension ->
+                val item = createItem(extension, header.identifier + (index + 1).toLong())
+                if (item !in extensions) extensions.add(item)
             }
         }
 
         drawExtensions()
     }
 
+    private fun createItem(extension: Extension, id: Long): ExtensionItem {
+        val item = ExtensionItem(extension)
+        item.identifier = id
+
+        return item
+    }
+
     private fun drawExtensions() {
         binding.swipeRefresh.isRefreshing = false
-        adapter?.updateDataSet(this.extensions)
+
+        //itemAdapter.set(extensions)
+        FastAdapterDiffUtil[itemAdapter] = extensions
     }
 }

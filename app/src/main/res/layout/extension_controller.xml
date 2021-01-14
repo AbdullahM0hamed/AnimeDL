@@ -21,12 +21,14 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <eu.davidea.fastscroller.FastScroller
+    <!--
+        <eu.davidea.fastscroller.FastScroller
         android:id="@+id/fast_scroller"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         app:fastScrollerBubbleEnabled="false"
-        tools:visibility="visible" />
+        tools:visibility="visible" /> 
+    -->
 
 </FrameLayout>
