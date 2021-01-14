@@ -12,7 +12,7 @@
             </item>
 
             <item>
-                <color android:color="#55555555" />
+                <color android:color="@android:color/transparent" />
             </item>
         </selector>
     </item>
