@@ -86,6 +86,7 @@ class ExtensionController :
 
     private fun newState(state: ExtensionListState) {
         val context = App.applicationContext()
+        extensions = mutableListOf<GenericItem>()
 
         if (state.installedExtensions.isNotEmpty()) {
             val header = ExtensionHeaderItem(context.getString(R.string.ext_installed))
