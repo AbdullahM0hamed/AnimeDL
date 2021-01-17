@@ -7,7 +7,6 @@ sealed class Extension {
     abstract val versionName: String
     abstract val versionCode: Int
     abstract val lang: String?
-    abstract val isTutorial: Boolean
 
     data class Installed(
         override val name: String,
@@ -15,7 +14,6 @@ sealed class Extension {
         override val lang: String,
         override val versionName: String,
         override val versionCode: Int,
-        override val isTutorial: Boolean = false,
         val hasUpdate: Boolean = false,
         val isObsolete: Boolean = false
     ) : Extension()
@@ -25,7 +23,6 @@ sealed class Extension {
         override val pkgName: String,
         override val lang: String,
         override val versionName: String,
-        override val versionCode: Int,
-        override val isTutorial: Boolean = false
+        override val versionCode: Int
     ) : Extension()
 }
