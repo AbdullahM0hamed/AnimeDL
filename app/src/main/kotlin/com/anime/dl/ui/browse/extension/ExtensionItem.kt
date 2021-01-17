@@ -18,6 +18,10 @@ data class ExtensionItem(val extension: Extension) :
     ) {
         binding.extTitle.text = extension.name
         binding.version.text = "${extension.versionName}.${extension.versionCode}"
+
+        if (extension.isTutorial) {
+            binding.image.setImageResource(R.drawable.ic_tutorial)
+        }
     }
 
     override fun createBinding(

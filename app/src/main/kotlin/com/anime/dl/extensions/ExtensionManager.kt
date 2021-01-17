@@ -23,7 +23,8 @@ class ExtensionManager(private val context: Context) {
                     pkgName = "com.anime.dl.tutorial",
                     lang = "all",
                     versionName = "0.0",
-                    versionCode = 1
+                    versionCode = 1,
+                    isTutorial = true
                 )
             )
         } else {
@@ -33,7 +34,8 @@ class ExtensionManager(private val context: Context) {
                     pkgName = "com.anime.dl.tutorial",
                     lang = "all",
                     versionName = "0.0",
-                    versionCode = 1
+                    versionCode = 1,
+                    isTutorial = true
                 )
             )
         }
