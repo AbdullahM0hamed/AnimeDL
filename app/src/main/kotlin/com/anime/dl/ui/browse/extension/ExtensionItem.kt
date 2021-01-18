@@ -11,6 +11,7 @@ data class ExtensionItem(val extension: Extension) :
     AbstractBindingItem<ExtensionCardItemBinding>() {
 
     override val type: Int = R.id.fastadapter_extension_item_id
+    public lateinit var binding: ExtensionCardItemBinding
 
     override fun bindView(
         binding: ExtensionCardItemBinding, 
@@ -28,6 +29,7 @@ data class ExtensionItem(val extension: Extension) :
         inflater: LayoutInflater,
         parent: ViewGroup?
     ): ExtensionCardItemBinding {
-        return ExtensionCardItemBinding.inflate(inflater, parent, false)
+        binding = ExtensionCardItemBinding.inflate(inflater, parent, false)
+        return binding
     }
 }

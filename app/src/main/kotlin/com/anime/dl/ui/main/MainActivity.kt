@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.App
 import com.anime.dl.databinding.MainBinding
@@ -15,6 +14,7 @@ import com.anime.dl.states.ExtensionListState
 import com.anime.dl.ui.base.controller.PlaceholderController
 import com.anime.dl.ui.base.controller.TabbedController
 import com.anime.dl.ui.browse.BrowseController
+import com.anime.dl.ui.browse.extension.ExtensionItem
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Controller
 import com.bluelinelabs.conductor.ControllerChangeHandler
@@ -83,7 +83,25 @@ class MainActivity : AppCompatActivity() {
 
         val listener = MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
             if (position == 1) {
+                val downloadExtButton = (controller
+                        .adapter
+                        ?.extController
+                        ?.itemAdapter
+                        ?.getAdapterItem(1) as ExtensionItem)
+                        ?.binding
+                        ?.extButton
+
                 controller.binding.pager.currentItem = 1
+                tutorial(
+                    listOf(
+                        Pair(
+                            downloadExtButton,
+                            resources!!.getString(R.string.tutorial_download_ext)
+                        )
+                    ),
+                    null,
+                    2
+                )
             }
         }
 
@@ -98,16 +116,17 @@ class MainActivity : AppCompatActivity() {
                     resources.getString(R.string.tutorial_extension_tab)
                 )
             ),
-            listener
+            listener,
+            1
         )
     }
 
-    private fun tutorial(viewsAndTutorialStrings: List<Pair<View, String>>, listener: MaterialShowcaseSequence.OnSequenceItemDismissedListener) {
+    private fun tutorial(viewsAndTutorialStrings: List<Pair<View, String>>, listener: MaterialShowcaseSequence.OnSequenceItemDismissedListener?, position: Int) {
         val config: ShowcaseConfig = ShowcaseConfig()
         config.delay = 500
         config.renderOverNavigationBar = true
 
-        val sequence: MaterialShowcaseSequence = MaterialShowcaseSequence(this@MainActivity, "tutorial")
+        val sequence: MaterialShowcaseSequence = MaterialShowcaseSequence(this@MainActivity, "tutorial_$position")
         sequence.setConfig(config)
 
         viewsAndTutorialStrings.forEach { item ->

@@ -36,7 +36,7 @@ class ExtensionController :
 
     val scope = CoroutineScope(Job() + Dispatchers.Main)
 
-    private lateinit var itemAdapter: GenericItemAdapter
+    public var itemAdapter: GenericItemAdapter = items()
     private lateinit var adapter: GenericFastAdapter
 
     private var extensions = mutableListOf<GenericItem>()
@@ -59,8 +59,6 @@ class ExtensionController :
         binding.swipeRefresh.refreshes()
             .onEach { mainStore.dispatch(FindExtensions()) }
             .launchIn(scope)
-
-        itemAdapter = items()
 
         adapter = FastAdapter.with(listOf(itemAdapter))
         adapter?.setHasStableIds(true)

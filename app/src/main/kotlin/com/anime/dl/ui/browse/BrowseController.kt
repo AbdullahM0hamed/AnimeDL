@@ -22,7 +22,7 @@ class BrowseController :
     BaseController<BrowseControllerBinding>(),
     TabbedController {
 
-    private var adapter: BrowseAdapter? = null
+    public var adapter: BrowseAdapter? = null
 
     override fun inflateView(
         inflater: LayoutInflater,
@@ -65,7 +65,9 @@ class BrowseController :
         adapter = null
     }
 
-    private inner class BrowseAdapter : RouterPagerAdapter(this@BrowseController) {
+    public inner class BrowseAdapter : RouterPagerAdapter(this@BrowseController) {
+
+       public val extController = ExtensionController()
 
        private val tabTitles = listOf(
            R.string.sources,
@@ -79,7 +81,7 @@ class BrowseController :
 
        override fun configureRouter(router: Router, position: Int) {
            if (position == EXTENSIONS_CONTROLLER) {
-               router.setRoot(with(ExtensionController()))
+               router.setRoot(with(extController))
            }
        }
 
