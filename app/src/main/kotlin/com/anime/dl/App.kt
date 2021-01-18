@@ -5,19 +5,19 @@ import android.content.Context
 
 class App : Application() {
 
-    init {
-        instance = this
-    }
+  init {
+    instance = this
+  }
 
-    companion object {
-        private var instance: App? = null
+  companion object {
+    private var instance: App? = null
 
-        fun applicationContext(): Context {
-            return instance!!.applicationContext
-        }
+    fun applicationContext(): Context {
+      return instance!!.applicationContext
     }
+  }
 
-    override fun onCreate() {
-        super.onCreate()
-    }
+  override fun onCreate() {
+    super.onCreate()
+  }
 }

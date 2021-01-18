@@ -1,4 +1,4 @@
 package com.anime.dl.actions
 
-//Extension Actions
+// Extension Actions
 class FindExtensions

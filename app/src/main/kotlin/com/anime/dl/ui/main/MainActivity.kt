@@ -1,14 +1,14 @@
 package com.anime.dl.ui.main
 
 import android.os.Bundle
-import android.view.animation.DecelerateInterpolator
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.App
+import com.anime.dl.R
 import com.anime.dl.databinding.MainBinding
 import com.anime.dl.extensions.ExtensionManager
-import com.anime.dl.R
 import com.anime.dl.reducers.extensionListReducer
 import com.anime.dl.states.ExtensionListState
 import com.anime.dl.ui.base.controller.PlaceholderController
@@ -25,131 +25,121 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
 import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
 
-val mainStore = createThreadSafeStore(
-    ::extensionListReducer,
-    ExtensionListState()
-)
+val mainStore = createThreadSafeStore(::extensionListReducer, ExtensionListState())
 
 class MainActivity : AppCompatActivity() {
 
-    public lateinit var binding: MainBinding
-    private lateinit var router: Router
+  public lateinit var binding: MainBinding
+  private lateinit var router: Router
 
-    override fun onCreate(savedInstance: Bundle?) {
-        super.onCreate(savedInstance)
+  override fun onCreate(savedInstance: Bundle?) {
+    super.onCreate(savedInstance)
 
-        if (!isTaskRoot) {
-            finish()
-            return
-        }
-
-        binding = MainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setSupportActionBar(binding.topAppBar)
-        router = Conductor.attachRouter(this, binding.controllerContainer, savedInstance)
-
-        tutorial()
-
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
-            val id = item.itemId
-
-            val currentRoot = router.backstack.firstOrNull()
-            if (currentRoot?.tag()?.toIntOrNull() != id) {
-                clearContainersAndChangeRouter(false)
-                when (id) {
-                    R.id.nav_browse -> {
-                        router = Conductor.attachRouter(this, binding.browseContainer, savedInstance)
-                        router.setRoot(with(BrowseController()))
-                    }
-                    R.id.nav_home -> router.setRoot(with(PlaceholderController()))
-                    R.id.nav_downloads -> router.setRoot(with(PlaceholderController()))
-                    R.id.nav_settings -> router.setRoot(with(PlaceholderController()))
-                }
-            }
-            true
-        }
-
-        if (!router.hasRootController()) {
-            binding.bottomNavigation.selectedItemId = R.id.nav_home
-        }
+    if (!isTaskRoot) {
+      finish()
+      return
     }
 
-    private fun tutorial() {
-        binding.bottomNavigation.selectedItemId = R.id.nav_browse
-        clearContainersAndChangeRouter(true)
+    binding = MainBinding.inflate(layoutInflater)
+    setContentView(binding.root)
+    setSupportActionBar(binding.topAppBar)
+    router = Conductor.attachRouter(this, binding.controllerContainer, savedInstance)
 
-        val controller: BrowseController = BrowseController()
-        router.setRoot(with(controller))
+    tutorial()
 
-        val listener = MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
-            if (position == 1) {
-                val downloadExtButton = (controller
-                        .adapter
-                        ?.extController
-                        ?.itemAdapter
-                        ?.getAdapterItem(1) as ExtensionItem)
-                        ?.binding
-                        ?.extButton
+    binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+      val id = item.itemId
 
-                controller.binding.pager.currentItem = 1
-                tutorial(
-                    listOf(
-                        Pair(
-                            downloadExtButton,
-                            resources!!.getString(R.string.tutorial_download_ext)
-                        )
-                    ),
-                    null,
-                    2
-                )
-            }
+      val currentRoot = router.backstack.firstOrNull()
+      if (currentRoot?.tag()?.toIntOrNull() != id) {
+        clearContainersAndChangeRouter(false)
+        when (id) {
+          R.id.nav_browse -> {
+            router = Conductor.attachRouter(this, binding.browseContainer, savedInstance)
+            router.setRoot(with(BrowseController()))
+          }
+          R.id.nav_home -> router.setRoot(with(PlaceholderController()))
+          R.id.nav_downloads -> router.setRoot(with(PlaceholderController()))
+          R.id.nav_settings -> router.setRoot(with(PlaceholderController()))
         }
-
-        tutorial(
-            listOf(
-                Pair(
-                    binding.bottomNavigation.findViewById(R.id.nav_browse),
-                    resources!!.getString(R.string.tutorial_browse)
-                ),
-                Pair(
-                    (binding.tabs.getChildAt(0) as ViewGroup).getChildAt(1),
-                    resources.getString(R.string.tutorial_extension_tab)
-                )
-            ),
-            listener,
-            1
-        )
+      }
+      true
     }
 
-    private fun tutorial(viewsAndTutorialStrings: List<Pair<View, String>>, listener: MaterialShowcaseSequence.OnSequenceItemDismissedListener?, position: Int) {
-        val config: ShowcaseConfig = ShowcaseConfig()
-        config.delay = 500
-        config.renderOverNavigationBar = true
+    if (!router.hasRootController()) {
+      binding.bottomNavigation.selectedItemId = R.id.nav_home
+    }
+  }
 
-        val sequence: MaterialShowcaseSequence = MaterialShowcaseSequence(this@MainActivity, "tutorial_$position")
-        sequence.setConfig(config)
+  private fun tutorial() {
+    binding.bottomNavigation.selectedItemId = R.id.nav_browse
+    clearContainersAndChangeRouter(true)
 
-        viewsAndTutorialStrings.forEach { item ->
-            sequence.addSequenceItem(
-                item.first,
-                item.second,
-                resources!!.getString(R.string.tutorial_understood)
-            )
+    val controller: BrowseController = BrowseController()
+    router.setRoot(with(controller))
+
+    val listener =
+        MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
+          if (position == 1) {
+            val downloadExtButton =
+                (controller.adapter
+                    ?.extController
+                    ?.itemAdapter
+                    ?.getAdapterItem(1) as ExtensionItem)?.binding
+                    ?.extButton
+
+            controller.binding.pager.currentItem = 1
+            tutorial(
+                listOf(
+                    Pair(downloadExtButton, resources!!.getString(R.string.tutorial_download_ext))),
+                null,
+                2)
+          }
         }
 
-        sequence.setOnItemDismissedListener(listener)
+    tutorial(
+        listOf(
+            Pair(
+                binding.bottomNavigation.findViewById(R.id.nav_browse),
+                resources!!.getString(R.string.tutorial_browse)),
+            Pair(
+                (binding.tabs.getChildAt(0) as ViewGroup).getChildAt(1),
+                resources.getString(R.string.tutorial_extension_tab))),
+        listener,
+        1)
+  }
 
-        sequence.start()
+  private fun tutorial(
+      viewsAndTutorialStrings: List<Pair<View, String>>,
+      listener: MaterialShowcaseSequence.OnSequenceItemDismissedListener?,
+      position: Int
+  ) {
+    val config: ShowcaseConfig = ShowcaseConfig()
+    config.delay = 500
+    config.renderOverNavigationBar = true
+
+    val sequence: MaterialShowcaseSequence =
+        MaterialShowcaseSequence(this@MainActivity, "tutorial_$position")
+    sequence.setConfig(config)
+
+    viewsAndTutorialStrings.forEach { item ->
+      sequence.addSequenceItem(
+          item.first, item.second, resources!!.getString(R.string.tutorial_understood))
     }
 
-    private fun clearContainersAndChangeRouter(isBrowse: Boolean) {
-        binding.controllerContainer.removeAllViews()
-        binding.browseContainer.removeAllViews()
+    sequence.setOnItemDismissedListener(listener)
 
-        if (isBrowse) {
-            router = Conductor.attachRouter(this, binding.browseContainer, null)
-        } else {
-            router = Conductor.attachRouter(this, binding.controllerContainer, null)
-        }
+    sequence.start()
+  }
+
+  private fun clearContainersAndChangeRouter(isBrowse: Boolean) {
+    binding.controllerContainer.removeAllViews()
+    binding.browseContainer.removeAllViews()
+
+    if (isBrowse) {
+      router = Conductor.attachRouter(this, binding.browseContainer, null)
+    } else {
+      router = Conductor.attachRouter(this, binding.controllerContainer, null)
     }
+  }
 }
