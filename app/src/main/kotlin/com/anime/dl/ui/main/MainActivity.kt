@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.App
 import com.anime.dl.databinding.MainBinding
@@ -80,6 +81,12 @@ class MainActivity : AppCompatActivity() {
         val controller: BrowseController = BrowseController()
         router.setRoot(with(controller))
 
+        val listener = MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
+            if (position == 1) {
+                controller.binding.pager.currentItem = 1
+            }
+        }
+
         tutorial(
             listOf(
                 Pair(
@@ -90,11 +97,12 @@ class MainActivity : AppCompatActivity() {
                     (binding.tabs.getChildAt(0) as ViewGroup).getChildAt(1),
                     resources.getString(R.string.tutorial_extension_tab)
                 )
-            )
+            ),
+            listener
         )
     }
 
-    private fun tutorial(viewsAndTutorialStrings: List<Pair<View, String>>) {
+    private fun tutorial(viewsAndTutorialStrings: List<Pair<View, String>>, listener: MaterialShowcaseSequence.OnSequenceItemDismissedListener) {
         val config: ShowcaseConfig = ShowcaseConfig()
         config.delay = 500
         config.renderOverNavigationBar = true
@@ -109,6 +117,8 @@ class MainActivity : AppCompatActivity() {
                 resources!!.getString(R.string.tutorial_understood)
             )
         }
+
+        sequence.setOnItemDismissedListener(listener)
 
         sequence.start()
     }
