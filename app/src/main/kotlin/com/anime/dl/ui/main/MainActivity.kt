@@ -64,12 +64,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    
+    private lateinit var downloadExtButton: View
+    private val controller: BrowseController = BrowseController()
+
     private fun tutorial() {
-        lateinit var downloadExtButton: View
         binding.bottomNavigation.selectedItemId = R.id.nav_browse
         clearContainersAndChangeRouter(true)
 
-        val controller: BrowseController = BrowseController()
         router.setRoot(with(controller))
 
         val installExtListener =
@@ -81,7 +83,9 @@ class MainActivity : AppCompatActivity() {
                             (binding.tabs.getChildAt(0) as ViewGroup).getChildAt(0),
                             R.string.tutorial_source_tab
                         )
-                    )
+                    ),
+                    null,
+                    3
                 )
             }
 
