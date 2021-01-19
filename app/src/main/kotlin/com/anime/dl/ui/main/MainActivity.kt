@@ -81,8 +81,18 @@ class MainActivity : AppCompatActivity() {
     val installExtListener =
         MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
             downloadExtButton?.performClick()
-        }
+            tutorial(
+                listOf(
+                    Pair(
+                        (binding.tabs.getChildAt(0) as ViewGroup).getChildAt(0),
+                        R.string.tutorial_source_tab
+                )))
+    }
 
+    extensionTutorial(installExtListener)
+  }
+
+  private fun extensionTutorial(listener: MaterialShowcaseSequence.OnSequenceItemDismissedListener) {
     // Displays extension download button
     val extListener =
         MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
@@ -97,8 +107,8 @@ class MainActivity : AppCompatActivity() {
             controller.binding.pager.currentItem = 1
             tutorial(
                 listOf(
-                    Pair(downloadExtButton, resources!!.getString(R.string.tutorial_download_ext))),
-                installExtListener,
+                    Pair(downloadExtButton, R.string.tutorial_download_ext)),
+                listener,
                 2)
           }
         }
@@ -107,16 +117,16 @@ class MainActivity : AppCompatActivity() {
         listOf(
             Pair(
                 binding.bottomNavigation.findViewById(R.id.nav_browse),
-                resources!!.getString(R.string.tutorial_browse)),
+                R.string.tutorial_browse),
             Pair(
                 (binding.tabs.getChildAt(0) as ViewGroup).getChildAt(1),
-                resources.getString(R.string.tutorial_extension_tab))),
+                R.string.tutorial_extension_tab)),
         extListener,
         1)
   }
 
   private fun tutorial(
-      viewsAndTutorialStrings: List<Pair<View, String>>,
+      viewsAndTutorialStrings: List<Pair<View, Int>>,
       listener: MaterialShowcaseSequence.OnSequenceItemDismissedListener?,
       position: Int
   ) {
@@ -130,7 +140,7 @@ class MainActivity : AppCompatActivity() {
 
     viewsAndTutorialStrings.forEach { item ->
       sequence.addSequenceItem(
-          item.first, item.second, resources!!.getString(R.string.tutorial_understood))
+          item.first, resources!!.getString(item.second), resources!!.getString(R.string.tutorial_understood))
     }
 
     sequence.setOnItemDismissedListener(listener)
