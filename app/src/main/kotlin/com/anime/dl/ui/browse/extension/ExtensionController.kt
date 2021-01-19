@@ -22,7 +22,6 @@ import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
-import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -117,6 +116,5 @@ class ExtensionController : BaseController<ExtensionControllerBinding>() {
     binding.swipeRefresh.isRefreshing = false
 
     itemAdapter.set(extensions)
-    //FastAdapterDiffUtil[itemAdapter] = extensions
   }
 }
