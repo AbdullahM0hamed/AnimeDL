@@ -19,6 +19,10 @@ data class ExtensionItem(val extension: Extension) :
         binding.extTitle.text = extension.name
         binding.version.text = "${extension.versionName}.${extension.versionCode}"
 
+        if (extension is Extension.Installed) {
+            binding.extButton.setImageResource(R.drawable.ic_settings_fill_24dp)
+        }
+
         binding.extButton.setOnClickListener {
             val installAction: InstallExtension = InstallExtension(extension)
             mainStore.dispatch(installAction)
