@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anime.dl.App
 import com.anime.dl.R
 import com.anime.dl.actions.FindExtensions
+import com.anime.dl.actions.InstallExtension
 import com.anime.dl.databinding.ExtensionControllerBinding
 import com.anime.dl.extensions.ExtensionManager
 import com.anime.dl.extensions.models.Extension
@@ -115,7 +116,7 @@ class ExtensionController : BaseController<ExtensionControllerBinding>() {
   private fun drawExtensions() {
     binding.swipeRefresh.isRefreshing = false
 
-    // itemAdapter.set(extensions)
-    FastAdapterDiffUtil[itemAdapter] = extensions
+    itemAdapter.set(extensions)
+    //FastAdapterDiffUtil[itemAdapter] = extensions
   }
 }

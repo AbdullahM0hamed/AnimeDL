@@ -6,7 +6,7 @@ sealed class Extension {
   abstract val pkgName: String
   abstract val versionName: String
   abstract val versionCode: Int
-  abstract val lang: String?
+  abstract val lang: String
   abstract val isTutorial: Boolean
 
   data class Installed(

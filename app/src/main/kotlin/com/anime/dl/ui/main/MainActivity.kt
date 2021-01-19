@@ -3,7 +3,6 @@ package com.anime.dl.ui.main
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.App
 import com.anime.dl.R
@@ -72,16 +71,23 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun tutorial() {
+    lateinit var downloadExtButton: View
     binding.bottomNavigation.selectedItemId = R.id.nav_browse
     clearContainersAndChangeRouter(true)
 
     val controller: BrowseController = BrowseController()
     router.setRoot(with(controller))
 
-    val listener =
+    val installExtListener =
+        MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
+            downloadExtButton?.performClick()
+        }
+
+    // Displays extension download button
+    val extListener =
         MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
           if (position == 1) {
-            val downloadExtButton =
+            downloadExtButton =
                 (controller.adapter
                     ?.extController
                     ?.itemAdapter
@@ -92,7 +98,7 @@ class MainActivity : AppCompatActivity() {
             tutorial(
                 listOf(
                     Pair(downloadExtButton, resources!!.getString(R.string.tutorial_download_ext))),
-                null,
+                installExtListener,
                 2)
           }
         }
@@ -105,7 +111,7 @@ class MainActivity : AppCompatActivity() {
             Pair(
                 (binding.tabs.getChildAt(0) as ViewGroup).getChildAt(1),
                 resources.getString(R.string.tutorial_extension_tab))),
-        listener,
+        extListener,
         1)
   }
 

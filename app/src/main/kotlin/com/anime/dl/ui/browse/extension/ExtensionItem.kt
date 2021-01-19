@@ -2,9 +2,11 @@ package com.anime.dl.ui.browse.extension
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.anime.dl.R
+import com.anime.dl.actions.InstallExtension
 import com.anime.dl.databinding.ExtensionCardItemBinding
 import com.anime.dl.extensions.models.Extension
+import com.anime.dl.R
+import com.anime.dl.ui.main.mainStore
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 data class ExtensionItem(val extension: Extension) :
@@ -16,6 +18,11 @@ data class ExtensionItem(val extension: Extension) :
   override fun bindView(binding: ExtensionCardItemBinding, payloads: List<Any>) {
     binding.extTitle.text = extension.name
     binding.version.text = "${extension.versionName}.${extension.versionCode}"
+
+    binding.extButton.setOnClickListener {
+        val installAction: InstallExtension = InstallExtension(extension)
+        mainStore.dispatch(installAction)
+    }
 
     if (extension.isTutorial) {
       binding.image.setImageResource(R.drawable.ic_tutorial)

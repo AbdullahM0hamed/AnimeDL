@@ -2,13 +2,14 @@ package com.anime.dl.extensions
 
 import android.content.Context
 import androidx.preference.PreferenceManager
-import com.anime.dl.R
+import com.anime.dl.App
 import com.anime.dl.extensions.models.Extension
+import com.anime.dl.R
 
 class ExtensionManager(private val context: Context) {
 
-  var installedExtensions = emptyList<Extension.Installed>()
-  var availableExtensions = emptyList<Extension.Available>()
+  var installedExtensions = mutableListOf<Extension.Installed>()
+  var availableExtensions = mutableListOf<Extension.Available>()
   var prefs = PreferenceManager.getDefaultSharedPreferences(context)
 
   init {
@@ -17,8 +18,8 @@ class ExtensionManager(private val context: Context) {
 
   private fun initTutorialExtension() {
     if (prefs.getBoolean("tutorial_installed", false)) {
-      installedExtensions =
-          listOf(
+      installedExtensions
+          .add(
               Extension.Installed(
                   name = context.resources!!.getString(R.string.tutorial_extension),
                   pkgName = "com.anime.dl.tutorial",
@@ -27,8 +28,8 @@ class ExtensionManager(private val context: Context) {
                   versionCode = 1,
                   isTutorial = true))
     } else {
-      availableExtensions =
-          listOf(
+      availableExtensions
+          .add(
               Extension.Available(
                   name = context.resources!!.getString(R.string.tutorial_extension),
                   pkgName = "com.anime.dl.tutorial",
@@ -43,5 +44,11 @@ class ExtensionManager(private val context: Context) {
     if (!prefs.getBoolean("tutorial_complete", false)) {
       initTutorialExtension()
     }
+  }
+
+  public fun installExtension(extension: Extension) {
+      if (extension.isTutorial) {
+          prefs.edit().putBoolean("tutorial_installed", true).apply()
+      }
   }
 }
