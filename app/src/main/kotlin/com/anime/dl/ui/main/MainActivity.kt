@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    
     private lateinit var downloadExtButton: View
     private val controller: BrowseController = BrowseController()
 
