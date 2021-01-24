@@ -1,9 +1,9 @@
 package com.anime.dl.sources.models
 
 data class EpisodeInfo(
+    var key: String,
     var title: String,
-    var ep_number: Int,
-    var ep_url: String,
-    var thumbnail: String,
-    var dateUpload: String
+    var dateUpload: Long = 0,
+    var ep_number: Float = -1f,
+    var thumbnail: String = ""
 )

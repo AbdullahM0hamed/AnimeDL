@@ -1,7 +1,5 @@
 package com.anime.dl.sources
 
-import com.anime.dl.sources.models.AnimeInfo
-import com.anime.dl.sources.models.EpisodeInfo
 import okhttp3.Headers
 import okhttp3.OkHttpClient
 import java.security.MessageDigest

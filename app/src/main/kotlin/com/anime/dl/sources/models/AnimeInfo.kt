@@ -3,8 +3,9 @@ package com.anime.dl.sources.models
 data class AnimeInfo(
     val key: String,
     val title: String,
+    val description: String = "",
     val studios: String = "",
-    val genres: String = "",
+    val genres: List<String> = emptyList(),
     val cover: String = "",
     val status: Int = UNKNOWN
 ) {
