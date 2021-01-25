@@ -74,6 +74,10 @@ class BrowseController : BaseController<ExtensionControllerBinding>() {
         }
     }
 
+    override fun getTitle(): String? {
+        return resources!!.getString(R.string.browse)
+    }
+
     private fun newState(state: ExtensionListState) {
         val context = App.applicationContext()
         extensions = mutableListOf<GenericItem>()
