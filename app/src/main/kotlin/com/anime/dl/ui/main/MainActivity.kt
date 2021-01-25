@@ -79,23 +79,21 @@ class MainActivity : AppCompatActivity() {
         // Displays extension download button
         val extListener =
             MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
-                if (position == 1) {
-                    downloadExtButton =
-                        (
-                            controller
-                                .itemAdapter
-                                .getAdapterItem(1) as ExtensionItem
-                            ).binding
-                            .extButton
+                downloadExtButton =
+                    (
+                        controller
+                            .itemAdapter
+                            .getAdapterItem(1) as ExtensionItem
+                        ).binding
+                        .extButton
 
-                    tutorial(
-                        listOf(
-                            Pair(downloadExtButton, R.string.tutorial_download_ext)
-                        ),
-                        null,
-                        2
-                    )
-                }
+                tutorial(
+                    listOf(
+                        Pair(downloadExtButton, R.string.tutorial_download_ext)
+                    ),
+                    null,
+                    2
+                )
             }
 
         tutorial(
