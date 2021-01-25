@@ -3,83 +3,116 @@ package com.anime.dl.ui.browse
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.anime.dl.App
 import com.anime.dl.R
-import com.anime.dl.databinding.BrowseControllerBinding
+import com.anime.dl.actions.FindExtensions
+import com.anime.dl.databinding.ExtensionControllerBinding
+import com.anime.dl.extensions.models.Extension
+import com.anime.dl.states.ExtensionListState
 import com.anime.dl.ui.base.controller.BaseController
-import com.anime.dl.ui.base.controller.TabbedController
-import com.anime.dl.ui.browse.extension.ExtensionController
-import com.anime.dl.ui.main.MainActivity
+import com.anime.dl.ui.browse.extension.ExtensionHeaderItem
+import com.anime.dl.ui.browse.extension.ExtensionItem
+import com.anime.dl.ui.main.mainStore
 import com.bluelinelabs.conductor.ControllerChangeHandler
 import com.bluelinelabs.conductor.ControllerChangeType
-import com.bluelinelabs.conductor.Router
-import com.bluelinelabs.conductor.RouterTransaction.with
-import com.bluelinelabs.conductor.support.RouterPagerAdapter
-import com.google.android.material.tabs.TabLayout
+import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.GenericFastAdapter
+import com.mikepenz.fastadapter.GenericItem
+import com.mikepenz.fastadapter.adapters.GenericItemAdapter
+import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import org.reduxkotlin.StoreSubscription
+import reactivecircus.flowbinding.swiperefreshlayout.refreshes
 
-class BrowseController : BaseController<BrowseControllerBinding>(), TabbedController {
+class BrowseController : BaseController<ExtensionControllerBinding>() {
 
-    public var adapter: BrowseAdapter? = null
+    val scope = CoroutineScope(Job() + Dispatchers.Main)
+
+    public var itemAdapter: GenericItemAdapter = items()
+    private lateinit var adapter: GenericFastAdapter
+
+    private var extensions = mutableListOf<GenericItem>()
+
+    private lateinit var storeSubscription: StoreSubscription
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
-        binding = BrowseControllerBinding.inflate(inflater)
+        binding = ExtensionControllerBinding.inflate(inflater)
         return binding.root
-    }
-
-    override fun getTitle(): String? {
-        return resources!!.getString(R.string.browse)
-    }
-
-    override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
-        super.onChangeStarted(handler, type)
-        if (type.isEnter) {
-            (activity as? MainActivity)?.binding?.tabs?.setVisibility(View.VISIBLE)
-            (activity as? MainActivity)?.binding?.tabs?.apply { setupWithViewPager(binding.pager) }
-        }
-    }
-
-    override fun configureTabs(tabs: TabLayout) {
-        with(tabs) {
-            tabGravity = TabLayout.GRAVITY_FILL
-            tabMode = TabLayout.MODE_FIXED
-        }
     }
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
+        storeSubscription = mainStore.subscribe { newState(mainStore.state) }
 
-        adapter = BrowseAdapter()
-        binding.pager.adapter = adapter
+        binding.swipeRefresh.isRefreshing = true
+        binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(FindExtensions()) }.launchIn(scope)
+
+        adapter = FastAdapter.with(listOf(itemAdapter))
+        adapter?.setHasStableIds(true)
+
+        binding.recycler.layoutManager = LinearLayoutManager(view.context)
+        binding.recycler.adapter = adapter
+        // adapter?.fastScroller = binding.fastScroller
     }
 
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
-        adapter = null
+
+        // Unsubscribe
+        storeSubscription()
     }
 
-    public inner class BrowseAdapter : RouterPagerAdapter(this@BrowseController) {
-
-        public val extController = ExtensionController()
-
-        private val tabTitles =
-            listOf(R.string.sources, R.string.extensions).map { resources!!.getString(it) }
-
-        override fun getCount(): Int {
-            return tabTitles.size
+    override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
+        super.onChangeStarted(handler, type)
+        if (type.isPush) {
+            mainStore.dispatch(FindExtensions())
         }
+    }
 
-        override fun configureRouter(router: Router, position: Int) {
-            if (position == EXTENSIONS_CONTROLLER) {
-                router.setRoot(with(extController))
+    private fun newState(state: ExtensionListState) {
+        val context = App.applicationContext()
+        extensions = mutableListOf<GenericItem>()
+
+        if (state.installedExtensions.isNotEmpty()) {
+            val header = ExtensionHeaderItem(context.getString(R.string.ext_installed))
+            header.identifier = 0
+
+            if (header !in extensions) extensions.add(header)
+            state.installedExtensions.mapIndexed { index, extension ->
+                val item = createItem(extension, (index + 1).toLong())
+                if (item !in extensions) extensions.add(item)
             }
         }
 
-        override fun getPageTitle(position: Int): CharSequence {
-            return tabTitles[position]
+        if (state.availableExtensions.isNotEmpty()) {
+            val header = ExtensionHeaderItem(context.getString(R.string.ext_available))
+            header.identifier = extensions.size.toLong()
+
+            if (header !in extensions) extensions.add(header)
+            state.availableExtensions.mapIndexed { index, extension ->
+                val item = createItem(extension, header.identifier + (index + 1).toLong())
+                if (item !in extensions) extensions.add(item)
+            }
         }
+
+        drawExtensions()
     }
 
-    companion object {
-        const val SOURCES_CONTROLLER = 0
-        const val EXTENSIONS_CONTROLLER = 1
+    private fun createItem(extension: Extension, id: Long): ExtensionItem {
+        val item = ExtensionItem(extension)
+        item.identifier = id
+
+        return item
+    }
+
+    private fun drawExtensions() {
+        binding.swipeRefresh.isRefreshing = false
+
+        itemAdapter.set(extensions)
     }
 }

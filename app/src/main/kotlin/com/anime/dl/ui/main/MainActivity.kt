@@ -2,7 +2,6 @@ package com.anime.dl.ui.main
 
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.R
 import com.anime.dl.databinding.MainBinding
@@ -45,12 +44,8 @@ class MainActivity : AppCompatActivity() {
 
             val currentRoot = router.backstack.firstOrNull()
             if (currentRoot?.tag()?.toIntOrNull() != id) {
-                clearContainersAndChangeRouter(false)
                 when (id) {
-                    R.id.nav_browse -> {
-                        router = Conductor.attachRouter(this, binding.browseContainer, savedInstance)
-                        router.setRoot(with(BrowseController()))
-                    }
+                    R.id.nav_browse -> router.setRoot(with(BrowseController()))
                     R.id.nav_home -> router.setRoot(with(PlaceholderController()))
                     R.id.nav_downloads -> router.setRoot(with(PlaceholderController()))
                     R.id.nav_settings -> router.setRoot(with(PlaceholderController()))
@@ -65,33 +60,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var downloadExtButton: View
+    private lateinit var installExtListener: MaterialShowcaseSequence.OnSequenceItemDismissedListener
     private val controller: BrowseController = BrowseController()
 
     private fun tutorial() {
         binding.bottomNavigation.selectedItemId = R.id.nav_browse
-        clearContainersAndChangeRouter(true)
-
         router.setRoot(with(controller))
 
-        val installExtListener =
+        installExtListener =
             MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
                 downloadExtButton?.performClick()
-                tutorial(
-                    listOf(
-                        Pair(
-                            (binding.tabs.getChildAt(0) as ViewGroup).getChildAt(0),
-                            R.string.tutorial_source_tab
-                        )
-                    ),
-                    null,
-                    3
-                )
             }
 
-        extensionTutorial(installExtListener)
+        extensionTutorial()
     }
 
-    private fun extensionTutorial(listener: MaterialShowcaseSequence.OnSequenceItemDismissedListener) {
+    private fun extensionTutorial() {
         // Displays extension download button
         val extListener =
             MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
@@ -110,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                         listOf(
                             Pair(downloadExtButton, R.string.tutorial_download_ext)
                         ),
-                        listener,
+                        installExtListener,
                         2
                     )
                 }
@@ -122,10 +106,6 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavigation.findViewById(R.id.nav_browse),
                     R.string.tutorial_browse
                 ),
-                Pair(
-                    (binding.tabs.getChildAt(0) as ViewGroup).getChildAt(1),
-                    R.string.tutorial_extension_tab
-                )
             ),
             extListener,
             1
@@ -154,16 +134,5 @@ class MainActivity : AppCompatActivity() {
         sequence.setOnItemDismissedListener(listener)
 
         sequence.start()
-    }
-
-    private fun clearContainersAndChangeRouter(isBrowse: Boolean) {
-        binding.controllerContainer.removeAllViews()
-        binding.browseContainer.removeAllViews()
-
-        if (isBrowse) {
-            router = Conductor.attachRouter(this, binding.browseContainer, null)
-        } else {
-            router = Conductor.attachRouter(this, binding.controllerContainer, null)
-        }
     }
 }
