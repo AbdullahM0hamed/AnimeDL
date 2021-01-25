@@ -13,7 +13,7 @@
     <string name="sources">Sources</string>
 
         <!-- Tutorial Strings -->
-    <string name="tutorial_extension">Tutorial Source</string>
+    <string name="tutorial_source">Tutorial Source</string>
     <string name="tutorial_browse">Browse is where you can find sources/extensions</string>
     <string name="tutorial_understood">GOT IT</string>
     <string name="tutorial_download_ext">The download buttons in the extensions list, allow you to download extensions which will be used to get anime from the corresponding site</string>

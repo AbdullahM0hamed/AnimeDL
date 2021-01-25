@@ -20,7 +20,7 @@ class ExtensionManager(private val context: Context) {
             installedExtensions
                 .add(
                     Extension.Installed(
-                        name = context.resources!!.getString(R.string.tutorial_extension),
+                        name = context.resources!!.getString(R.string.tutorial_source),
                         pkgName = "com.anime.dl.tutorial",
                         lang = "all",
                         versionName = "0.0",
