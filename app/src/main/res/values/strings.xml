@@ -17,6 +17,7 @@
     <string name="tutorial_browse">Browse is where you can find sources/extensions</string>
     <string name="tutorial_understood">GOT IT</string>
     <string name="tutorial_download_ext">The download buttons in the extensions list, allow you to download extensions which will be used to get anime from the corresponding site</string>
+    <string name="tutorial_click_source">To browse the catalogue of a given source, click anywhere on that source\'s row (excluding the settings icon)</string>
 
         <!-- Extensions -->
     <string name="ext_installed">Installed</string>

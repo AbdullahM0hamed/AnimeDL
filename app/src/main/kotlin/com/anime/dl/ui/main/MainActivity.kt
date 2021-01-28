@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.R
+import com.anime.dl.databinding.ExtensionCardItemBinding
 import com.anime.dl.databinding.MainBinding
 import com.anime.dl.reducers.extensionListReducer
 import com.anime.dl.states.ExtensionListState
@@ -15,6 +16,8 @@ import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction.with
 import org.reduxkotlin.createThreadSafeStore
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
+import uk.co.deanwild.materialshowcaseview.shape.OvalShape
+import uk.co.deanwild.materialshowcaseview.shape.Shape
 import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
 
 val mainStore = createThreadSafeStore(::extensionListReducer, ExtensionListState())
@@ -60,6 +63,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var downloadExtButton: View
+    private lateinit var extensionBinding: ExtensionCardItemBinding
     private lateinit var installExtListener: MaterialShowcaseSequence.OnSequenceItemDismissedListener
     private val controller: BrowseController = BrowseController()
 
@@ -70,6 +74,17 @@ class MainActivity : AppCompatActivity() {
         installExtListener =
             MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
                 downloadExtButton?.performClick()
+
+                tutorial(
+                    listOf(
+                        Pair(
+                            extensionBinding.root, R.string.tutorial_click_source
+                        )
+                    ),
+                    null,
+                    3,
+                    OvalShape()
+                )
             }
 
         extensionTutorial()
@@ -79,19 +94,20 @@ class MainActivity : AppCompatActivity() {
         // Displays extension download button
         val extListener =
             MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
-                downloadExtButton =
+                extensionBinding =
                     (
                         controller
                             .itemAdapter
                             .getAdapterItem(1) as ExtensionItem
                         ).binding
-                        .extButton
+
+                downloadExtButton = extensionBinding.extButton
 
                 tutorial(
                     listOf(
                         Pair(downloadExtButton, R.string.tutorial_download_ext)
                     ),
-                    null,
+                    installExtListener,
                     2
                 )
             }
@@ -111,11 +127,16 @@ class MainActivity : AppCompatActivity() {
     private fun tutorial(
         viewsAndTutorialStrings: List<Pair<View, Int>>,
         listener: MaterialShowcaseSequence.OnSequenceItemDismissedListener?,
-        position: Int
+        position: Int,
+        shape: Shape? = null
     ) {
         val config: ShowcaseConfig = ShowcaseConfig()
         config.delay = 500
         config.renderOverNavigationBar = true
+
+        if (shape != null) {
+            config.shape = shape
+        }
 
         val sequence: MaterialShowcaseSequence =
             MaterialShowcaseSequence(this@MainActivity, "tutorial_$position")
