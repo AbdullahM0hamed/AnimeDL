@@ -15,7 +15,7 @@ class TutorialSource : Source {
     override val lang = "all"
 
     override suspend fun getAnimeList(page: Int): AnimePage {
-        return AnimePage(getTutorialManga(page), true)
+        return AnimePage(getTutorialAnime(page), true)
     }
 
     override suspend fun getAnimeDetails(anime: AnimeInfo): AnimeInfo { return anime }
@@ -33,7 +33,7 @@ class TutorialSource : Source {
         return listOf(chapter1, chapter2, chapter3)
     }
 
-    private fun getTutorialManga(page: Int): List<AnimeInfo> {
+    private fun getTutorialAnime(page: Int): List<AnimeInfo> {
         val list = mutableListOf<AnimeInfo>()
         val id = (page - 1) * 20 + 1
         val anime1 = AnimeInfo(

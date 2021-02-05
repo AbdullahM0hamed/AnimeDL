@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.bluelinelabs.conductor.Controller
@@ -15,6 +16,7 @@ abstract class BaseController<VB : ViewBinding>(bundle: Bundle? = null) :
     RestoreViewOnCreateController(bundle) {
 
     public lateinit var binding: VB
+    var actionBar: ActionBar? = null
 
     init {
         addLifecycleListener(
@@ -23,6 +25,7 @@ abstract class BaseController<VB : ViewBinding>(bundle: Bundle? = null) :
                     onViewCreated(view)
                 }
             })
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -33,9 +36,22 @@ abstract class BaseController<VB : ViewBinding>(bundle: Bundle? = null) :
         return inflateView(inflater, container)
     }
 
+    override fun onAttach(view: View) {
+        setActionBar()
+    }
+
+    override fun onDetach(view: View) {
+        resetActionBar()
+    }
+
     abstract fun inflateView(inflater: LayoutInflater, container: ViewGroup): View
 
-    open fun onViewCreated(view: View) {}
+    open fun onViewCreated(view: View) {
+        actionBar = (activity as? AppCompatActivity)?.supportActionBar
+        setActionBar()
+    }
+
+    open fun setActionBar() {}
 
     override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
         if (type.isEnter) {
@@ -59,5 +75,9 @@ abstract class BaseController<VB : ViewBinding>(bundle: Bundle? = null) :
         }
 
         (activity as? AppCompatActivity)?.supportActionBar?.title = title ?: getTitle()
+    }
+
+    fun resetActionBar() {
+        actionBar?.setDisplayHomeAsUpEnabled(false)
     }
 }

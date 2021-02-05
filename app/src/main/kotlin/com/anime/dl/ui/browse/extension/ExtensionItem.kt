@@ -6,10 +6,15 @@ import com.anime.dl.R
 import com.anime.dl.actions.InstallExtension
 import com.anime.dl.databinding.ExtensionCardItemBinding
 import com.anime.dl.extensions.models.Extension
+import com.anime.dl.ui.browse.BrowseController
 import com.anime.dl.ui.main.mainStore
+import com.bluelinelabs.conductor.RouterTransaction
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-data class ExtensionItem(val extension: Extension) :
+data class ExtensionItem(
+    val extension: Extension, 
+    val controller: BrowseController
+) :
     AbstractBindingItem<ExtensionCardItemBinding>() {
 
     override val type: Int = R.id.fastadapter_extension_item_id
@@ -24,8 +29,13 @@ data class ExtensionItem(val extension: Extension) :
         }
 
         binding.extButton.setOnClickListener {
-            val installAction: InstallExtension = InstallExtension(extension)
-            mainStore.dispatch(installAction)
+            when (extension) {
+                is Extension.Available -> {
+                    val installAction: InstallExtension = InstallExtension(extension)
+                    mainStore.dispatch(installAction)
+                }
+                else -> { openDetails(extension) }
+            }
         }
 
         if (extension.isTutorial) {
@@ -40,4 +50,10 @@ data class ExtensionItem(val extension: Extension) :
         binding = ExtensionCardItemBinding.inflate(inflater, parent, false)
         return binding
     }
+
+    private fun openDetails(extension: Extension) {
+        val detailController = ExtensionDetailsController(extension)
+        controller!!.router.pushController(RouterTransaction.with(detailController))
+    }
+
 }

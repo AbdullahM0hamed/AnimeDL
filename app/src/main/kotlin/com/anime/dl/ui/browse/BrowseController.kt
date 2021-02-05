@@ -57,7 +57,6 @@ class BrowseController : BaseController<ExtensionControllerBinding>() {
 
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
-        // adapter?.fastScroller = binding.fastScroller
     }
 
     override fun onDestroyView(view: View) {
@@ -108,7 +107,7 @@ class BrowseController : BaseController<ExtensionControllerBinding>() {
     }
 
     private fun createItem(extension: Extension, id: Long): ExtensionItem {
-        val item = ExtensionItem(extension)
+        val item = ExtensionItem(extension, this)
         item.identifier = id
 
         return item

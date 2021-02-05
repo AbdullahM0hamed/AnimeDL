@@ -54,4 +54,12 @@ class ExtensionManager(private val context: Context) {
             prefs.edit().putBoolean("tutorial_installed", true).apply()
         }
     }
+
+    public fun getExtension(pkgName: String): Extension? {
+        for (extension in installedExtensions) {
+            if (extension.pkgName == pkgName) return extension
+        }
+
+        return null
+    }
 }

@@ -62,6 +62,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        if (!router.handleBack()) {
+            super.onBackPressed()
+        }
+    }
+
     private lateinit var downloadExtButton: View
     private lateinit var extensionBinding: ExtensionCardItemBinding
     private lateinit var installExtListener: MaterialShowcaseSequence.OnSequenceItemDismissedListener
