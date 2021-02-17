@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.preference.PreferenceManager
 import com.anime.dl.R
 import com.anime.dl.extensions.models.Extension
+import com.anime.dl.sources.Source
+import com.anime.dl.sources.TutorialSource
 
 class ExtensionManager(private val context: Context) {
 
@@ -59,6 +61,12 @@ class ExtensionManager(private val context: Context) {
         for (extension in installedExtensions) {
             if (extension.pkgName == pkgName) return extension
         }
+
+        return null
+    }
+
+    public fun getSource(pkgName: String): Source? {
+        if (pkgName == "com.anime.dl.tutorial") return TutorialSource()
 
         return null
     }
