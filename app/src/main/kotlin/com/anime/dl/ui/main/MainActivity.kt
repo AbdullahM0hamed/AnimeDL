@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.R
 import com.anime.dl.databinding.ExtensionCardItemBinding
 import com.anime.dl.databinding.MainBinding
-import com.anime.dl.reducers.extensionListReducer
-import com.anime.dl.states.ExtensionListState
+import com.anime.dl.reducers.appStateReducer
+import com.anime.dl.states.AppState
 import com.anime.dl.ui.base.controller.PlaceholderController
 import com.anime.dl.ui.browse.BrowseController
 import com.anime.dl.ui.browse.extension.ExtensionItem
@@ -16,11 +16,11 @@ import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction.with
 import org.reduxkotlin.createThreadSafeStore
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
+import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
 import uk.co.deanwild.materialshowcaseview.shape.OvalShape
 import uk.co.deanwild.materialshowcaseview.shape.Shape
-import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
 
-val mainStore = createThreadSafeStore(::extensionListReducer, ExtensionListState())
+val mainStore = createThreadSafeStore(::appStateReducer, AppState())
 
 class MainActivity : AppCompatActivity() {
 

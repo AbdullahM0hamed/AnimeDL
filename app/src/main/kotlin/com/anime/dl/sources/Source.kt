@@ -12,9 +12,9 @@ interface Source {
 
     val lang: String
 
-    suspend fun getAnimeDetails(anime: AnimeInfo): AnimeInfo
+    fun getAnimeDetails(anime: AnimeInfo): AnimeInfo
 
-    suspend fun getEpisodeList(anime: AnimeInfo): List<EpisodeInfo>
+    fun getEpisodeList(anime: AnimeInfo): List<EpisodeInfo>
 
-    suspend fun getAnimeList(page: Int): AnimePage
+    fun getAnimeList(page: Int): AnimePage
 }

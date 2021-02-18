@@ -14,13 +14,13 @@ class TutorialSource : Source {
 
     override val lang = "all"
 
-    override suspend fun getAnimeList(page: Int): AnimePage {
+    override fun getAnimeList(page: Int): AnimePage {
         return AnimePage(getTutorialAnime(page), true)
     }
 
-    override suspend fun getAnimeDetails(anime: AnimeInfo): AnimeInfo { return anime }
+    override fun getAnimeDetails(anime: AnimeInfo): AnimeInfo { return anime }
 
-    override suspend fun getEpisodeList(anime: AnimeInfo): List<EpisodeInfo> {
+    override fun getEpisodeList(anime: AnimeInfo): List<EpisodeInfo> {
         val chapter1 = EpisodeInfo(
             "1",
             "Chapter 1",

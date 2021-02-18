@@ -47,7 +47,7 @@ class BrowseController : BaseController<ExtensionControllerBinding>() {
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
-        storeSubscription = mainStore.subscribe { newState(mainStore.state) }
+        storeSubscription = mainStore.subscribe { newState(mainStore.state.extensionListState) }
 
         binding.swipeRefresh.isRefreshing = true
         binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(FindExtensions()) }.launchIn(scope)
