@@ -7,7 +7,7 @@ import com.anime.dl.R
 import com.anime.dl.databinding.SourceCompactGridItemBinding
 import com.anime.dl.sources.models.AnimeInfo
 import com.anime.dl.widget.StateImageViewTarget
-import com.bumtech.glide.Glide
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
