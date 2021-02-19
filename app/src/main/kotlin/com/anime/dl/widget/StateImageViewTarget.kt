@@ -30,7 +30,7 @@ class StateImageViewTarget(
         view.scaleType = ScaleType.CENTER
 
         val vector = AppCompatResources.getDrawable(view.context, errorDrawableRes)
-        vector?.setTint(0xFFFFFFFF)
+        vector?.setTint(0xFFFFFFFF.toInt())
         view.setImageDrawable(vector)
     }
 

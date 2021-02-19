@@ -45,7 +45,7 @@ abstract class BaseController<VB : ViewBinding>(bundle: Bundle? = null) :
 
     override fun onDetach(view: View) {
         resetActionBar()
-        (activity as? MainActivity)?.binding.bottomNavigation.visibility = View.VISIBLE
+        (activity as? MainActivity)?.binding?.bottomNavigation?.visibility = View.VISIBLE
     }
 
     abstract fun inflateView(inflater: LayoutInflater, container: ViewGroup): View
@@ -87,6 +87,6 @@ abstract class BaseController<VB : ViewBinding>(bundle: Bundle? = null) :
     }
 
     fun hideBottomNav() {
-        (activity as? MainActivity)?.binding.bottomNavigation.visibility = View.GONE
+        (activity as? MainActivity)?.binding?.bottomNavigation?.visibility = View.GONE
     }
 }
