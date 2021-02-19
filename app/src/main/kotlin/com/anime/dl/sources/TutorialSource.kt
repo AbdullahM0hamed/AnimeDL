@@ -39,7 +39,7 @@ class TutorialSource : Source {
         val anime1 = AnimeInfo(
             "$id",
             "Tutorial Anime $id",
-            "Tutorial Anime for the sake of the tutorial!"
+            "Tutorial Anime for the sake of the tutorial!",
             "https://picsum.photos/300/400/?image=$id"
         )
 
