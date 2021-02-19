@@ -2,7 +2,6 @@ package com.anime.dl.ui.browse.source
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import com.anime.dl.App
 import com.anime.dl.R
 import com.anime.dl.databinding.SourceCompactGridItemBinding
@@ -33,7 +32,6 @@ data class SourceItem(val anime: AnimeInfo) :
 
     fun setImage(anime: AnimeInfo) {
         val context = App.applicationContext()
-        Toast.makeText(context, anime.toString(), 5).show()
         binding.card.clipToOutline = true
 
         Glide.with(context).clear(binding.thumbnail)
