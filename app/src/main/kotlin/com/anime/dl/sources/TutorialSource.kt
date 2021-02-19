@@ -45,7 +45,7 @@ class TutorialSource : Source {
         list += anime1
 
         for (i in 1..19) {
-            list += anime1.copy(key = "${id + 1}", title = "Anime ${id + 1}")
+            list += anime1.copy(key = "${i + 1}", title = "Anime ${i + 1}")
         }
 
         return list

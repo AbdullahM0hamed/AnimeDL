@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.anime.dl.ui.main.MainActivity
 import com.bluelinelabs.conductor.Controller
 import com.bluelinelabs.conductor.ControllerChangeHandler
 import com.bluelinelabs.conductor.ControllerChangeType
@@ -17,6 +18,7 @@ abstract class BaseController<VB : ViewBinding>(bundle: Bundle? = null) :
 
     public lateinit var binding: VB
     var actionBar: ActionBar? = null
+    open val hasBottomNav = true
 
     init {
         addLifecycleListener(
@@ -38,10 +40,12 @@ abstract class BaseController<VB : ViewBinding>(bundle: Bundle? = null) :
 
     override fun onAttach(view: View) {
         setActionBar()
+        if (!hasBottomNav) hideBottomNav()
     }
 
     override fun onDetach(view: View) {
         resetActionBar()
+        (activity as? MainActivity)?.binding.bottomNavigation.visibility = View.VISIBLE
     }
 
     abstract fun inflateView(inflater: LayoutInflater, container: ViewGroup): View
@@ -49,6 +53,7 @@ abstract class BaseController<VB : ViewBinding>(bundle: Bundle? = null) :
     open fun onViewCreated(view: View) {
         actionBar = (activity as? AppCompatActivity)?.supportActionBar
         setActionBar()
+        if (!hasBottomNav) hideBottomNav()
     }
 
     open fun setActionBar() {}
@@ -79,5 +84,9 @@ abstract class BaseController<VB : ViewBinding>(bundle: Bundle? = null) :
 
     fun resetActionBar() {
         actionBar?.setDisplayHomeAsUpEnabled(false)
+    }
+
+    fun hideBottomNav() {
+        (activity as? MainActivity)?.binding.bottomNavigation.visibility = View.GONE
     }
 }

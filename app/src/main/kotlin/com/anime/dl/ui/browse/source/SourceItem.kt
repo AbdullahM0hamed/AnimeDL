@@ -6,7 +6,7 @@ import com.anime.dl.App
 import com.anime.dl.R
 import com.anime.dl.databinding.SourceCompactGridItemBinding
 import com.anime.dl.sources.models.AnimeInfo
-import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 data class SourceItem(val anime: AnimeInfo) :
@@ -16,7 +16,7 @@ data class SourceItem(val anime: AnimeInfo) :
 
     override fun bindView(binding: SourceCompactGridItemBinding, payloads: List<Any>) {
         binding.title.text = anime.title
-        Glide.with(App.applicationContext()).load(anime.cover).into(binding.thumbnail)
+        setImage(anime)
     }
 
     override fun createBinding(
@@ -24,5 +24,20 @@ data class SourceItem(val anime: AnimeInfo) :
         parent: ViewGroup?
     ): SourceCompactGridItemBinding {
         return SourceCompactGridItemBinding.inflate(inflater, parent, false)
+    }
+
+    fun setImage(anime: AnimeInfo) {
+        val context = App.applicationContext()
+        binding.card.clipToOutline = true
+
+        GlideApp.with(context).clear(binding.thumbnail)
+        if (!anime.cover.isNullOrEmpty()) {
+            GlideApp.with(context)
+                .load(anime.cover)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .centerCrop()
+                .placeholder(android.R.color.transparent)
+                .into(StateImageViewTarget(binding.thumbnail, binding.progress))
+        }
     }
 }

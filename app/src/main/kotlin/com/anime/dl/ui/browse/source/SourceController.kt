@@ -32,6 +32,8 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         }
     )
 
+    override val hasBottomNav = false
+
     private var source: Source? = null
     private var recycler: RecyclerView? = null
     private var adapter: GenericFastAdapter? = null
