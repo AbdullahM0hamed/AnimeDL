@@ -40,12 +40,13 @@ class TutorialSource : Source {
             "$id",
             "Tutorial Anime $id",
             "Tutorial Anime for the sake of the tutorial!"
+            "https://picsum.photos/300/400/?image=$id"
         )
 
         list += anime1
 
         for (i in 1..19) {
-            list += anime1.copy(key = "${i + 1}", title = "Anime ${i + 1}")
+            list += anime1.copy(key = "${i + 1}", title = "Anime ${i + 1}", cover = "https://picsum.photos/300/400/?image=$id")
         }
 
         return list

@@ -4,9 +4,9 @@ data class AnimeInfo(
     val key: String,
     val title: String,
     val description: String = "",
+    val cover: String = "",
     val studios: String = "",
     val genres: List<String> = emptyList(),
-    val cover: String = "",
     val status: Int = UNKNOWN
 ) {
 
