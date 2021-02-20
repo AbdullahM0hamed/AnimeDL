@@ -21,6 +21,7 @@ data class SourceItem(val anime: AnimeInfo) :
     private lateinit var binding: SourceCompactGridItemBinding
 
     override fun bindView(binding: SourceCompactGridItemBinding, payloads: List<Any>) {
+        this.binding = binding
         binding.title.text = anime.title
         setImage(anime)
     }
