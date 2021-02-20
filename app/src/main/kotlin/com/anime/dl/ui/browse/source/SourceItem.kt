@@ -1,10 +1,7 @@
 package com.anime.dl.ui.browse.source
 
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.widget.FrameLayout
 import com.anime.dl.App
 import com.anime.dl.R
 import com.anime.dl.databinding.SourceCompactGridItemBinding
@@ -30,21 +27,7 @@ data class SourceItem(val anime: AnimeInfo) :
         inflater: LayoutInflater,
         parent: ViewGroup?
     ): SourceCompactGridItemBinding {
-        binding = SourceCompactGridItemBinding.inflate(inflater, parent, false)
-        val coverHeight = binding.root.width / 3 * 4
-        binding.root.apply {
-            binding.card.layoutParams = FrameLayout.LayoutParams(
-                MATCH_PARENT,
-                coverHeight
-            )
-            binding.gradient.layoutParams = FrameLayout.LayoutParams(
-                MATCH_PARENT,
-                coverHeight / 2,
-                Gravity.BOTTOM
-            )
-        }
-
-        return binding
+        SourceCompactGridItemBinding.inflate(inflater, parent, false)
     }
 
     fun setImage(anime: AnimeInfo) {
