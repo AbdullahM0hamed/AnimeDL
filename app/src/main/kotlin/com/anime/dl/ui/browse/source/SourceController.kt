@@ -58,7 +58,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         val manager = ExtensionManager(context)
         source = manager.getSource(bundle.getString(PKG_NAME) as String)
 
-        val gridLayoutManager = GridLayoutManager(context, 3)
+        val gridLayoutManager = GridLayoutManager(context, 2)
         setupRecycler(view, gridLayoutManager)
         binding.progress.isVisible = true
     }
