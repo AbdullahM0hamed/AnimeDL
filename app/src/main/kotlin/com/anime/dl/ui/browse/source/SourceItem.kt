@@ -43,7 +43,7 @@ data class SourceItem(val anime: AnimeInfo) :
             )
         }
 
-        return bindibg
+        return binding
     }
 
     fun setImage(anime: AnimeInfo) {
