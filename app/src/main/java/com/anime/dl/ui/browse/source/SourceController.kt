@@ -109,7 +109,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         val items = mutableListOf<GenericItem>()
 
         state.browseAnime?.anime?.map {
-            items.add(SourceItem(it))
+            items.add(SourceItem(it, this))
         }
 
         itemAdapter.set(items)

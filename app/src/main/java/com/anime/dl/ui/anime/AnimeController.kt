@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.anime.dl.App
 import com.anime.dl.R
-import com.anime.dl.databing.AnimeControllerBinding
+import com.anime.dl.databinding.AnimeControllerBinding
 import com.anime.dl.sources.models.AnimeInfo
 import com.anime.dl.sources.Source
 import com.anime.dl.ui.base.controller.BaseController
