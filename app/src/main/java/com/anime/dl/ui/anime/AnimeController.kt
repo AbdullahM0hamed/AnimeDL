@@ -58,7 +58,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         super.onViewCreated(view)
 
         val context = App.applicationContext()
-        if (!anime?.cover?.isNullOrEmpty()) { 
+        if (!anime?.cover?.isNullOrEmpty()!!) { 
             Glide.with(context)
                 .load(anime?.cover)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
