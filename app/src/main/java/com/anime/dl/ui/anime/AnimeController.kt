@@ -60,7 +60,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         recycler = null
 
         // Unsubscribe
-        storeSubscription()
+        //storeSubscription()
 
         super.onDestroyView(view)
     }
