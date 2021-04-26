@@ -20,7 +20,7 @@ import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
 import org.reduxkotlin.StoreSubscription
 
-class AnimeController : BaseController<AnimeControllerBinding>() {
+class AnimeController : BaseController<AnimeControllerBinding> {
 
     constructor(anime: AnimeInfo) : this(
         Bundle().apply {
@@ -31,7 +31,7 @@ class AnimeController : BaseController<AnimeControllerBinding>() {
     }
 
     @Suppress("unused")
-    constructor(bundle: Bundle) : this()
+    constructor(bundle: Bundle) : super(bundle)
 
     override val hasBottomNav = false
 
