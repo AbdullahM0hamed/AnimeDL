@@ -6,6 +6,7 @@ import com.anime.dl.App
 import com.anime.dl.R
 import com.anime.dl.databinding.SourceCompactGridItemBinding
 import com.anime.dl.sources.models.AnimeInfo
+import com.anime.dl.ui.anime.AnimeController
 import com.anime.dl.ui.browse.source.SourceController
 import com.anime.dl.widget.StateImageViewTarget
 import com.bumptech.glide.Glide
