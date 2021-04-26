@@ -20,7 +20,7 @@ import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
 import org.reduxkotlin.StoreSubscription
 
-class AnimeController(val bundle: Bundle) : BaseController<AnimeControllerBinding>() {
+class AnimeController : BaseController<AnimeControllerBinding>() {
 
     constructor(anime: AnimeInfo) : this(
         Bundle().apply {
