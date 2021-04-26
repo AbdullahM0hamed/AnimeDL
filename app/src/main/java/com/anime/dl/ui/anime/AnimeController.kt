@@ -30,6 +30,9 @@ class AnimeController(val bundle: Bundle) : BaseController<AnimeControllerBindin
         this.anime = anime
     }
 
+    @Suppress("unused")
+    constructor(bundle: Bundle) : this()
+
     override val hasBottomNav = false
 
     /*private var source: Source? = null
