@@ -13,6 +13,9 @@ import com.anime.dl.sources.models.AnimeInfo
 import com.anime.dl.sources.Source
 import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.main.mainStore
+import com.anime.dl.widget.StateImageViewTarget
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.GenericItem
@@ -53,6 +56,16 @@ class AnimeController : BaseController<AnimeControllerBinding> {
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
+
+        val context = App.applicationContext()
+        if (!anime?.cover?.isNullOrEmpty()) { 
+            Glide.with(context)
+                .load(anime?.cover)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .centerCrop()
+                .placeholder(android.R.color.transparent)
+                .into(StateImageViewTarget(binding.coverImage, binding.progress))
+        }
     }
 
     override fun onDestroyView(view: View) {
