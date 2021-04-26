@@ -6,13 +6,17 @@ import com.anime.dl.App
 import com.anime.dl.R
 import com.anime.dl.databinding.SourceCompactGridItemBinding
 import com.anime.dl.sources.models.AnimeInfo
+import com.anime.dl.ui.browse.source.SourceController
 import com.anime.dl.widget.StateImageViewTarget
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bluelinelabs.conductor.RouterTransaction
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-data class SourceItem(val anime: AnimeInfo) :
-    AbstractBindingItem<SourceCompactGridItemBinding>() {
+data class SourceItem(
+    val anime: AnimeInfo,
+    val controller: SourceController
+) : AbstractBindingItem<SourceCompactGridItemBinding>() {
 
     override val type: Int = R.id.fastadapter_source_grid_item_id
     private lateinit var binding: SourceCompactGridItemBinding
@@ -33,6 +37,9 @@ data class SourceItem(val anime: AnimeInfo) :
     fun setImage(anime: AnimeInfo) {
         val context = App.applicationContext()
         binding.card.clipToOutline = true
+        binding.root.setOnClickListener {
+            controller!!.router.pushController(RouterTransaction.with(AnimeController(anime)))
+        }
 
         Glide.with(context).clear(binding.thumbnail)
         if (!anime.cover.isNullOrEmpty()) {

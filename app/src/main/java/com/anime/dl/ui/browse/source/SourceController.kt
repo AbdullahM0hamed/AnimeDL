@@ -16,6 +16,7 @@ import com.anime.dl.extensions.models.Extension
 import com.anime.dl.sources.Source
 import com.anime.dl.states.BrowseAnimeState
 import com.anime.dl.ui.base.controller.BaseController
+import com.anime.dl.ui.anime.AnimeController
 import com.anime.dl.ui.main.mainStore
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter

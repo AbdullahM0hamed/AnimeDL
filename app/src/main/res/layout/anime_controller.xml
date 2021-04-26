@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+ xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:tools="http://schemas.android.com/tools"
+ xmlns:app="http://schemas.android.com/apk/res-auto"
+ android:background="@android:color/black"
+ android:layout_width="fill_parent"
+ android:layout_height="fill_parent">
+    <ImageView
+     android:id="@id/cover_image"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:src="#55880000"
+     app:layout_constraintDimensionRatio="H,2:3"
+     android:scaleType="centerCrop"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toTopOf="parent" />
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+     android:id="@+id/frame_layout"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:background="?android:colorBackground">
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+         android:id="@+id/swipe_refresh"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:background="?android:colorBackground"
+         app:layout_scrollFlags="scroll">
+            <FrameLayout
+             android:id="@+id/linear_recycler_layout"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                 android:id="@+id/recycler"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:clipToPadding="false" />
+                <!-- tools:listitem="@layout/episodes_item" -->
+            </FrameLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
