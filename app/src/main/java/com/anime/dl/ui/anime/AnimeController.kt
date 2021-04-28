@@ -59,7 +59,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
 
         val context = App.applicationContext()
         android.widget.Toast.makeText(context, anime?.cover?.isNullOrEmpty()?.toString(), 5).show()
-        if (!anime?.cover?.isNullOrEmpty()!!) { 
+        if (anime?.cover!! != "") { 
             Glide.with(context)
                 .load(anime?.cover)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
