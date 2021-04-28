@@ -58,15 +58,12 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         super.onViewCreated(view)
 
         val context = App.applicationContext()
-        android.widget.Toast.makeText(context, anime!!.cover, 5).show()
-        if (anime!!.cover != "") { 
-            Glide.with(context)
-                .load(anime?.cover)
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .centerCrop()
-                .placeholder(android.R.color.transparent)
-                .into(StateImageViewTarget(binding.coverImage, binding.progress))
-        }
+        Glide.with(context)
+            .load(anime?.cover)
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .centerCrop()
+            .placeholder(android.R.color.transparent)
+            .into(StateImageViewTarget(binding.coverImage, binding.progress))
     }
 
     override fun onDestroyView(view: View) {
