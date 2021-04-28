@@ -9,14 +9,21 @@
     <ImageView
      android:id="@+id/cover_image"
      android:layout_width="match_parent"
-     android:layout_height="wrap_content"
+     android:layout_height="200dp"
      android:src="#55880000"
      app:layout_constraintDimensionRatio="H,2:3"
      android:scaleType="centerCrop"
      app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintStart_toStartOf="parent"
      app:layout_constraintTop_toTopOf="parent" />
-    <com.google.android.material.progressindicator.CircularProgressIndicator                    android:id="@+id/progress"                                                              android:layout_width="wrap_content"                                                     android:layout_height="wrap_content"                                                    android:layout_gravity="center"                                                         android:indeterminate="true"                                                            android:visibility="gone"                                                               tools:visibility="visible" />
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+     android:id="@+id/progress"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_gravity="center"
+     android:indeterminate="true"
+     android:visibility="gone"
+     tools:visibility="visible" />
     <androidx.coordinatorlayout.widget.CoordinatorLayout
      android:id="@+id/frame_layout"
      android:layout_width="match_parent"
@@ -38,7 +45,7 @@
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
                  android:clipToPadding="false" />
-                <!-- tools:listitem="@layout/episodes_item" -->
+<!-- tools:listitem="@layout/episodes_item" -->
             </FrameLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
