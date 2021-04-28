@@ -58,7 +58,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         super.onViewCreated(view)
 
         val context = App.applicationContext()
-        android.widget.Toast.makeText(context, anime?.cover?.isNullOrEmpty()?.toString(), 5).show()
+        android.widget.Toast.makeText(context, (anime?.cover!! == "").toString(), 5).show()
         if (anime?.cover!! != "") { 
             Glide.with(context)
                 .load(anime?.cover)
