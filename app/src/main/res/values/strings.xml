@@ -25,4 +25,10 @@
     <string name="extension_info">Extension Info</string>
     <string name="ext_lang">Language: %1$s</string>
     <string name="ext_version">Version: %1$s</string>
+    
+    
+        <!-- Anime Page -->
+    <string name="animeSource">Source: %1s</string>
+    <string name="animeTitle">Anime Title</string>
+
 </resources>
