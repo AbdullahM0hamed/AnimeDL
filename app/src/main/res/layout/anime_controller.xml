@@ -6,6 +6,7 @@
  android:background="@android:color/black"
  android:layout_width="fill_parent"
  android:layout_height="fill_parent">
+
     <ImageView
      android:id="@+id/cover_image"
      android:layout_width="match_parent"
@@ -16,37 +17,78 @@
      app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintStart_toStartOf="parent"
      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/animePoster"
+        android:layout_width="122dp"
+        android:layout_height="152dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="@+id/cover_image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
     <com.google.android.material.progressindicator.CircularProgressIndicator
-     android:id="@+id/progress"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_gravity="center"
-     android:indeterminate="true"
-     android:visibility="gone"
-     tools:visibility="visible" />
+        android:id="@+id/progress"
+        android:layout_width="143dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="90dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/cover_image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/animeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/animeTitle"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/animePoster"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/animeSource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/animeSource"
+        app:layout_constraintStart_toStartOf="@+id/animeTitle"
+        app:layout_constraintTop_toBottomOf="@+id/animeTitle"
+        tools:text="Source: GogoAnime" />
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-     android:id="@+id/frame_layout"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:background="?android:colorBackground"
-     app:layout_constraintTop_toBottomOf="@id/cover_image">
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?android:colorBackground"
+        app:layout_constraintTop_toBottomOf="@+id/cover_image">
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-         android:id="@+id/swipe_refresh"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:background="?android:colorBackground"
-         app:layout_scrollFlags="scroll">
+            android:id="@+id/swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:colorBackground"
+            app:layout_scrollFlags="scroll">
+
             <FrameLayout
-             android:id="@+id/linear_recycler_layout"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+                android:id="@+id/linear_recycler_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- tools:listitem="@layout/episodes_item" -->
                 <androidx.recyclerview.widget.RecyclerView
-                 android:id="@+id/recycler"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:clipToPadding="false" />
-<!-- tools:listitem="@layout/episodes_item" -->
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false" />
             </FrameLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
