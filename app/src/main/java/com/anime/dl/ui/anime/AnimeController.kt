@@ -86,6 +86,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
 
     override fun onDestroyView(view: View) {
         params.topMargin = marginTop!!
+        actionBar?.setBackgroundDrawable(ColorDrawable(Color.BLACK))
         adapter = null
         recycler = null
 
