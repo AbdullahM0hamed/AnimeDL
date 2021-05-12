@@ -68,7 +68,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         params = (activity as MainActivity).binding.controllerContainer.layoutParams as ViewGroup.MarginLayoutParams
         marginTop = params.topMargin
         params.topMargin = 0
-        actionBar?.background = ColorDrawable(Color.TRANSPARENT)
+        actionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val context = App.applicationContext()
         setImage(context, binding.coverImage)
