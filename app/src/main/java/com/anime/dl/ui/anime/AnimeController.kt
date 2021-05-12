@@ -48,8 +48,10 @@ class AnimeController : BaseController<AnimeControllerBinding> {
 
     private var recycler: RecyclerView? = null
     private var adapter: GenericFastAdapter? = null
+    private var marginTop: Int? = null
     private var itemAdapter: GenericItemAdapter = items()
     private lateinit var storeSubscription: StoreSubscription
+    private lateinit var params: ViewGroup.MarginLayoutParams
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
         binding = AnimeControllerBinding.inflate(inflater)
@@ -58,6 +60,10 @@ class AnimeController : BaseController<AnimeControllerBinding> {
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
+        
+        params = binding.controllerContainer.layoutParams as ViewGroup.MarginLayoutParams
+        marginTop = params.topMargin
+        params.topMargin = 0
 
         val context = App.applicationContext()
         setImage(context, binding.coverImage)
@@ -74,6 +80,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
     }
 
     override fun onDestroyView(view: View) {
+        params.topMargin = marginTop
         adapter = null
         recycler = null
 
