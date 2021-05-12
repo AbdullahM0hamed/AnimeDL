@@ -74,6 +74,11 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         super.onDestroyView(view)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {                               if (item.itemId == android.R.id.home) {
+            resetActionBar()                                                                        router.popCurrentController()                                                           return true
+        }                                                                                                                                                                               return super.onOptionsItemSelected(item)                                            }
+                                                                                            override fun setActionBar() {                                                               actionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp)                          actionBar?.setDisplayHomeAsUpEnabled(true)                                          }
+
     protected companion object {
         const val PKG_NAME = "pkg_name"
     }
