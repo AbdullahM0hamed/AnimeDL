@@ -77,21 +77,6 @@ class BrowseController : BaseController<ExtensionControllerBinding>() {
         return resources!!.getString(R.string.browse)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            resetActionBar()
-            router.popCurrentController()
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun setActionBar() {
-        actionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
     private fun newState(state: ExtensionListState) {
         val context = App.applicationContext()
         extensions = mutableListOf<GenericItem>()
