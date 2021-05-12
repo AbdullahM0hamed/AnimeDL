@@ -1,6 +1,8 @@
 package com.anime.dl.ui.anime
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -65,6 +67,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         params = (activity as MainActivity).binding.controllerContainer.layoutParams as ViewGroup.MarginLayoutParams
         marginTop = params.topMargin
         params.topMargin = 0
+        actionBar?.backgroundDrawable = ColorDrawable(Color.TRANSPARENT)
 
         val context = App.applicationContext()
         setImage(context, binding.coverImage)
@@ -89,6 +92,21 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         //storeSubscription()
 
         super.onDestroyView(view)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            resetActionBar()
+            router.popCurrentController()
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun setActionBar() {
+        actionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     protected companion object {
