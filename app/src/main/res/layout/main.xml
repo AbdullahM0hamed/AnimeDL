@@ -19,9 +19,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <com.google.android.material.appbar.AppBarLayout 
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
     
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar" 
