@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.anime.dl.App
@@ -58,12 +59,17 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         super.onViewCreated(view)
 
         val context = App.applicationContext()
+        setImage(context, binding.coverImage)
+        setImage(context, binding.animePoster)
+    }
+
+    fun setImage(context: Context, view: ImageView) {
         Glide.with(context)
             .load(anime?.cover)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .centerCrop()
             .placeholder(android.R.color.transparent)
-            .into(StateImageViewTarget(binding.coverImage, binding.progress))
+            .into(StateImageViewTarget(view, binding.progress))
     }
 
     override fun onDestroyView(view: View) {
