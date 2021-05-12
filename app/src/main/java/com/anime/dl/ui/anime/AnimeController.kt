@@ -14,6 +14,7 @@ import com.anime.dl.databinding.AnimeControllerBinding
 import com.anime.dl.sources.models.AnimeInfo
 import com.anime.dl.sources.Source
 import com.anime.dl.ui.base.controller.BaseController
+import com.anime.dl.ui.main.MainActivity
 import com.anime.dl.ui.main.mainStore
 import com.anime.dl.widget.StateImageViewTarget
 import com.bumptech.glide.Glide
@@ -61,7 +62,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
         
-        params = binding.controllerContainer.layoutParams as ViewGroup.MarginLayoutParams
+        params = (activity as MainActivity).binding.controllerContainer.layoutParams as ViewGroup.MarginLayoutParams
         marginTop = params.topMargin
         params.topMargin = 0
 
@@ -80,7 +81,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
     }
 
     override fun onDestroyView(view: View) {
-        params.topMargin = marginTop
+        params.topMargin = marginTop!!
         adapter = null
         recycler = null
 
