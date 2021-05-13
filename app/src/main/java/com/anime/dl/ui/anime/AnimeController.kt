@@ -82,7 +82,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .centerCrop()
             .placeholder(android.R.color.transparent)
-            .bitmapTransform(BlurTransformation())
+            .transform(BlurTransformation())
             .into(StateImageViewTarget(view, binding.progress))
     }
 
