@@ -72,8 +72,8 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         actionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val context = App.applicationContext()
-        setImage(context, binding.coverImage, false)
-        setImage(context, binding.animePoster, true)
+        setImage(context, binding.coverImage, true)
+        setImage(context, binding.animePoster, false)
     }
 
     fun setImage(context: Context, view: ImageView, blur: Boolean) {
