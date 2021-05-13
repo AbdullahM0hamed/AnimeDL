@@ -12,8 +12,8 @@
 
         <ImageView
             android:id="@+id/episodeThumbnail"
-            android:layout_width="60dp"
-            android:layout_height="110dp"
+            android:layout_width="155dp"
+            android:layout_height="95dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_broken_image_grey_24dp" />
