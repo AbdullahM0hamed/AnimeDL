@@ -3,7 +3,7 @@
     android:height="24dp"
     android:viewportHeight="24"
     android:viewportWidth="24"
-    android:tint="?attr/actionBarTintColor">
+    android:tint="@color/actionBarTintColor">
     <path
         android:fillColor="#FFFFFF"
         android:pathData="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"/>
