@@ -27,6 +27,7 @@ import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
+import jp.wasabeef.glide.transformations.BlurTransformation
 import org.reduxkotlin.StoreSubscription
 
 class AnimeController : BaseController<AnimeControllerBinding> {
@@ -81,6 +82,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .centerCrop()
             .placeholder(android.R.color.transparent)
+            .bitmapTransform(BlurTransformation(context))
             .into(StateImageViewTarget(view, binding.progress))
     }
 
