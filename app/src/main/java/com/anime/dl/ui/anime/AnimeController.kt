@@ -72,18 +72,22 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         actionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val context = App.applicationContext()
-        setImage(context, binding.coverImage)
-        setImage(context, binding.animePoster)
+        setImage(context, binding.coverImage, false)
+        setImage(context, binding.animePoster, true)
     }
 
     fun setImage(context: Context, view: ImageView) {
-        Glide.with(context)
+        var image = Glide.with(context) 
             .load(anime?.cover)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .centerCrop()
             .placeholder(android.R.color.transparent)
-            .transform(BlurTransformation())
-            .into(StateImageViewTarget(view, binding.progress))
+
+        if (blur) {
+            image.transform(BlurTransformation())
+        }
+
+        image.into(StateImageViewTarget(view, binding.progress))
     }
 
     override fun onDestroyView(view: View) {
