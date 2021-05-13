@@ -76,7 +76,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         setImage(context, binding.animePoster, true)
     }
 
-    fun setImage(context: Context, view: ImageView) {
+    fun setImage(context: Context, view: ImageView, blur: Boolean) {
         var image = Glide.with(context) 
             .load(anime?.cover)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
