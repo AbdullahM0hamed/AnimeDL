@@ -89,6 +89,11 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
+    override fun onRestoreViewState(view: View, savedViewState: Bundle) {
+        super.onRestoreViewState(view, savedViewState)
+        hideProgressBar()
+    }
+
     protected companion object {
         const val PKG_NAME = "pkg_name"
     }
