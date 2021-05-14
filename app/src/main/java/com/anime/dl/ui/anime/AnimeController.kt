@@ -75,7 +75,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         binding.animeTitle.text = anime?.title
 
         val context = App.applicationContext()
-        binding.animeSource.text = source.name
+        binding.animeSource.text = source?.name
         binding.card.clipToOutline = true
         setImage(context, binding.coverImage, true)
         setImage(context, binding.animePoster, false)
