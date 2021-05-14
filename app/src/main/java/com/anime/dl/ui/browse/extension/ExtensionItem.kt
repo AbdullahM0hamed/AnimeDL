@@ -58,6 +58,6 @@ data class ExtensionItem(
 
     private fun openDetails(extension: Extension) {
         val detailController = ExtensionDetailsController(extension)
-        controller!!.router.pushController(RouterTransaction.with(detailController))
+        controller.router.pushController(RouterTransaction.with(detailController))
     }
 }
