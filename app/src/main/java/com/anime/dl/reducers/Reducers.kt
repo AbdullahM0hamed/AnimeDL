@@ -15,7 +15,7 @@ fun appStateReducer(state: AppState, action: Any) = AppState(
 )
 
 fun extensionListReducer(state: ExtensionListState, action: Any): ExtensionListState {
-    var currentState = state ?: ExtensionListState()
+    var currentState = state
     val context = App.applicationContext()
     var manager = ExtensionManager(context)
 
@@ -35,7 +35,7 @@ fun extensionListReducer(state: ExtensionListState, action: Any): ExtensionListS
 
 fun browseAnimeStateReducer(state: BrowseAnimeState, action: Any): BrowseAnimeState {
     if (action is GetBrowseAnime) {
-        var currentState = state ?: BrowseAnimeState()
+        var currentState = state
         val browseList = action.source.getAnimeList(action.page)
         currentState = currentState.copy(browseList)
 

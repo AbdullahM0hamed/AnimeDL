@@ -123,7 +123,6 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
     }
 
     fun newState(state: BrowseAnimeState) {
-        val adapter = adapter ?: return
         hideProgressBar()
 
         val items = mutableListOf<GenericItem>()

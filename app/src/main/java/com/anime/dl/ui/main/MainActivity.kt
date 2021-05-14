@@ -78,8 +78,8 @@ class MainActivity : AppCompatActivity() {
         router.setRoot(with(controller))
 
         installExtListener =
-            MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
-                downloadExtButton?.performClick()
+            MaterialShowcaseSequence.OnSequenceItemDismissedListener() { _, position ->
+                downloadExtButton.performClick()
 
                 tutorial(
                     listOf(
@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
     private fun extensionTutorial() {
         // Displays extension download button
         val extListener =
-            MaterialShowcaseSequence.OnSequenceItemDismissedListener() { itemView, position ->
+            MaterialShowcaseSequence.OnSequenceItemDismissedListener() { _, position ->
                 extensionBinding =
                     (
                         controller

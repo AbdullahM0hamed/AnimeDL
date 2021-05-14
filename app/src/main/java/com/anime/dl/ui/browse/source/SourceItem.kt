@@ -41,7 +41,7 @@ data class SourceItem(
         val context = App.applicationContext()
         binding.card.clipToOutline = true
         binding.root.setOnClickListener {
-            controller!!.router.pushController(RouterTransaction.with(AnimeController(anime, source)))
+            controller.router.pushController(RouterTransaction.with(AnimeController(anime, source)))
         }
 
         Glide.with(context).clear(binding.thumbnail)

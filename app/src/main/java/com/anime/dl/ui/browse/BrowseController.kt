@@ -53,7 +53,7 @@ class BrowseController : BaseController<ExtensionControllerBinding>() {
         binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(FindExtensions()) }.launchIn(scope)
 
         adapter = FastAdapter.with(listOf(itemAdapter))
-        adapter?.setHasStableIds(true)
+        adapter.setHasStableIds(true)
 
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter

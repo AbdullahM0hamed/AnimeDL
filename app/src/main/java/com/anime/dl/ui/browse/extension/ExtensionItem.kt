@@ -44,7 +44,7 @@ data class ExtensionItem(
         }
 
         binding.root.setOnClickListener {
-            controller!!.router.pushController(RouterTransaction.with(SourceController(extension)))
+            controller.router.pushController(RouterTransaction.with(SourceController(extension)))
         }
     }
 
