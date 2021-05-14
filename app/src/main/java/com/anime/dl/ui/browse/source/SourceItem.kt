@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import com.anime.dl.App
 import com.anime.dl.R
 import com.anime.dl.databinding.SourceCompactGridItemBinding
+import com.anime.dl.sources.Source
 import com.anime.dl.sources.models.AnimeInfo
 import com.anime.dl.ui.anime.AnimeController
 import com.anime.dl.ui.browse.source.SourceController
@@ -16,6 +17,7 @@ import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
 data class SourceItem(
     val anime: AnimeInfo,
+    val source: Source,
     val controller: SourceController
 ) : AbstractBindingItem<SourceCompactGridItemBinding>() {
 
@@ -39,7 +41,7 @@ data class SourceItem(
         val context = App.applicationContext()
         binding.card.clipToOutline = true
         binding.root.setOnClickListener {
-            controller!!.router.pushController(RouterTransaction.with(AnimeController(anime)))
+            controller!!.router.pushController(RouterTransaction.with(AnimeController(anime, source)))
         }
 
         Glide.with(context).clear(binding.thumbnail)

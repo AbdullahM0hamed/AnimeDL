@@ -32,12 +32,13 @@ import org.reduxkotlin.StoreSubscription
 
 class AnimeController : BaseController<AnimeControllerBinding> {
 
-    constructor(anime: AnimeInfo) : this(
+    constructor(anime: AnimeInfo, source: Source) : this(
         Bundle().apply {
             putString(ANI_NAME, anime.title)
         }
     ) {
         this.anime = anime
+        this.source = source
     }
 
     @Suppress("unused")
@@ -45,8 +46,8 @@ class AnimeController : BaseController<AnimeControllerBinding> {
 
     override val hasBottomNav = false
 
-    /*private var source: Source? = null
-        private set*/
+    private var source: Source? = null
+        private set
 
     private var anime: AnimeInfo? = null
         private set
@@ -71,7 +72,11 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         params.topMargin = 0
         actionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
+        binding.animeTitle.text = anime?.title
+
         val context = App.applicationContext()
+        binding.animeSource.text = source.name
+        binding.card.clipToOutline = true
         setImage(context, binding.coverImage, true)
         setImage(context, binding.animePoster, false)
     }

@@ -25,15 +25,23 @@
         android:backgroundTint="?android:attr/colorBackground"
         android:background="@drawable/anime_gradient" />
 
-    <ImageView
-        android:id="@+id/animePoster"
+    <FrameLayout
+        android:id="@+id/card"
         android:layout_width="122dp"
         android:layout_height="152dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="@+id/cover_image"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:background="@drawable/rounded_rectangle">
+    
+        <ImageView
+            android:id="@+id/animePoster"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            tools:srcCompat="@tools:sample/avatars" />
+    
+    </FrameLayout>
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progress"
