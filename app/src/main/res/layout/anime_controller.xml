@@ -10,7 +10,7 @@
     <ImageView
      android:id="@+id/cover_image"
      android:layout_width="match_parent"
-     android:layout_height="200dp"
+     android:layout_height="225dp"
      android:src="#55880000"
      app:layout_constraintDimensionRatio="H,2:3"
      android:scaleType="centerCrop"
@@ -21,7 +21,7 @@
     <View
         android:id="@+id/backdrop"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="225dp"
         android:backgroundTint="?android:attr/colorBackground"
         android:background="@drawable/anime_gradient" />
 
@@ -30,7 +30,7 @@
         android:layout_width="122dp"
         android:layout_height="152dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="65dp"
         app:layout_constraintStart_toStartOf="@+id/cover_image"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/rounded_rectangle">
@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="75dp"
         android:text="@string/animeTitle"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/card"
