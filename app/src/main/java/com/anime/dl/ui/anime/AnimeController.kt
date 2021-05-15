@@ -129,8 +129,8 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         val context = App.applicationContext()
         binding.animeSource.text = source?.name
         binding.card.clipToOutline = true
-        setImage(context, binding.coverImage, anime!!.cover, true)
-        setImage(context, binding.animePoster, anime!!.cover, false)
+        setImage(context, binding.coverImage, anime?.cover, true)
+        setImage(context, binding.animePoster, anime?.cover, false)
     }
 
     fun setImage(context: Context, view: ImageView, cover: String, blur: Boolean) {
