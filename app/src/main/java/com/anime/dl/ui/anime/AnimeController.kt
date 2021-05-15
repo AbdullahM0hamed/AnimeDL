@@ -21,6 +21,8 @@ import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.main.MainActivity
 import com.anime.dl.ui.main.mainStore
 import com.anime.dl.widget.StateImageViewTarget
+import com.bluelinelabs.conductor.ControllerChangeHandler
+import com.bluelinelabs.conductor.ControllerChangeType
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.mikepenz.fastadapter.FastAdapter
@@ -84,6 +86,13 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         storeSubscription = mainStore.subscribe { newState(mainStore.state.animeInfoState.anime) }
         binding.swipeRefresh.isRefreshing = true
         binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!)) }.launchIn(scope)
+    }
+
+    override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
+        super.onChangeStarted(handler, type)
+        if (type.isPush) {
+            mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!))
+        }
     }
 
     override fun onDestroyView(view: View) {
