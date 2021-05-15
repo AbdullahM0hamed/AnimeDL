@@ -51,7 +51,7 @@ fun browseAnimeStateReducer(state: BrowseAnimeState, action: Any): BrowseAnimeSt
 fun animeInfoStateReducer(state: AnimeInfoState, action: Any): AnimeInfoState {
     if (action is UpdateAnimeInfo) {
         var currentState = state
-        android.widget.Toast.makeText(App.applicationContext(), action.anime.toString(), 5).show()
+        android.widget.Toast.makeText(App.applicationContext(), action.source.getAnimeDetails(action.anime).toString(), 5).show()
         currentState.copy(action.source.getAnimeDetails(action.anime!!))
 
         return currentState
