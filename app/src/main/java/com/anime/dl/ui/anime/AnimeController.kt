@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.anime.dl.App
 import com.anime.dl.R
+import com.anime.dl.actions.UpdateAnimeInfo
 import com.anime.dl.databinding.AnimeControllerBinding
 import com.anime.dl.sources.models.AnimeInfo
 import com.anime.dl.sources.Source
@@ -32,6 +33,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import org.reduxkotlin.StoreSubscription
+import reactivecircus.flowbinding.swiperefreshlayout.refreshes
 
 class AnimeController : BaseController<AnimeControllerBinding> {
 
@@ -77,7 +79,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         params.topMargin = 0
         actionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        storeSubscription = mainStore.subscribe { newState(mainStore.state.animeInfoState) }
+        storeSubscription = mainStore.subscribe { newState(mainStore.state.animeInfoState.anime) }
         binding.swipeRefresh.isRefreshing = true
         binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(UpdateAnimeInfo(anime)) }.launchIn(scope)
     }

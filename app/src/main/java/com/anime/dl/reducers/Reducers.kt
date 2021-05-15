@@ -4,7 +4,7 @@ import com.anime.dl.App
 import com.anime.dl.actions.FindExtensions
 import com.anime.dl.actions.GetBrowseAnime
 import com.anime.dl.actions.InstallExtension
-import com.anime.dl.action.UpdateAnimeInfi
+import com.anime.dl.actions.UpdateAnimeInfo
 import com.anime.dl.extensions.ExtensionManager
 import com.anime.dl.states.AppState
 import com.anime.dl.states.AnimeInfoState
@@ -48,7 +48,7 @@ fun browseAnimeStateReducer(state: BrowseAnimeState, action: Any): BrowseAnimeSt
     return state
 }
 
-fun animeInfoStateReducer(state: AnimeInfoState, action: Any) {
+fun animeInfoStateReducer(state: AnimeInfoState, action: Any): AnimeInfoState {
     if (action is UpdateAnimeInfo) {
         var currentState = state
         currentState.copy(action.source.getAnimeDetails(state.anime))
