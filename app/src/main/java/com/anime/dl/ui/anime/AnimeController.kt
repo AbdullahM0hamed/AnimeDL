@@ -81,7 +81,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
 
         storeSubscription = mainStore.subscribe { newState(mainStore.state.animeInfoState.anime) }
         binding.swipeRefresh.isRefreshing = true
-        binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(UpdateAnimeInfo(anime)) }.launchIn(scope)
+        binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(UpdateAnimeInfo(anime!!, source)) }.launchIn(scope)
     }
 
     override fun onDestroyView(view: View) {
@@ -111,20 +111,20 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    fun newState(anime: AnimeInfo) {
+    fun newState(anime: AnimeInfo?) {
         binding.swipeRefresh.isRefreshing = false
         binding.animeTitle.text = anime?.title
 
         val context = App.applicationContext()
         binding.animeSource.text = source?.name
         binding.card.clipToOutline = true
-        setImage(context, binding.coverImage, true)
-        setImage(context, binding.animePoster, false)
+        setImage(context, binding.coverImage, anime?.cover true)
+        setImage(context, binding.animePoster, anime?.cover, false)
     }
 
-    fun setImage(context: Context, view: ImageView, blur: Boolean) {
+    fun setImage(context: Context, view: ImageView, cover: String, blur: Boolean) {
         var image = Glide.with(context) 
-            .load(anime?.cover)
+            .load(cover)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .centerCrop()
             .placeholder(android.R.color.transparent)

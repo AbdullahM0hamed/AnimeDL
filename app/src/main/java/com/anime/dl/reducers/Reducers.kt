@@ -51,7 +51,7 @@ fun browseAnimeStateReducer(state: BrowseAnimeState, action: Any): BrowseAnimeSt
 fun animeInfoStateReducer(state: AnimeInfoState, action: Any): AnimeInfoState {
     if (action is UpdateAnimeInfo) {
         var currentState = state
-        currentState.copy(action.source.getAnimeDetails(state.anime))
+        currentState.copy(action.source.getAnimeDetails(state.anime!!))
 
         return currentState
     }
