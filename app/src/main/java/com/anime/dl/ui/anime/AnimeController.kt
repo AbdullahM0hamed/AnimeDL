@@ -28,6 +28,9 @@ import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
 import jp.wasabeef.glide.transformations.BlurTransformation
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import org.reduxkotlin.StoreSubscription
 
 class AnimeController : BaseController<AnimeControllerBinding> {
@@ -59,6 +62,8 @@ class AnimeController : BaseController<AnimeControllerBinding> {
     private lateinit var storeSubscription: StoreSubscription
     private lateinit var params: ViewGroup.MarginLayoutParams
 
+    val scope = CoroutineScope(Job() + Dispatchers.Main)
+
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
         binding = AnimeControllerBinding.inflate(inflater)
         return binding.root
@@ -72,6 +77,40 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         params.topMargin = 0
         actionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
+        storeSubscription = mainStore.subscribe { newState(mainStore.state.animeInfoState) }
+        binding.swipeRefresh.isRefreshing = true
+        binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(UpdateAnimeInfo(anime)) }.launchIn(scope)
+    }
+
+    override fun onDestroyView(view: View) {
+        params.topMargin = marginTop!!
+        actionBar?.setBackgroundDrawable(ColorDrawable(Color.BLACK))
+        adapter = null
+        recycler = null
+
+        // Unsubscribe
+        storeSubscription()
+        super.onDestroyView(view)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            resetActionBar()
+            router.popCurrentController()
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    override fun setActionBar() {
+        actionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    fun newState(anime: AnimeInfo) {
+        binding.swipeRefresh.isRefreshing = false
         binding.animeTitle.text = anime?.title
 
         val context = App.applicationContext()
@@ -93,33 +132,6 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         }
 
         image.into(StateImageViewTarget(view, binding.progress))
-    }
-
-    override fun onDestroyView(view: View) {
-        params.topMargin = marginTop!!
-        actionBar?.setBackgroundDrawable(ColorDrawable(Color.BLACK))
-        adapter = null
-        recycler = null
-
-        // Unsubscribe
-        //storeSubscription()
-
-        super.onDestroyView(view)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            resetActionBar()
-            router.popCurrentController()
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun setActionBar() {
-        actionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     protected companion object {

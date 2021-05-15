@@ -4,14 +4,17 @@ import com.anime.dl.App
 import com.anime.dl.actions.FindExtensions
 import com.anime.dl.actions.GetBrowseAnime
 import com.anime.dl.actions.InstallExtension
+import com.anime.dl.action.UpdateAnimeInfi
 import com.anime.dl.extensions.ExtensionManager
 import com.anime.dl.states.AppState
+import com.anime.dl.states.AnimeInfoState
 import com.anime.dl.states.BrowseAnimeState
 import com.anime.dl.states.ExtensionListState
 
 fun appStateReducer(state: AppState, action: Any) = AppState(
     extensionListState = extensionListReducer(state.extensionListState, action),
-    browseAnimeState = browseAnimeStateReducer(state.browseAnimeState, action)
+    browseAnimeState = browseAnimeStateReducer(state.browseAnimeState, action),
+    animeInfoState = animeInfoStateReducer(state.animeInfoState, action)
 )
 
 fun extensionListReducer(state: ExtensionListState, action: Any): ExtensionListState {
@@ -38,6 +41,17 @@ fun browseAnimeStateReducer(state: BrowseAnimeState, action: Any): BrowseAnimeSt
         var currentState = state
         val browseList = action.source.getAnimeList(action.page)
         currentState = currentState.copy(browseList)
+
+        return currentState
+    }
+
+    return state
+}
+
+fun animeInfoStateReducer(state: AnimeInfoState, action: Any) {
+    if (action is UpdateAnimeInfo) {
+        var currentState = state
+        currentState.copy(action.source.getAnimeDetails(state.anime))
 
         return currentState
     }

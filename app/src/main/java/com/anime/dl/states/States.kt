@@ -2,10 +2,12 @@ package com.anime.dl.states
 
 import com.anime.dl.extensions.models.Extension
 import com.anime.dl.sources.models.AnimePage
+import com.anime.dl.sources.models.AnimeInfo
 
 data class AppState(
     val extensionListState: ExtensionListState = ExtensionListState(),
-    val browseAnimeState: BrowseAnimeState = BrowseAnimeState()
+    val browseAnimeState: BrowseAnimeState = BrowseAnimeState(),
+    val animeInfoState: AnimeInfoState = AnimeInfoState()
 )
 
 data class ExtensionListState(
@@ -15,4 +17,8 @@ data class ExtensionListState(
 
 data class BrowseAnimeState(
     val browseAnime: AnimePage? = null
+)
+
+data class AnimeInfoState(
+    val anime: AnimeInfo? = null
 )
