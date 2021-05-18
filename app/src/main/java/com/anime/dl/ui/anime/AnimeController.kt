@@ -125,8 +125,10 @@ class AnimeController : BaseController<AnimeControllerBinding> {
     fun newState(anime: AnimeInfo?) {
         binding.swipeRefresh.isRefreshing = false
         binding.animeTitle.text = anime?.title
+        binding.summaryText.text = anime?.description
 
         val context = App.applicationContext()
+        setStatus(context, anime?.status)
         binding.animeSource.text = source?.name
         binding.card.clipToOutline = true
         setImage(context, binding.coverImage, anime?.cover, true)
@@ -145,6 +147,13 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         }
 
         image.into(StateImageViewTarget(view, binding.progress))
+    }
+
+    fun setStatus(context: Context, status: Int) = when (status) {
+        AnimeInfo.UNKNOWN -> binding.status.text = context.getString(R.string.status_unknown)
+        AnimeInfo.AIRING -> binding.status.text = context.getString(R.string.status_airing)
+        AnimeInfo.COMPLETED -> binding.status.text = context.getString(R.string.status_completed)
+        AnimeInfo.CANCELLED -> binding.status.text = context.getString(R.string.status_cancelled)
     }
 
     protected companion object {
