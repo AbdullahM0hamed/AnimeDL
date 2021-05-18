@@ -139,7 +139,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         binding.summaryText.text = anime?.description
 
         val context = App.applicationContext()
-        android.widget.Toast.makeText(context, anime!!.genres.toString(), 5).show()
+        android.widget.Toast.makeText(context, anime!!.genres.isNullOrEmpty().toString(), 5).show()
         
         if (anime!!.genres.isNullOrEmpty()) {
             binding.genreTagsCompactChips.removeAllViews()
