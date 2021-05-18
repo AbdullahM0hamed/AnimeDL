@@ -147,7 +147,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
                     text = genre
                     setOnClickListener { android.widget.Toast.makeText(context, genre, 5).show() }
                 }
-                binding.genreTagsCompactChips.addChip(chip)
+                binding.genreTagsCompactChips.addView(chip)
             }
         } else {
             binding.genreTagsCompact.isVisible = false

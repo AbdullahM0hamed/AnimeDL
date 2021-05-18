@@ -145,7 +145,7 @@ class TutorialSource : Source {
                 key="$id",
                 title=anime["title"].toString(),
                 description=anime["description"].toString(),
-                cover=anime["img"].toString()
+                cover=anime["img"].toString(),
                 genres=if (anime.containsKey("genres")) {
                     anime["genres"]
                 } else {
