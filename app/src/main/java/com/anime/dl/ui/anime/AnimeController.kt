@@ -128,7 +128,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         binding.summaryText.text = anime?.description
 
         val context = App.applicationContext()
-        setStatus(context, anime?.status)
+        setStatus(context, anime!!.status)
         binding.animeSource.text = source?.name
         binding.card.clipToOutline = true
         setImage(context, binding.coverImage, anime?.cover, true)
@@ -154,6 +154,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         AnimeInfo.AIRING -> binding.status.text = context.getString(R.string.status_airing)
         AnimeInfo.COMPLETED -> binding.status.text = context.getString(R.string.status_completed)
         AnimeInfo.CANCELLED -> binding.status.text = context.getString(R.string.status_cancelled)
+        else -> binding.status.isVisible = false
     }
 
     protected companion object {
