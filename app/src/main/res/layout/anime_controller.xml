@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="225dp"
         android:src="#55880000"
+        android:id="@+id/cover_image"
         app:layout_constraintDimensionRatio="H,2:3"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
