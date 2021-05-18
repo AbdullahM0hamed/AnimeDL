@@ -32,5 +32,12 @@
     <string name="animeTitle">Anime Title</string>
     <string name="add_to_list">Add to list</string>
     <string name="action_webview">WebView</string>
+    <string name="more">More</string>
+
+        <!-- Status Strings -->
+    <string name="status_unknown">Status: Unknown</string>
+    <string name="status_airing">Status: Airing</string>
+    <string name="status_completed">Status: Completed</string>
+    <string name="status_cancelled">Status: Cancelled</string>
 
 </resources>
