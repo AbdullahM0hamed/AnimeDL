@@ -35,8 +35,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 import org.reduxkotlin.StoreSubscription
+import reactivecircus.flowbinding.android.view.clicks
 import reactivecircus.flowbinding.swiperefreshlayout.refreshes
 
 class AnimeController : BaseController<AnimeControllerBinding> {
@@ -82,6 +84,14 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         marginTop = params.topMargin
         params.topMargin = 0
         actionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        merge(
+            binding.summaryText.clicks(),
+            binding.toggleMore.clicks(),
+            binding.toggleLess.clicks()
+        )
+            .onEach { toggleInfo() }
+            .launchIn(scope)
 
         storeSubscription = mainStore.subscribe { newState(mainStore.state.animeInfoState.anime) }
         binding.swipeRefresh.isRefreshing = true
@@ -155,6 +165,20 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         AnimeInfo.COMPLETED -> binding.status.text = context.getString(R.string.status_completed)
         AnimeInfo.CANCELLED -> binding.status.text = context.getString(R.string.status_cancelled)
         else -> binding.status.isVisible = false
+    }
+
+    fun toggleInfo() {
+        val isCurrentlyExpanded = binding.summaryText.maxLines != 2
+
+        binding.toggleMoreScrim.isVisible = isCurrentlyExpanded
+        binding.toggleMore.isVisible = isCurrentlyExpanded
+        binding.toggleLess.isVisihle = !isCurrentlyExpanded
+        
+        binding.summaryText.maxLines = if (isCurrentlyExpanded) {
+            2
+        } else {
+            Int.MAX_VALUE
+        }
     }
 
     protected companion object {
