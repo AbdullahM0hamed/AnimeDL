@@ -25,6 +25,7 @@ import com.bluelinelabs.conductor.ControllerChangeHandler
 import com.bluelinelabs.conductor.ControllerChangeType
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.chip.Chip
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.GenericItem
@@ -138,6 +139,21 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         binding.summaryText.text = anime?.description
 
         val context = App.applicationContext()
+        
+        if (anime!!.genres.isNullOrEmpty()) {
+            binding.genreTagsCompactChips.removeAllViews()
+            anime?.genres?.forEach { genre ->
+                val chip = Chip(context).apply {
+                    text = genre
+                    setOnClickListener { android.widget.Toast.makeText(context, genre, 5).show() }
+                }
+                binding.genreTagsCompactChips.addChip(chip)
+            }
+        } else {
+            binding.genreTagsCompact.isVisible = false
+            binding.genreTagsCompactChips.isVisible = false
+        }
+
         setStatus(context, anime!!.status)
         binding.animeSource.text = source?.name
         binding.card.clipToOutline = true

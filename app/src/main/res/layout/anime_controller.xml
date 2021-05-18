@@ -189,6 +189,29 @@
         app:layout_constraintBottom_toBottomOf="@id/summary_text"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <HorizontalScrollView
+        android:id="@+id/genre_tags_compact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:requiresFadingEdge="horizontal"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/summary_text">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/genre_tags_compact_chips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            app:chipSpacingHorizontal="4dp"
+            app:singleLine="true" />
+
+    </HorizontalScrollView>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"

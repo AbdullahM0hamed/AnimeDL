@@ -41,7 +41,8 @@ class TutorialSource : Source {
             mapOf(
                 "title" to "Overlord",
                 "description" to "The story takes place in the year 2138 when virtual reality gaming is booming. Yggdrasil, a popular online game is quietly shut down one day. However, the protagonist Momonga decides to not log out. Momonga is then transformed into the image of a skeleton as \"the most powerful wizard.\" The world continues to change, with non-player characters (NPCs) beginning to feel emotion. Having no parents, friends, or place in society, this ordinary young man Momonga then strives to take over the new world the game has become.",
-                "img" to "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/nx20832-Kz7PMdGT0JI6.jpg"
+                "img" to "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/nx20832-Kz7PMdGT0JI6.jpg",
+                "genres" to listOf("Action", "Adventure", "Fantasy")
             ),
             mapOf(
                 "title" to "Overlord II",
@@ -145,6 +146,11 @@ class TutorialSource : Source {
                 title=anime["title"].toString(),
                 description=anime["description"].toString(),
                 cover=anime["img"].toString()
+                genres=if (anime.containsKey("genres")) {
+                    anime["genres"]
+                } else {
+                    emptyList()
+                }
             )
         }
         return list
