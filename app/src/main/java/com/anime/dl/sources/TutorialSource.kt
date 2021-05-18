@@ -147,7 +147,7 @@ class TutorialSource : Source {
                 description=anime["description"].toString(),
                 cover=anime["img"].toString(),
                 genres=if (anime.containsKey("genres")) {
-                    anime["genres"]
+                    anime["genres"] as List<String>
                 } else {
                     emptyList()
                 }
