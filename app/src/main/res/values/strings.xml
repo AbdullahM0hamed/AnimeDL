@@ -30,5 +30,7 @@
         <!-- Anime Page -->
     <string name="animeSource">Source: %1s</string>
     <string name="animeTitle">Anime Title</string>
+    <string name="add_to_list">Add to list</string>
+    <string name="action_webview">WebView</string>
 
 </resources>
