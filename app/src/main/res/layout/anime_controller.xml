@@ -185,6 +185,7 @@
         android:textAllCaps="false"
         android:textAlignment="viewEnd"
         android:visibility="gone"
+        app:backgroundTint="#ff000000"
         app:layout_constraintBottom_toBottomOf="@id/summary_text"
         app:layout_constraintEnd_toEndOf="parent" />
 
