@@ -34,6 +34,7 @@
     <string name="action_webview">WebView</string>
     <string name="more">More</string>
     <string name="less">Less</string>
+    <string name="episodes_count">%1d Episodes</string>
 
         <!-- Status Strings -->
     <string name="status_unknown">Status: Unknown</string>

@@ -214,6 +214,40 @@
 
     </HorizontalScrollView>
 
+    <androidx.constraintlayout.widget.ConstraintLayout 
+        android:background="?selectableItemBackground" 
+        android:paddingTop="4.0dip" 
+        android:paddingBottom="4.0dip" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:paddingStart="16.0dip" 
+        android:paddingEnd="12.0dip" 
+        app:layout_constraintTop_toBottomOf="@id/genre_tags_compact">
+
+        <TextView
+            android:textSize="16.0sp" 
+            android:id="@+id/episodes_label" 
+            android:layout_width="0.0dip" 
+            android:layout_height="wrap_content" 
+            android:text="X Episodes" 
+            android:textIsSelectable="false" 
+            app:layout_constraintBottom_toBottomOf="parent" 
+            app:layout_constraintEnd_toStartOf="@id/btn_episodes_filter" 
+            app:layout_constraintStart_toStartOf="parent" 
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton 
+            android:id="@+id/btn_episodes_filter" 
+            android:background="?selectableItemBackgroundBorderless" 
+            android:layout_width="28.0dip" 
+            android:layout_height="28.0dip" 
+            app:layout_constraintBottom_toBottomOf="parent" 
+            app:layout_constraintEnd_toEndOf="parent" 
+            app:layout_constraintTop_toTopOf="parent" 
+            app:srcCompat="@drawable/ic_filter_list_24dp" 
+            app:tint="#b3ffffff" />
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"

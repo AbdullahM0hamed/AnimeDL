@@ -155,7 +155,8 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         }
 
         setStatus(context, anime!!.status)
-        binding.animeSource.text = source?.name
+        binding.animeSource.text = context.getString(R.string.animeSource, source?.name)
+        binding.episodesLabel.text = context.getString(R.string.episodes_count, source?.getEpisodeList(anime)?.size ?: 0)
         binding.card.clipToOutline = true
         setImage(context, binding.coverImage, anime?.cover, true)
         setImage(context, binding.animePoster, anime?.cover, false)
