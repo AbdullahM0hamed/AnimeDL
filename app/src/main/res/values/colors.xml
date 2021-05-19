@@ -1,4 +1,7 @@
 <resources>
 <color name="colorPrimary">@android:color/black</color>
 <color name="white">@android:color/white</color>
+<color name="fullRippleColor">#ffc2c2c2</color>
+<color name="actionBarTintColor">#c8ffffff</color>
+<color name="gray_button">#ff404040</color>
 </resources>
