@@ -186,7 +186,7 @@
         android:textAlignment="viewEnd"
         android:visibility="gone"
         app:backgroundTint="#ff000000"
-        app:layout_constraintBottom_toBottomOf="@id/summary_text"
+        app:layout_constraintBottom_toBottomOf="@id/genre_tags_compact"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <HorizontalScrollView
@@ -195,6 +195,7 @@
         android:layout_height="wrap_content"
         android:requiresFadingEdge="horizontal"
         android:scrollbars="none"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/summary_text">
@@ -207,6 +208,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:paddingBottom="8dp"
+            android:visibility="gone"
             app:chipSpacingHorizontal="4dp"
             app:singleLine="true" />
 

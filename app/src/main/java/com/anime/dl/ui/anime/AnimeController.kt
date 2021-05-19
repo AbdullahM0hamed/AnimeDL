@@ -189,6 +189,8 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         binding.toggleMoreScrim.isVisible = isCurrentlyExpanded
         binding.toggleMore.isVisible = isCurrentlyExpanded
         binding.toggleLess.isVisible = !isCurrentlyExpanded
+        binding.genreTagsCompact.isVisible = !isCurrentlyExpanded
+        binding.genreTagsCompactChips.isVisible = !isCurrentlyExpanded
         
         binding.summaryText.maxLines = if (isCurrentlyExpanded) {
             2
