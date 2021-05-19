@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anime.dl.App
 import com.anime.dl.R
@@ -94,6 +95,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
             .onEach { toggleInfo() }
             .launchIn(scope)
 
+        binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = FastAdapter.with(listOf(itemAdapter))
         storeSubscription = mainStore.subscribe { newState(mainStore.state.animeInfoState.anime) }
         binding.swipeRefresh.isRefreshing = true
