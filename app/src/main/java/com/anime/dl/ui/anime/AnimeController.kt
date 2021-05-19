@@ -18,6 +18,7 @@ import com.anime.dl.databinding.AnimeControllerBinding
 import com.anime.dl.sources.models.AnimeInfo
 import com.anime.dl.sources.Source
 import com.anime.dl.ui.base.controller.BaseController
+import com.anime.dl.ui.browse.source.EpisodeItem
 import com.anime.dl.ui.main.MainActivity
 import com.anime.dl.ui.main.mainStore
 import com.anime.dl.widget.StateImageViewTarget
@@ -64,7 +65,6 @@ class AnimeController : BaseController<AnimeControllerBinding> {
     private var anime: AnimeInfo? = null
         private set
 
-    private var recycler: RecyclerView? = null
     private var adapter: GenericFastAdapter? = null
     private var marginTop: Int? = null
     private var itemAdapter: GenericItemAdapter = items()
@@ -94,6 +94,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
             .onEach { toggleInfo() }
             .launchIn(scope)
 
+        binding.recycler.adapter = FastAdapter.with(listOf(itemAdapter))
         storeSubscription = mainStore.subscribe { newState(mainStore.state.animeInfoState.anime) }
         binding.swipeRefresh.isRefreshing = true
         binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!)) }.launchIn(scope)
@@ -110,7 +111,6 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         params.topMargin = marginTop!!
         actionBar?.setBackgroundDrawable(ColorDrawable(Color.BLACK))
         adapter = null
-        recycler = null
 
         // Unsubscribe
         storeSubscription()
@@ -137,6 +137,13 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         binding.swipeRefresh.isRefreshing = false
         binding.animeTitle.text = anime?.title
         binding.summaryText.text = anime?.description
+
+        val items = mutableListOf<GenericItem>()
+        source?.getEpisodeList(anime)?.map {
+            items.add(EpisodeItem(it))
+        }
+
+        itemAdapter.set(items)
 
         val context = App.applicationContext()
  

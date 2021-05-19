@@ -4,5 +4,6 @@
     <item name="fastadapter_extension_header_id" type="id" />
     <item name="fastadapter_extension_details_id" type="id" />
     <item name="fastadapter_source_grid_item_id" type="id" />
+    <item name="fastadapter_episode_item_id" type="id" />
     <item name="recycler" type="id" />
 </resources>
