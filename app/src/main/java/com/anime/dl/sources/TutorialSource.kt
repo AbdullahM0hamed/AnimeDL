@@ -24,7 +24,9 @@ class TutorialSource : Source {
         val episode1 = EpisodeInfo(
             "1",
             "Episode 1",
-            System.currentTimeMillis()
+            System.currentTimeMillis(),
+            -1f,
+            "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/nx20832-Kz7PMdGT0JI6.jpg"
         )
 
         val episode2 = episode1.copy("2", "Episode 2")
