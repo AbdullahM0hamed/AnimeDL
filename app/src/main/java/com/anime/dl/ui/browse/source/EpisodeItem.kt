@@ -35,10 +35,10 @@ data class EpisodeItem(
     fun setImage(episode: EpisodeInfo) {
         val context = App.applicationContext()
 
-        Glide.with(context).clear(binding.thumbnail)
+        Glide.with(context).clear(binding.episodeThumbnail)
         if (!episode.thumbnail.isNullOrEmpty()) {
             Glide.with(context)
-                .load(anime.thumbnail)
+                .load(episode.thumbnail)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .centerCrop()
                 .placeholder(android.R.color.transparent)

@@ -139,7 +139,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         binding.summaryText.text = anime?.description
 
         val items = mutableListOf<GenericItem>()
-        source?.getEpisodeList(anime)?.map {
+        source?.getEpisodeList(anime!!)?.map {
             items.add(EpisodeItem(it))
         }
 
