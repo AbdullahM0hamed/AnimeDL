@@ -143,7 +143,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         if (!anime!!.genres.isNullOrEmpty()) {
             binding.genreTagsCompactChips.removeAllViews()
             anime?.genres?.forEach { genre ->
-                val chip = Chip(context).apply {
+                val chip = Chip(activity!! as Context).apply {
                     text = genre
                     setOnClickListener { android.widget.Toast.makeText(context, genre, 5).show() }
                 }
