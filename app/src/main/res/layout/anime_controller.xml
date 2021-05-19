@@ -249,13 +249,6 @@
             app:tint="#b3ffffff" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView 
-        android:id="@+id/recycler"
-        android:clipToPadding="false" 
-        android:layout_width="fill_parent" 
-        android:layout_height="wrap_content" 
-        app:layout_constraintTop_toBottomOf="@id/episodes_header" />
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
@@ -265,7 +258,21 @@
             android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll" />
+            app:layout_scrollFlags="scroll">
+
+            <FrameLayout
+                android:id="@+id/linear_recycler_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false" 
+                    app:layout_constraintTop_toBottomOf="@id/episodes_header" />
+            </FrameLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
