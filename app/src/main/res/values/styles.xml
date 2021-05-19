@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppTheme" parent="@style/Theme.MaterialComponents.NoActionBar">
-        <item name="chipStyle">@style/Theme.Widget.Chips</item>
+        <item name="chipStyle">@style/Theme.Widget.Chip</item>
     </style>
 
     <style name="Theme.Widget.Chip" parent="Widget.MaterialComponents.Chip.Action">
