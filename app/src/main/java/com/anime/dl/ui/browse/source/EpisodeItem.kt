@@ -1,7 +1,9 @@
 package com.anime.dl.ui.browse.source
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.viewbinding.ViewBinding
 import com.anime.dl.App
@@ -47,12 +49,12 @@ data class EpisodeItem(
     fun setImage(episode: EpisodeInfo) {
         val context = App.applicationContext()
 
-        Glide.with(context).clear(thumbnailBinding?.episodeThumbnail)
+        Glide.with(context).clear(thumbnailBinding?.episodeThumbnail as View)
         Glide.with(context)
             .load(episode.thumbnail)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .centerCrop()
             .placeholder(android.R.color.transparent)
-            .into(thumbnailBinding?.episodeThumbnail)
+            .into(thumbnailBinding!!.episodeThumbnail)
     }
 }
