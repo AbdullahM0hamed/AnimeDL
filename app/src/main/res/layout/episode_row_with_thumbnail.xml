@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/episodeThumbnail2"
+        android:id="@+id/episodeThumbnail"
         android:layout_width="160dp"
         android:layout_height="82dp"
         android:layout_weight="1"
@@ -24,7 +24,7 @@
         android:text="Episode 1:\nEpisode Title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/download_button"
-        app:layout_constraintStart_toEndOf="@+id/episodeThumbnail2"
+        app:layout_constraintStart_toEndOf="@+id/episodeThumbnail"
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
