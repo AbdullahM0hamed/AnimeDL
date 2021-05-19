@@ -24,11 +24,11 @@ data class EpisodeItem(
 
     override fun bindView(binding: ViewBinding, payloads: List<Any>) {
         if (!episode.thumbnail.isNullOrEmpty()) {
-            this.thumbnailBinding = binding
+            this.thumbnailBinding = binding as EpisodeRowWithThumbnailBinding?
             thumbnailBinding?.episodeTitle?.text = episode.title
             setImage(episode)
         } else {
-            this.binding = binding
+            this.binding = binding as EpisodeRowBinding?
             binding?.episodeTitle?.text = episode.title
         }
     }
@@ -47,12 +47,12 @@ data class EpisodeItem(
     fun setImage(episode: EpisodeInfo) {
         val context = App.applicationContext()
 
-        Glide.with(context).clear(thumbnailBinding.episodeThumbnail)
+        Glide.with(context).clear(thumbnailBinding?.episodeThumbnail)
         Glide.with(context)
             .load(episode.thumbnail)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .centerCrop()
             .placeholder(android.R.color.transparent)
-            .into(binding.episodeThumbnail)
+            .into(thumbnailBinding?.episodeThumbnail)
     }
 }
