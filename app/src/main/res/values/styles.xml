@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
+    <style name="AppTheme" parent="style/Theme.MaterialComponents.NoActionBar">
+        <item name="chipStyle">@style/Theme.Widget.Chips</item>
+    </style>
+
+    <style name="Theme.Widget.Chip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">#ff3399ff</item>
+        <item name="chipBackgroundColor">@android:color/transparent</item>
+        <item name="android:textColor">#ff3399ff</item>
+
+        <!-- Smaller text/height -->
+        <item name="chipCornerRadius">12dp</item>
+        <item name="chipMinHeight">24dp</item>
+
+        <!-- Collapse horizontal margin -->
+        <item name="chipMinTouchTargetSize">30dp</item>
     </style>
 
     <style name="Theme.Widget.Tabs" parent="@style/Widget.MaterialComponents.TabLayout">
