@@ -7,19 +7,19 @@
 
     <ImageView
         android:id="@+id/episodeThumbnail"
-        android:layout_width="160dp"
-        android:layout_height="82dp"
-        android:layout_weight="1"
+        android:layout_width="130dp"
+        android:layout_height="70dp"
         android:layout_marginStart="15dp"
+        android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_broken_image_grey_24dp" />
 
-    <ImageView 
+    <ImageView
         android:id="@+id/play"
-        android:layout_width="41dp"
-        android:layout_height="41dp"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
         app:layout_constraintBottom_toBottomOf="@id/episodeThumbnail"
         app:layout_constraintEnd_toEndOf="@id/episodeThumbnail"
         app:layout_constraintStart_toStartOf="@id/episodeThumbnail"
