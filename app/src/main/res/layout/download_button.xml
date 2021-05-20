@@ -1,51 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/download_button"
+    android:layout_width="35dp"
+    android:layout_height="35dp"
     android:clickable="true"
-    android:focusable="true"
-    android:layout_width="30dp"
-    android:layout_height="30dp">
+    android:focusable="true">
 
     <ImageView
         android:id="@+id/download_border"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_gravity="center"
-        android:src="@drawable/border_circle"
-        android:padding="3dp"/>
+        android:padding="3dp"
+        android:src="@drawable/border_circle" />
 
     <ProgressBar
         android:id="@+id/download_progress_indeterminate"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:visibility="gone"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_gravity="center"
         android:indeterminate="true"
-        android:indeterminateTint="@color/material_on_surface_disabled"/>
+        android:indeterminateTint="@color/material_on_surface_disabled"
+        android:visibility="gone" />
 
     <ProgressBar
         android:id="@+id/download_progress"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:visibility="gone"
-        tools:visibility="visible"
         style="?android:attr/progressBarStyleHorizontal"
-        android:progressDrawable="@drawable/circle_progress"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_gravity="center"
+        android:progressBackgroundTint="@color/material_on_surface_disabled"
+        android:progressDrawable="@drawable/circle_progress"
         android:progressTint="#ff2e7d32"
-        android:progressBackgroundTint="@color/material_on_surface_disabled"/>
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 
     <ImageView
         android:id="@+id/download_icon"
-        app:tint="#b3ffffff"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_gravity="center"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
         android:background="@drawable/round_ripple"
         android:padding="5dp"
-        android:src="@drawable/ic_arrow_downward_24dp" />
+        android:src="@drawable/ic_arrow_downward_24dp"
+        app:tint="#b3ffffff" />
 </FrameLayout>
