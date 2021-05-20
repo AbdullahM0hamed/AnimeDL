@@ -33,7 +33,6 @@ import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
-import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -167,20 +166,16 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         binding.animeSource.text = context.getString(R.string.animeSource, source?.name)
         binding.episodesLabel.text = context.getString(R.string.episodes_count, source?.getEpisodeList(anime)?.size ?: 0)
         binding.card.clipToOutline = true
-        setImage(context, binding.coverImage, anime?.cover, true)
-        setImage(context, binding.animePoster, anime?.cover, false)
+        setImage(context, binding.coverImage, anime?.cover)
+        setImage(context, binding.animePoster, anime?.cover)
     }
 
-    fun setImage(context: Context, view: ImageView, cover: String?, blur: Boolean) {
+    fun setImage(context: Context, view: ImageView, cover: String?) {
         var image = Glide.with(context) 
             .load(cover)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .centerCrop()
             .placeholder(android.R.color.transparent)
-
-        if (blur) {
-            image.transform(BlurTransformation())
-        }
 
         image.into(StateImageViewTarget(view, binding.progress))
     }
