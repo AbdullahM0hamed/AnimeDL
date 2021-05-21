@@ -53,12 +53,10 @@
         android:layout_width="143dp"
         android:layout_height="200dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="55dp"
-        android:layout_marginTop="90dp"
         android:indeterminate="true"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/card"
-            app:layout_constraintEnd_toEndOf="@id/card"
+        app:layout_constraintEnd_toEndOf="@id/card"
         app:layout_constraintStart_toStartOf="@id/card"
         app:layout_constraintTop_toTopOf="@id/card"
         tools:visibility="visible" />
