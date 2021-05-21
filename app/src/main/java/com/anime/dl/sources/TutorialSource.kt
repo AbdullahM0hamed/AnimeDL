@@ -21,18 +21,272 @@ class TutorialSource : Source {
     override fun getAnimeDetails(anime: AnimeInfo): AnimeInfo { return anime }
 
     override fun getEpisodeList(anime: AnimeInfo): List<EpisodeInfo> {
-        val episode1 = EpisodeInfo(
-            "1",
-            "Episode 1",
-            System.currentTimeMillis(),
-            -1f,
-            "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/nx20832-Kz7PMdGT0JI6.jpg"
+        val pattern = "anime/([0-9]+)/".toRegex()
+        val match = pattern.find(anime.link)
+        var (aniId) = match!!.destructured
+        aniId = aniId.toString()
+        val default = listOf(
+            mapOf(
+                "number" to "1",
+                "title" to "Episode 1"
+            ),
+            mapOf(
+                "number" to "2",
+                "title" to "Episode 1"
+            ),
+            mapOf(
+                "number" to "3",
+                "title" to "Episode 1"
+            ),
+            mapOf(
+                "number" to "4",
+                "title" to "Episode 1"
+            ),
+            mapOf(
+                "number" to "5",
+                "title" to "Episode 1"
+            )
         )
 
-        val episode2 = episode1.copy("2", "Episode 2")
-        val episode3 = episode1.copy("3", "Episode 3")
+        val animes = mapOf(
+            "20832" to listOf(
+                    mapOf(
+                        "number" to "1",
+                        "title" to "End and Beginning",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/4kP9LokDvo8houeyTzBBuV8R1zE.jpg"
+                    ),
+                    mapOf(
+                        "number" to "2",
+                        "title" to "Floor Guardians",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/5o2lrKAxesQgnxpaJVhwWXUWP7U.jpg"
+                    ),
+                    mapOf(
+                        "number" to "3",
+                        "title" to "The Battle of Carne Village",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/xwHETk5U7IQuKvugwH07lqUk1sG.jpg"
+                    ),
+                    mapOf(
+                        "number" to "4",
+                        "title" to "Ruler of Death",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/bqo2kd8GL2YzSnh8WOVV6zeJQEi.jpg"
+                    ),
+                    mapOf(
+                        "number" to "5",
+                        "title" to "Two Adventurers",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/1vKkF3gYCnQuzDMUX8AdLzArPlI.jpg"
+                    ),
+                    mapOf(
+                        "number" to "6",
+                        "title" to "Journey",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/alfzJA56yI1JUr5E6BVeayRuUIa.jpg"
+                    ),
+                    mapOf(
+                        "number" to "7",
+                        "title" to "Wise King of Forest",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/9hvjs6o3rml3XweLkTwAtJMCWU9.jpg"
+                    ),
+                    mapOf(
+                        "number" to "8",
+                        "title" to "Twin Swords of Slashing Death",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/qIAnSTmlbf11vHbeHPnZ0bIGStN.jpg"
+                    ),
+                    mapOf(
+                        "number" to "9",
+                        "title" to "The Dark Warrior",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/AqW3PZN2qOPN8OSqBdbnIuY4AUJ.jpg"
+                    ),
+                    mapOf(
+                        "number" to "10",
+                        "title" to "True Vampire",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/yPz3YYvU8efYVyrMcv6Ij2ZoVpE.jpg"
+                    ),
+                    mapOf(
+                        "number" to "11",
+                        "title" to "Confusion and Understanding",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/fUtckv6eojYgH9KrRQxztBcnucM.jpg"
+                    ),
+                    mapOf(
+                        "number" to "12",
+                        "title" to "The Bloody Valkyrie",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/j6vZwPs3cMfWhTGDDtFH2ckR8I3.jpg"
+                    ),
+                    mapOf(
+                        "number" to "13",
+                        "title" to "Player VS Non Player Character",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/hJf6boqyltf1YNJ0KqDIi68MxBO.jpg"
+                    )
+            ),
+            "98437" to listOf(
+                    mapOf(
+                        "number" to "1",
+                        "title" to "The Dawn of Despair",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/VNH6KUwz9s6NUOBq743WUKzCoQ.jpg"
+                    ),
+                    mapOf(
+                        "number" to "2",
+                        "title" to "Departure",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/uaRpG02CiAkVkzzJfD7tM6nojSK.jpg"
+                    ),
+                    mapOf(
+                        "number" to "3",
+                        "title" to "Lizard Men, Gathering",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/ejax8jW5gp75r362PiymeugWLxt.jpg"
+                    ),
+                    mapOf(
+                        "number" to "4",
+                        "title" to "Army of Death",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/jhapIiQz6QWRROxRyo7VYw5uz6A.jpg"
+                    ),
+                    mapOf(
+                        "number" to "5",
+                        "title" to "The Freezing God",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/pEnciyobmifN1ApNL3x99Ou9BG8.jpg"
+                    ),
+                    mapOf(
+                        "number" to "6",
+                        "title" to "Those Who Pick Up, Those Who Are Picked Up",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/oxpjVxdIhB0ikGDfH821lJnXnKA.jpg"
+                    ),
+                    mapOf(
+                        "number" to "7",
+                        "title" to "Blue Roses",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/zjuGVNiSV97XPBzbCQBAYEOK9hI.jpg"
+                    ),
+                    mapOf(
+                        "number" to "8",
+                        "title" to "A Boy’s Feeling",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/2aEdzdH0ifBImZL2eVEFKwae0PK.jpg"
+                    ),
+                    mapOf(
+                        "number" to "9",
+                        "title" to "Soaring Sparks of Fire",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/diNisbwHkTEM6vkQlJRyEwikykB.jpg"
+                    ),
+                    mapOf(
+                        "number" to "10",
+                        "title" to "Disturbance Begins in the Royal Capital",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/ap6Pic1Vm5wWEyG0YuLBtbcyhjJ.jpg"
+                    ),
+                    mapOf(
+                        "number" to "11",
+                        "title" to "Jaldabaoth",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/is8hObrVoJhOUi5s5S7eMAEmEOF.jpg"
+                    ),
+                    mapOf(
+                        "number" to "12",
+                        "title" to "The Final Battle of the Disturbance",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/qRAnxDWlk2HRHiEBUvMHIPJgFeI.jpg"
+                    ),
+                    mapOf(
+                        "number" to "13",
+                        "title" to "The Ultimate Trump Card",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/jLxv81N8jcKlQlYXYA9R2BM39aA.jpg"
+                    )
+            ),
+            "101474" to listOf(
+                    mapOf(
+                        "number" to "1",
+                        "title" to "A Ruler’s Melancholy",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/ndK5SF1xvtSuLlNInWyybGOIo3m.jpg"
+                    ),
+                    mapOf(
+                        "number" to "2",
+                        "title" to "Carne Village Once More",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/gqpAmd8lfkaQsYCSZG0F0WObo9y.jpg"
+                    ),
+                    mapOf(
+                        "number" to "3",
+                        "title" to "Enri’s Upheaval and Hectic Days",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/nBtno6Z2cNEQlcqfeyZBxzHKkEx.jpg"
+                    ),
+                    mapOf(
+                        "number" to "4",
+                        "title" to "Giant of the East, Demon Snake of the West",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/37Jmrqot5NsGiFWTpT4PDJ652UA.jpg"
+                    ),
+                    mapOf(
+                        "number" to "5",
+                        "title" to "Two Leaders",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/oMqo6oyjnrwaDXC1M2HGB4FbJeh.jpg"
+                    ),
+                    mapOf(
+                        "number" to "6",
+                        "title" to "Invitation to Death",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/hpw9A72rlcnnLY0ooQj3rPY6Axg.jpg"
+                    ),
+                    mapOf(
+                        "number" to "7",
+                        "title" to "Butterfly Entangled in a Spider’s Web",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/kYeA85N4nZQy9Qqk0f97EiSKEXK.jpg"
+                    ),
+                    mapOf(
+                        "number" to "8",
+                        "title" to "A Handful of Hope",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/oWWXfvqNzRad3ZKyELAL9Mvn5AY.jpg"
+                    ),
+                    mapOf(
+                        "number" to "9",
+                        "title" to "War of Words",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/rDzUMWUt4frNEyPRnYJHKdjVdRc.jpg"
+                    ),
+                    mapOf(
+                        "number" to "10",
+                        "title" to "Preparation for War",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/kW3ITQTE2vvBaDg7JbRZtbv3uk0.jpg"
+                    ),
+                    mapOf(
+                        "number" to "11",
+                        "title" to "Another Battle",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/ceJxUSG6RCwNLjOasRJKQWivoYa.jpg"
+                    ),
+                    mapOf(
+                        "number" to "12",
+                        "title" to "Massacre",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/o0kr52klt1Qv3EwQjpCrM7gwd4M.jpg"
+                    ),
+                    mapOf(
+                        "number" to "13",
+                        "title" to "Player vs Player",
+                        "thumbnail" to "https://www.themoviedb.org/t/p/original/9kpZeXSUhmwqpNlbK1u6m1hc80h.jpg"
+                    )
+            ),
+            "6702" to default,
+            "20626" to default,
+            "99749" to default,
+            "21087" to default,
+            "97668" to default,
+            "21" to default,
+            "11061" to default,
+            "20" to default,
+            "1735" to default,
+            "97938" to default,
+            "116589" to default,
+            "20997" to default,
+            "20954" to default,
+            "5682" to default,
+            "68" to default,
+            "14345" to default,
+            "1535" to default
+        )
 
-        return listOf(episode1, episode2, episode3)
+        if (animes.containsKey(aniId)) {
+            return animes.get(aniId)!!.map {
+                EpisodeInfo(
+                        key = it["number"].toString(),
+                        title = it["number"].toString() + ". " + it["title"].toString(),
+                        dateUpload = System.currentTimeMillis(),
+                        ep_number = -1f,
+                        thumbnail = if (it.containsKey("thumbnail")) {
+                            it["thumbnail"].toString()
+                        } else {
+                            ""
+                        }
+                )
+            }
+        } else {
+            return emptyList()
+            // this line should never execute, but I just added it in, just in case
+        }
     }
 
     private fun getTutorialAnime(page: Int): List<AnimeInfo> {
