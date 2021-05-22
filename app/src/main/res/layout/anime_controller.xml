@@ -27,7 +27,6 @@
         android:id="@+id/backdrop"
         android:layout_width="match_parent"
         android:layout_height="225dp"
-        android:backgroundTint="?android:attr/colorBackground"
         android:background="@drawable/anime_gradient" />
 
     <FrameLayout
