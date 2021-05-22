@@ -78,7 +78,6 @@
         android:id="@+id/animeSource"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/animeSource"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="@+id/animeTitle"
         app:layout_constraintTop_toBottomOf="@+id/animeTitle"
