@@ -28,7 +28,6 @@
     
     
         <!-- Anime Page -->
-    <string name="animeSource">Source: %1s</string>
     <string name="animeTitle">Anime Title</string>
     <string name="add_to_list">Add to list</string>
     <string name="action_webview">WebView</string>
@@ -37,9 +36,9 @@
     <string name="episodes_count">%1d Episodes</string>
 
         <!-- Status Strings -->
-    <string name="status_unknown">Status: Unknown</string>
-    <string name="status_airing">Status: Airing</string>
-    <string name="status_completed">Status: Completed</string>
-    <string name="status_cancelled">Status: Cancelled</string>
+    <string name="status_unknown">Unknown</string>
+    <string name="status_airing">Airing</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_cancelled">Cancelled</string>
 
 </resources>

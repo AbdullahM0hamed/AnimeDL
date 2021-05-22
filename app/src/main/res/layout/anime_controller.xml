@@ -69,6 +69,7 @@
         android:layout_marginTop="75dp"
         android:text="@string/animeTitle"
         android:textSize="20sp"
+        android:textColor="@android:color/white"
         app:layout_constraintStart_toEndOf="@+id/card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -78,6 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/animeSource"
+        android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="@+id/animeTitle"
         app:layout_constraintTop_toBottomOf="@+id/animeTitle"
         tools:text="Source: GogoAnime" />
@@ -87,6 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/status_unknown"
+        android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="@id/animeSource"
         app:layout_constraintTop_toBottomOf="@id/animeSource" />
 
@@ -95,28 +98,30 @@
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:visibility="gone"
+        android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="@id/status" 
         app:layout_constraintTop_toBottomOf="@id/status" />
 
     <com.google.android.material.button.MaterialButton 
-        android:textColor="#80ffffff" 
-        android:layout_gravity="center" 
-        android:id="@+id/btn_favorite" 
-        android:layout_width="0.0dip" 
-        android:layout_height="wrap_content" 
-        android:text="@string/add_to_list" 
-        android:textAllCaps="false" 
-        android:layout_marginStart="16.0dip" 
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:id="@+id/btn_favorite"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_list"
+        android:textAllCaps="false"
+        android:layout_marginStart="16.0dip"
         android:letterSpacing="0.0"
-        app:backgroundTint="@android:color/transparent" 
-        app:icon="@drawable/ic_favorite_border_24dp" 
-        app:iconGravity="top" app:iconTint="#80ffffff" 
-        app:layout_constraintEnd_toStartOf="@id/btn_webview" 
-        app:layout_constraintStart_toStartOf="parent" 
+        app:backgroundTint="@android:color/transparent"
+        app:icon="@drawable/ic_favorite_border_24dp"
+        app:iconGravity="top"
+        app:iconTint="@android:color/white"
+        app:layout_constraintEnd_toStartOf="@id/btn_webview"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cover_image" />
     
     <com.google.android.material.button.MaterialButton 
-        android:textColor="#80ffffff"
+        android:textColor="@android:color/white"
         android:layout_gravity="center"
         android:id="@+id/btn_webview" 
         android:layout_width="0.0dip"
@@ -128,7 +133,7 @@
         app:backgroundTint="@android:color/transparent"
         app:icon="@drawable/ic_public_24dp"
         app:iconGravity="top"
-        app:iconTint="#80ffffff"
+        app:iconTint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_favorite"
         app:layout_constraintTop_toBottomOf="@id/cover_image" />
@@ -145,6 +150,7 @@
         android:textAllCaps="false" 
         android:layout_marginStart="16.0dip" 
         android:layout_marginEnd="16.0dip" 
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent" 
         app:layout_constraintStart_toStartOf="parent" 
         app:layout_constraintTop_toBottomOf="@id/btn_favorite" />
@@ -239,6 +245,7 @@
             android:layout_height="wrap_content" 
             android:text="X Episodes" 
             android:textIsSelectable="false" 
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent" 
             app:layout_constraintEnd_toStartOf="@id/btn_episodes_filter" 
             app:layout_constraintStart_toStartOf="parent" 
@@ -253,7 +260,7 @@
             app:layout_constraintEnd_toEndOf="parent" 
             app:layout_constraintTop_toTopOf="parent" 
             app:srcCompat="@drawable/ic_filter_list_24dp" 
-            app:tint="#b3ffffff" />
+            app:tint="@android:color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

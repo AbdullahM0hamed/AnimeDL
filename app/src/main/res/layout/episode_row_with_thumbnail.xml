@@ -33,6 +33,7 @@
         android:layout_marginLeft="30dp"
         android:layout_weight="1"
         android:text="Episode 1:\nEpisode Title"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/download_button"
         app:layout_constraintStart_toEndOf="@+id/episodeThumbnail"
