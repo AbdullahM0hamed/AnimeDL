@@ -41,4 +41,6 @@
     <string name="status_completed">Completed</string>
     <string name="status_cancelled">Cancelled</string>
 
+    <!-- Do not translate "WebView" -->
+    <string name="information_webview_required">WebView is required for AnimeDL for certain providers</string>
 </resources>

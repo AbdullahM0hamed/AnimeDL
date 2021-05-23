@@ -22,9 +22,11 @@ import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.browse.source.EpisodeItem
 import com.anime.dl.ui.main.MainActivity
 import com.anime.dl.ui.main.mainStore
+import com.anime.dl.ui.webview.WebViewController
 import com.anime.dl.widget.StateImageViewTarget
 import com.bluelinelabs.conductor.ControllerChangeHandler
 import com.bluelinelabs.conductor.ControllerChangeType
+import com.bluelinelabs.conductor.RouterTransaction
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.chip.Chip
@@ -85,6 +87,10 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         marginTop = params.topMargin
         params.topMargin = 0
         actionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        binding.btnWebview.setOnClickListener {
+            router.pushController(RouterTransaction.with(WebViewController(anime?.title, anime!!.link)))
+        }
 
         merge(
             binding.summaryText.clicks(),
