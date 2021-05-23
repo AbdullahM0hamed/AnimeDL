@@ -1,4 +1,4 @@
-package com.anime.dl.ui.base.controller
+package com.anime.dl.ui.webview
 
 import android.content.Context
 import android.content.pm.PackageManager
