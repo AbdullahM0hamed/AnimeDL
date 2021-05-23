@@ -11,6 +11,8 @@ import android.webkit.WebView
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import android.widget.Toast
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.anime.dl.R
 import com.anime.dl.databinding.WebviewControllerBinding
 import com.anime.dl.ui.base.controller.BaseController
