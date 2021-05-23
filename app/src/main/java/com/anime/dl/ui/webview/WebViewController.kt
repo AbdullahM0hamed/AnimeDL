@@ -14,11 +14,11 @@ import com.anime.dl.R
 import com.anime.dl.databinding.WebviewControllerBinding
 import com.anime.dl.ui.base.controller.BaseController
 
-class WebViewController : BaseController<WebviewControllerBinding>() {
+class WebViewController : BaseController<WebviewControllerBinding> {
 
     constructor(animeTitle: String?, link: String) : this(
         Bundle().apply {
-            putString('link', link)
+            putString("link", link)
         }
     ) {
         this.animeTitle = animeTitle
