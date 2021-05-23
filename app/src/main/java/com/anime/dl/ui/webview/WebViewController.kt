@@ -11,6 +11,7 @@ import android.webkit.WebViewClient
 import android.widget.Toast
 import com.anime.dl.R
 import com.anime.dl.databinding.WebviewControllerBinding
+import com.anime.dl.ui.base.controller.BaseController
 
 class WebViewController(
     val title: String?,
