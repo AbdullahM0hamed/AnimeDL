@@ -13,12 +13,27 @@ import com.anime.dl.R
 import com.anime.dl.databinding.WebviewControllerBinding
 import com.anime.dl.ui.base.controller.BaseController
 
-class WebViewController(
-    val animeTitle: String?,
-    val link: String
-) : BaseController<WebviewControllerBinding>() {
+class WebViewController : BaseController<WebviewControllerBinding>() {
+
+    constructor(animeTitle: String?, link: String) : this(
+        Bundle().apply {
+            putString('link', link)
+        }
+    ) {
+        this.animeTitle = animeTitle
+        this.link = link
+    }
+
+    @Suppress("unused")
+    constructor(bundle: Bundle) : super(bundle)
 
     override val hasBottomNav = false
+
+    private var animeTitle: String? = null
+        private set
+
+    private var link: String? = null
+        private set
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View {
         try {
