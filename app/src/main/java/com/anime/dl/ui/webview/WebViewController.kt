@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.CookieManager
 import android.webkit.WebView
+import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import android.widget.Toast
 import com.anime.dl.R
@@ -56,6 +57,17 @@ class WebViewController : BaseController<WebviewControllerBinding> {
         }
 
         binding.webview.settings.setJavaScriptEnabled(true)
+
+        binding.webview.webChromeClient = object : WebChromeClient() {
+            override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                binding.progressBar.isVisible = true
+                binding.progressBar.progress = newProgress
+                if (newProgress == 100) {
+                    binding.progressBar.isInvisible = true
+                }
+                super.onProgressChanged(view, newProgress)
+            }
+        }
         binding.webview.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 view?.loadUrl(link)
