@@ -27,7 +27,7 @@ class WebViewController(
             requireWebView()
         }
 
-        return View(activity as!! Context)
+        return android.widget.LinearLayout(activity!! as Context)
     }
 
     override fun onViewCreated(view: View) {
@@ -38,8 +38,8 @@ class WebViewController(
             return
         }
 
-        binding.webView.settings.setJavaScriptEnabled(true)
-        binding.webView.webViewClient = object : WebViewClient() {
+        binding.webview.settings.setJavaScriptEnabled(true)
+        binding.webview.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 view?.loadUrl(link)
                 return true
