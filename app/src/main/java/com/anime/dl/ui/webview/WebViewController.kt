@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.CookieManager
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.Toast
 import com.anime.dl.R
 import com.anime.dl.databinding.WebviewControllerBinding
@@ -25,13 +27,13 @@ class WebViewController(
             requireWebView()
         }
 
-        return super.inflateView(inflater, container)
+        return View(activity as!! Context)
     }
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
 
-        if (!supportsWebView) {
+        if (!supportsWebView()) {
             requireWebView()
             return
         }
@@ -39,28 +41,28 @@ class WebViewController(
         binding.webView.settings.setJavaScriptEnabled(true)
         binding.webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                view?.loadUrl(url)
+                view?.loadUrl(link)
                 return true
             }
         }
 
-        binding.webview.loadUrl(url)
+        binding.webview.loadUrl(link)
     }
 
     override fun getTitle() = title
 
-    fun supportsWebView() {
+    fun supportsWebView(): Boolean {
         try {
             CookieManager.getInstance()
         } catch (e: Throwable) {
             return false
         }
 
-        return activity.packageManager.hasSystemFeature(PackageManager.FEATURE_WEBVIEW)
+        return activity!!.packageManager.hasSystemFeature(PackageManager.FEATURE_WEBVIEW)
     }
 
     fun requireWebView() {
         Toast.makeText(activity as Context, resources!!.getString(R.string.information_webview_required), Toast.LENGTH_LONG).show()
-        finish()
+        router.handleBack()
     }
 }
