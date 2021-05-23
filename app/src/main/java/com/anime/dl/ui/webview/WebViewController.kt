@@ -14,7 +14,7 @@ import com.anime.dl.databinding.WebviewControllerBinding
 import com.anime.dl.ui.base.controller.BaseController
 
 class WebViewController(
-    val title: String?,
+    val animeTitle: String?,
     val link: String
 ) : BaseController<WebviewControllerBinding>() {
 
@@ -50,7 +50,7 @@ class WebViewController(
         binding.webview.loadUrl(link)
     }
 
-    override fun getTitle() = title
+    override fun getTitle() = animeTitle
 
     fun supportsWebView(): Boolean {
         try {
