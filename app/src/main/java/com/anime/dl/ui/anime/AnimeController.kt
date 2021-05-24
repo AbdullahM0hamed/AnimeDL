@@ -57,7 +57,9 @@ class AnimeController : BaseController<AnimeControllerBinding> {
     }
 
     @Suppress("unused")
-    constructor(bundle: Bundle) : super(bundle)
+    constructor(bundle: Bundle) : super(bundle) {
+        mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!))
+    }
 
     override val hasBottomNav = false
 
