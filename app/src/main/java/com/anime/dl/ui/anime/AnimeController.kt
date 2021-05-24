@@ -57,9 +57,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
     }
 
     @Suppress("unused")
-    constructor(bundle: Bundle) : super(bundle) {
-        mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!))
-    }
+    constructor(bundle: Bundle) : super(bundle) 
 
     override val hasBottomNav = false
 
@@ -111,7 +109,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
 
     override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
         super.onChangeStarted(handler, type)
-        if (type.isPush) {
+        if (type.isPush || type.isEnter) {
             mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!))
         }
     }
