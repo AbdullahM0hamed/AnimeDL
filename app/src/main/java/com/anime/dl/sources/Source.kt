@@ -14,7 +14,7 @@ interface Source {
 
     fun getAnimeDetails(anime: AnimeInfo): AnimeInfo
 
-    fun getEpisodeList(anime: AnimeInfo): List<EpisodeInfo>
+    fun getEpisodeList(anime: AnimeInfo, page: Int): List<EpisodeInfo>
 
     fun getAnimeList(page: Int): AnimePage
 }
