@@ -32,7 +32,7 @@ class TutorialSource : HttpSource {
                 title=json.getString("title"),
                 link=json.getString("link"),
                 description=json.getString("description"),
-                cover=json.getString("img")
+                cover=json.getString("img"),
                 genres=json.getJSONArray("genres").toList()
             )
         }
@@ -43,7 +43,7 @@ class TutorialSource : HttpSource {
     override fun episodeListFromJson(link: String, json: String): List<EpisodeInfo>? {
         val array = JSONObject(json)
         val pattern = "anime/([0-9]+)/".toRegex()
-        val match = pattern.find(anime.link)
+        val match = pattern.find(link)
         var (aniId) = match!!.destructured
         aniId = aniId.toString()
 

@@ -8,10 +8,12 @@ import okhttp3.FormBody
 import okhttp3.Headers
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import java.security.MessageDigest
+import java.util.concurrent.TimeUnit.MINUTES
 
 abstract class HttpSource : Source {
 
@@ -20,7 +22,7 @@ abstract class HttpSource : Source {
 
     fun GET(
         url: String,
-        headers: Headers = headers,
+        headers: Headers = headersBuilder.Build(),
         cache: CacheControl = DEFAULT_CACHE_CONTROL
     ): Request {
         return Request.Builder()
@@ -32,7 +34,7 @@ abstract class HttpSource : Source {
 
     fun POST(
         url: String,
-        headers: Headers = headers,
+        headers: Headers = headersBuilder.Build(),
         body: RequestBody = DEFAULT_BODY,
         cache: CacheControl = DEFAULT_CACHE_CONTROL
     ): Request {
@@ -76,9 +78,9 @@ abstract class HttpSource : Source {
 
     open fun episodeFromElement(element: Element): EpisodeInfo? = null
 
-    open fun episodeListFromJson(link: String, json: String): List<EpisodeInfo>? = null
+    open fun episodeListFromJson(link: String, json: String): List<EpisodeInfo> = emptyList()
 
-    open fun episodeListNextPageFromJson(): Boolean = false
+    open fun episodeListNextPageFromJson(json: String): Boolean = false
 
     override fun getAnimeList(page: Int): AnimePage {
         var anime: List<AnimeInfo>? = null
@@ -86,14 +88,14 @@ abstract class HttpSource : Source {
 
         client.newCall(browseAnimeRequest(page)).execute().let { response ->
             if (browseAnimeSelector() != null) {
-               val document = Jsoup.parse(response!!.body.string(), response.request.url.toString())
+               val document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
                anime = document.select(browseAnimeSelector()).map { element ->
                    browseAnimeFromElement(element)!!
                }
 
                hasNextPage = document.select(browseAnimeNextPageSelector()).first() != null
            } else {
-               val json = response!!.body
+               val json = response!!.body!!.string()
                anime = browseAnimeFromJson(json)
                hasNextPage = browseAnimeNextPageFromJson(json)
            }
@@ -103,12 +105,12 @@ abstract class HttpSource : Source {
    }
 
    override fun getEpisodeList(anime: AnimeInfo, page: Int): List<EpisodeInfo> {
-      var episodes: List<EpisodeInfo>? = nul
+      var episodes: List<EpisodeInfo> = emptyList()
       var pageCount: Int = page
 
       client.newCall(episodeListRequest(anime.link, page)).execute().let { response ->
          if (episodeListSelector() != null) {
-            var document: Document = Jsoup.parse(response!!.body().string(), response.request.url.toString())
+            var document: Document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
             episodes = document!!.select(episodeListSelector()).map { element ->
                episodeFromElement(element)!!
             }
@@ -116,21 +118,21 @@ abstract class HttpSource : Source {
             while (document!!.select(episodeListNextPageSelector()).first() != null) {
                pageCount += 1
                val response = client.newCall(episodeListRequest(anime.link, pageCount)).execute()
-               document = Jsoup.parse(response!!.body().string(), response.request.url.toString())
+               document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
 
                episodes += document!!.select(episodeListSelector()).map { element ->
-                  episodeFromElement(element)!!
+                  episodeFromElement(element)
                }
             }
          } else {
-            var json = response!!.body
-            episodes = episodeListFromJson(json)
+            var json = response!!.body!!.string()
+            episodes = episodeListFromJson(anime.link, json)
 
             while (episodeListNextPageFromJson(json)) {
                pageCount += 1 
                val response = client.newCall(episodeListRequest(anime.link, pageCount)).execute()
-               json = response!!.body
-               episodes += episodeListFromJson(json)
+               json = response!!.body!!.string()
+               episodes += episodeListFromJson(anime.link, json)
             }
          }
       }
