@@ -22,7 +22,7 @@ abstract class HttpSource : Source {
 
     fun GET(
         url: String,
-        headers: Headers = headersBuilder.Build(),
+        headers: Headers = headersBuilder().build(),
         cache: CacheControl = DEFAULT_CACHE_CONTROL
     ): Request {
         return Request.Builder()
@@ -34,7 +34,7 @@ abstract class HttpSource : Source {
 
     fun POST(
         url: String,
-        headers: Headers = headersBuilder.Build(),
+        headers: Headers = headersBuilder().build(),
         body: RequestBody = DEFAULT_BODY,
         cache: CacheControl = DEFAULT_CACHE_CONTROL
     ): Request {
@@ -121,7 +121,7 @@ abstract class HttpSource : Source {
                document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
 
                episodes += document!!.select(episodeListSelector()).map { element ->
-                  episodeFromElement(element)
+                  episodeFromElement(element)!!
                }
             }
          } else {
