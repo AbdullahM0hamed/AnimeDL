@@ -68,7 +68,7 @@ fun animeInfoStateReducer(state: AnimeInfoState, action: Any): AnimeInfoState {
         ).start()
     } else if (action is AnimeInfoResult) {
         currentState = currentState.copy(action.anime, action.episodes)
-    } else if (actioms is NullifyAnimeInfoState) {
+    } else if (action is NullifyAnimeInfoState) {
         currentState = currentState.copy(null, null)
     }
 
