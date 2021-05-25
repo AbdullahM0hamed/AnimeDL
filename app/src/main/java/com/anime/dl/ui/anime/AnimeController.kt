@@ -103,15 +103,15 @@ class AnimeController : BaseController<AnimeControllerBinding> {
 
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = FastAdapter.with(listOf(itemAdapter))
-        storeSubscription = mainStore.subscribe { newState(mainStore.state.animeInfoState.anime, mainAtore.state.animeInfoState.episodes) }
+        storeSubscription = mainStore.subscribe { newState(mainStore.state.animeInfoState.anime, mainStore.state.animeInfoState.episodes) }
         binding.swipeRefresh.isRefreshing = true
-        binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!)) }.launchIn(scope)
+        binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!, activity)) }.launchIn(scope)
     }
 
     override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
         super.onChangeStarted(handler, type)
         if (type.isPush || type.isEnter) {
-            mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!))
+            mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!, activity))
         }
     }
 
@@ -148,11 +148,8 @@ class AnimeController : BaseController<AnimeControllerBinding> {
 
         val items = mutableListOf<GenericItem>()
 
-        source?.getEpisodeList(anime!!, 1)
-        if (episodes != null) {
-            episodes!!.map {
-                items.add(EpisodeItem(it))
-            }
+        episodes?.map {
+            items.add(EpisodeItem(it))
         }
 
         itemAdapter.set(items)
