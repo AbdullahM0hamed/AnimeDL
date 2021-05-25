@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.anime.dl.App
 import com.anime.dl.R
-import com.anime.dl.actions.AnimeInfoResult
+import com.anime.dl.actions.NullifyAnimeInfoState
 import com.anime.dl.databinding.SourceCompactGridItemBinding
 import com.anime.dl.sources.Source
 import com.anime.dl.sources.models.AnimeInfo
@@ -43,7 +43,7 @@ data class SourceItem(
         val context = App.applicationContext()
         binding.card.clipToOutline = true
         binding.root.setOnClickListener {
-            mainStore.dispatch(AnimeInfoResult(null, null))
+            mainStore.dispatch(NullifyAnimeInfoState())
             controller.router.pushController(RouterTransaction.with(AnimeController(anime, source)))
         }
 

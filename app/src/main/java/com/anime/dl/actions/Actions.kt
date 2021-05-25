@@ -14,3 +14,4 @@ data class GetBrowseAnime(val source: Source, val page: Int, val activity: Activ
 data class BrowseAnimeResult(val page: AnimePage)
 data class UpdateAnimeInfo(val anime: AnimeInfo, val source: Source, val activity: Activity)
 data class AnimeInfoResult(val anime: AnimeInfo, val episodes: List<EpisodeInfo>)
+class NullifyAnimeInfoState

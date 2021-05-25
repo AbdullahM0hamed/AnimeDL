@@ -6,6 +6,7 @@ import com.anime.dl.actions.BrowseAnimeResult
 import com.anime.dl.actions.FindExtensions
 import com.anime.dl.actions.GetBrowseAnime
 import com.anime.dl.actions.InstallExtension
+import com.anime.dl.actions.NullifyAnimeInfoState
 import com.anime.dl.actions.UpdateAnimeInfo
 import com.anime.dl.extensions.ExtensionManager
 import com.anime.dl.states.AnimeInfoState
@@ -67,6 +68,8 @@ fun animeInfoStateReducer(state: AnimeInfoState, action: Any): AnimeInfoState {
         ).start()
     } else if (action is AnimeInfoResult) {
         currentState = currentState.copy(action.anime, action.episodes)
+    } else if (actioms is NullifyAnimeInfoState) {
+        currentState = currentState.copy(null, null)
     }
 
     return currentState
