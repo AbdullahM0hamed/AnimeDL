@@ -105,13 +105,13 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         binding.recycler.adapter = FastAdapter.with(listOf(itemAdapter))
         storeSubscription = mainStore.subscribe { newState(mainStore.state.animeInfoState.anime, mainStore.state.animeInfoState.episodes) }
         binding.swipeRefresh.isRefreshing = true
-        binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!, activity)) }.launchIn(scope)
+        binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!, activity!!)) }.launchIn(scope)
     }
 
     override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
         super.onChangeStarted(handler, type)
         if (type.isPush || type.isEnter) {
-            mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!, activity))
+            mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!, activity!!))
         }
     }
 
