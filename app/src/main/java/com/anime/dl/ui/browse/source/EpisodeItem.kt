@@ -26,6 +26,7 @@ data class EpisodeItem(
 
     override fun bindView(binding: ViewBinding, payloads: List<Any>) {
         if (!episode.thumbnail.isNullOrEmpty()) {
+            android.widget.Toast.makeText(App.applicationContext(), episode.thumbnail, 5).show()
             this.thumbnailBinding = binding as EpisodeRowWithThumbnailBinding?
             thumbnailBinding?.episodeTitle?.text = episode.title
             setImage(episode)
