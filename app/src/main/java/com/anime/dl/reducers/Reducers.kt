@@ -1,6 +1,7 @@
 package com.anime.dl.reducers
 
 import com.anime.dl.App
+import com.anime.dl.actions.BrowseAnimeResult
 import com.anime.dl.actions.FindExtensions
 import com.anime.dl.actions.GetBrowseAnime
 import com.anime.dl.actions.InstallExtension
@@ -10,6 +11,7 @@ import com.anime.dl.states.AppState
 import com.anime.dl.states.AnimeInfoState
 import com.anime.dl.states.BrowseAnimeState
 import com.anime.dl.states.ExtensionListState
+import com.anime.dl.ui.main.mainStore
 
 fun appStateReducer(state: AppState, action: Any) = AppState(
     extensionListState = extensionListReducer(state.extensionListState, action),
@@ -37,15 +39,17 @@ fun extensionListReducer(state: ExtensionListState, action: Any): ExtensionListS
 }
 
 fun browseAnimeStateReducer(state: BrowseAnimeState, action: Any): BrowseAnimeState {
+    var currentState = state
     if (action is GetBrowseAnime) {
-        var currentState = state
-        val browseList = action.source.getAnimeList(action.page)
-        currentState = currentState.copy(browseList)
-
-        return currentState
+        action.activity.runOnUiThread(Runnable {
+            val browseList = action.source.getAnimeList(action.page)
+            mainStore.dispatch(BrowseAnimeResult(browseList))
+        })
+    } else if (action is BrowseAnimeResult) {
+        currentState = currentState.copy(action.page)
     }
 
-    return state
+    return currentState
 }
 
 fun animeInfoStateReducer(state: AnimeInfoState, action: Any): AnimeInfoState {
