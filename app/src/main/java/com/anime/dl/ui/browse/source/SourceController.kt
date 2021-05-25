@@ -91,7 +91,6 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
 
     override fun onRestoreViewState(view: View, savedViewState: Bundle) {
         super.onRestoreViewState(view, savedViewState)
-        hideProgressBar()
     }
 
     protected companion object {
@@ -123,8 +122,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
     }
 
     fun newState(state: BrowseAnimeState) {
-        hideProgressBar()
-
+        hideProgresaBar()
         val items = mutableListOf<GenericItem>()
 
         state.browseAnime?.anime?.map {
