@@ -11,14 +11,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.anime.dl.App
 import com.anime.dl.R
 import com.anime.dl.actions.UpdateAnimeInfo
 import com.anime.dl.databinding.AnimeControllerBinding
+import com.anime.dl.sources.Source
 import com.anime.dl.sources.models.AnimeInfo
 import com.anime.dl.sources.models.EpisodeInfo
-import com.anime.dl.sources.Source
 import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.browse.source.EpisodeItem
 import com.anime.dl.ui.main.MainActivity
@@ -58,7 +57,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
     }
 
     @Suppress("unused")
-    constructor(bundle: Bundle) : super(bundle) 
+    constructor(bundle: Bundle) : super(bundle)
 
     override val hasBottomNav = false
 
@@ -83,7 +82,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
-        
+
         params = (activity as MainActivity).binding.controllerContainer.layoutParams as ViewGroup.MarginLayoutParams
         marginTop = params.topMargin
         params.topMargin = 0
@@ -135,51 +134,52 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         return super.onOptionsItemSelected(item)
     }
 
-
     override fun setActionBar() {
         actionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp)
         actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     fun newState(anime: AnimeInfo?, episodes: List<EpisodeInfo>?) {
-        binding.swipeRefresh.isRefreshing = false
-        binding.animeTitle.text = anime?.title
-        binding.summaryText.text = anime?.description
+        if (anime != null) {
+            binding.swipeRefresh.isRefreshing = false
+            binding.animeTitle.text = anime?.title
+            binding.summaryText.text = anime?.description
 
-        val items = mutableListOf<GenericItem>()
+            val items = mutableListOf<GenericItem>()
 
-        episodes?.map {
-            items.add(EpisodeItem(it))
-        }
-
-        itemAdapter.set(items)
-
-        val context = App.applicationContext()
- 
-        if (!anime!!.genres.isNullOrEmpty()) {
-            binding.genreTagsCompactChips.removeAllViews()
-            anime?.genres?.forEach { genre ->
-                val chip = Chip(activity!! as Context).apply {
-                    text = genre
-                    setOnClickListener { android.widget.Toast.makeText(context, genre, 5).show() }
-                }
-                binding.genreTagsCompactChips.addView(chip)
+            episodes?.map {
+                items.add(EpisodeItem(it))
             }
-        } else {
-            binding.genreTagsCompact.isVisible = false
-            binding.genreTagsCompactChips.isVisible = false
-        }
 
-        setStatus(context, anime!!.status)
-        binding.animeSource.text = source?.name
-        binding.episodesLabel.text = context.getString(R.string.episodes_count, source?.getEpisodeList(anime, 1)?.size ?: 0)
-        binding.card.clipToOutline = true
-        setImage(context, binding.coverImage, anime?.cover)
-        setImage(context, binding.animePoster, anime?.cover)
+            itemAdapter.set(items)
+
+            val context = App.applicationContext()
+
+            if (!anime!!.genres.isNullOrEmpty()) {
+                binding.genreTagsCompactChips.removeAllViews()
+                anime?.genres?.forEach { genre ->
+                    val chip = Chip(activity!! as Context).apply {
+                        text = genre
+                        setOnClickListener { android.widget.Toast.makeText(context, genre, 5).show() }
+                    }
+                    binding.genreTagsCompactChips.addView(chip)
+                }
+            } else {
+                binding.genreTagsCompact.isVisible = false
+                binding.genreTagsCompactChips.isVisible = false
+            }
+
+            setStatus(context, anime!!.status)
+            binding.animeSource.text = source?.name
+            binding.episodesLabel.text = context.getString(R.string.episodes_count, source?.getEpisodeList(anime, 1)?.size ?: 0)
+            binding.card.clipToOutline = true
+            setImage(context, binding.coverImage, anime?.cover)
+            setImage(context, binding.animePoster, anime?.cover)
+        }
     }
 
     fun setImage(context: Context, view: ImageView, cover: String?) {
-        var image = Glide.with(context) 
+        var image = Glide.with(context)
             .load(cover)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .centerCrop()
@@ -204,7 +204,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         binding.toggleLess.isVisible = !isCurrentlyExpanded
         binding.genreTagsCompact.isVisible = !isCurrentlyExpanded
         binding.genreTagsCompactChips.isVisible = !isCurrentlyExpanded
-        
+
         binding.summaryText.maxLines = if (isCurrentlyExpanded) {
             2
         } else {
