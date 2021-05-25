@@ -1,19 +1,30 @@
 package com.anime.dl.sources
 
-import com.anime.dl.sources.models.AnimePage
 import com.anime.dl.sources.models.AnimeInfo
+import com.anime.dl.sources.models.AnimePage
 import com.anime.dl.sources.models.EpisodeInfo
+import kotlinx.coroutines.CancellableContinuation
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.suspendCancellableCoroutine
 import okhttp3.CacheControl
+import okhttp3.Call
 import okhttp3.FormBody
 import okhttp3.Headers
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
+import okhttp3.Response
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
-import java.security.MessageDigest
+import rx.Observable
+import rx.Producer
+import rx.Subscriber
+import rx.Subscription
 import java.util.concurrent.TimeUnit.MINUTES
+import java.util.concurrent.atomic.AtomicBoolean
 
 abstract class HttpSource : Source {
 
@@ -82,61 +93,152 @@ abstract class HttpSource : Source {
 
     open fun episodeListNextPageFromJson(json: String): Boolean = false
 
-    override fun getAnimeList(page: Int): AnimePage {
+    override fun getAnimeList(page: Int): AnimePage = runBlocking { fetchAnimeList(page).awaitSingle() }
+
+    override fun getEpisodeList(anime: AnimeInfo, page: Int): List<EpisodeInfo> = runBlocking { fetchEpisodeList(anime, page).awaitSingle() }
+
+    fun fetchAnimeList(page: Int): Observable<AnimePage> {
+        return client.newCall(browseAnimeRequest(page))
+            .asObservableSuccess()
+            .map { response ->
+                animeListParse(response)
+            }
+    }
+
+    fun animeListParse(response: Response): AnimePage {
         var anime: List<AnimeInfo>? = null
         var hasNextPage: Boolean = false
 
-        client.newCall(browseAnimeRequest(page)).execute().let { response ->
-            if (browseAnimeSelector() != null) {
-               val document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
-               anime = document.select(browseAnimeSelector()).map { element ->
-                   browseAnimeFromElement(element)!!
-               }
+        if (browseAnimeSelector() != null) {
+            val document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
+            anime = document.select(browseAnimeSelector()).map { element ->
+                browseAnimeFromElement(element)!!
+            }
 
-               hasNextPage = document.select(browseAnimeNextPageSelector()).first() != null
-           } else {
-               val json = response!!.body!!.string()
-               anime = browseAnimeFromJson(json)
-               hasNextPage = browseAnimeNextPageFromJson(json)
-           }
-       }
+            hasNextPage = document.select(browseAnimeNextPageSelector()).first() != null
+        } else {
+            val json = response!!.body!!.string()
+            anime = browseAnimeFromJson(json)
+            hasNextPage = browseAnimeNextPageFromJson(json)
+        }
 
-       return AnimePage(anime!!, hasNextPage)
-   }
+        return AnimePage(anime!!, hasNextPage)
+    }
 
-   override fun getEpisodeList(anime: AnimeInfo, page: Int): List<EpisodeInfo> {
-      var episodes: List<EpisodeInfo> = emptyList()
-      var pageCount: Int = page
+    fun fetchEpisodeList(anime: AnimeInfo, page: Int): Observable<List<EpisodeInfo>> {
+        return client.newCall(episodeListRequest(anime.link, page))
+            .asObservableSuccess()
+            .map { response ->
+                episodeListParse(response, page, anime)
+            }
+    }
 
-      client.newCall(episodeListRequest(anime.link, page)).execute().let { response ->
-         if (episodeListSelector() != null) {
+    fun episodeListParse(response: Response, page: Int, anime: AnimeInfo): List<EpisodeInfo> {
+        var episodes: List<EpisodeInfo> = emptyList()
+        var pageCount: Int = page
+
+        if (episodeListSelector() != null) {
             var document: Document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
             episodes = document!!.select(episodeListSelector()).map { element ->
-               episodeFromElement(element)!!
+                episodeFromElement(element)!!
             }
 
             while (document!!.select(episodeListNextPageSelector()).first() != null) {
-               pageCount += 1
-               val response = client.newCall(episodeListRequest(anime.link, pageCount)).execute()
-               document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
+                pageCount += 1
+                val response = client.newCall(episodeListRequest(anime.link, pageCount)).execute()
+                document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
 
-               episodes += document!!.select(episodeListSelector()).map { element ->
-                  episodeFromElement(element)!!
-               }
+                episodes += document!!.select(episodeListSelector()).map { element ->
+                    episodeFromElement(element)!!
+                }
             }
-         } else {
+        } else {
             var json = response!!.body!!.string()
             episodes = episodeListFromJson(anime.link, json)
 
             while (episodeListNextPageFromJson(json)) {
-               pageCount += 1 
-               val response = client.newCall(episodeListRequest(anime.link, pageCount)).execute()
-               json = response!!.body!!.string()
-               episodes += episodeListFromJson(anime.link, json)
+                pageCount += 1
+                val response = client.newCall(episodeListRequest(anime.link, pageCount)).execute()
+                json = response!!.body!!.string()
+                episodes += episodeListFromJson(anime.link, json)
             }
-         }
-      }
+        }
 
-      return episodes!!
-   }
+        return episodes!!
+    }
+
+    fun Call.asObservableSuccess(): Observable<Response> {
+        return asObservable().doOnNext { response ->
+            if (!response.isSuccessful) {
+                response.close()
+                throw Exception("HTTP error ${response.code}")
+            }
+        }
+    }
+
+    fun Call.asObservable(): Observable<Response> {
+        return Observable.unsafeCreate { subscriber ->
+            val call = clone()
+
+            val requestArbiter = object : AtomicBoolean(), Producer, Subscription {
+                override fun request(n: Long) {
+                    if (n == 0L || !compareAndSet(false, true)) return
+
+                    try {
+                        val response = call.execute()
+                        if (!subscriber.isUnsubscribed) {
+                            subscriber.onNext(response)
+                            subscriber.onCompleted()
+                        }
+                    } catch (error: Exception) {
+                        if (!subscriber.isUnsubscribed) {
+                            subscriber.onError(error)
+                        }
+                    }
+                }
+
+                override fun unsubscribe() {
+                    call.cancel()
+                }
+
+                override fun isUnsubscribed(): Boolean {
+                    return call.isCanceled()
+                }
+            }
+
+            subscriber.add(requestArbiter)
+            subscriber.setProducer(requestArbiter)
+        }
+    }
+
+    suspend fun <T> Observable<T>.awaitSingle(): T = single().awaitOne()
+
+    private suspend fun <T> Observable<T>.awaitOne(): T = suspendCancellableCoroutine { cont ->
+        cont.unsubscribeOnCancellation(
+            subscribe(
+                object : Subscriber<T>() {
+                    override fun onStart() {
+                        request(1)
+                    }
+
+                    override fun onNext(t: T) {
+                        cont.resume(t)
+                    }
+
+                    override fun onCompleted() {
+                        if (cont.isActive) cont.resumeWithException(
+                            IllegalStateException(
+                                "Should have invoked onNext"
+                            )
+                        )
+                    }
+
+                    override fun onError(e: Throwable) {}
+                }
+            )
+        )
+    }
+
+    fun <T> CancellableContinuation<T>.unsubscribeOnCancellation(sub: Subscription) =
+    invokeOnCancellation { sub.unsubscribe() }
 }

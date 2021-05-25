@@ -1,9 +1,9 @@
 package com.anime.dl.sources.models
 
 data class AnimeInfo(
-    val key: String,
-    val title: String,
-    val link: String,
+    val key: String = "",
+    val title: String = "",
+    val link: String = "",
     val description: String = "",
     val cover: String = "",
     val studios: String = "",
