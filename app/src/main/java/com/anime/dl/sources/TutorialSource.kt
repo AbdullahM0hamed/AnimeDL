@@ -25,15 +25,14 @@ class TutorialSource : HttpSource() {
     override fun browseAnimeFromJson(json: String): List<AnimeInfo>? {
         val array = JSONArray(json)
 
-        return array.asList().map { info ->
-            val json = info as JSONObject
+        return array.asJsonList().map { json ->
             AnimeInfo(
                 key="0",
                 title=json.getString("title"),
                 link=json.getString("link"),
                 description=json.getString("description"),
                 cover=json.getString("img"),
-                genres=json.getJSONArray("genres").asList()
+                genres=json.getJSONArray("genres").asStringList()
             )
         }
     }
@@ -47,8 +46,7 @@ class TutorialSource : HttpSource() {
         var (aniId) = match!!.destructured
         aniId = aniId.toString()
 
-        return array.getJSONArray(aniId).asList().map { info ->
-            val json = info as JSONObject
+        return array.getJSONArray(aniId).asJsonList().map { json ->
             EpisodeInfo(
                 key=json.getString("key"),
                 title=json.getString("number") + ". " + json.getString("title"),
@@ -63,8 +61,17 @@ class TutorialSource : HttpSource() {
         }
     }
 
-    fun JSONArray.asList(): List<String> {
+    fun JSONArray.asStringList(): List<String> {
         val list: List<String> = mutableListOf<String>()
+        for (i in 0 until length()) {
+            list.add(get(i))
+        }
+
+        return list
+    }
+
+    fun JSONArray.asJsonList(): List<JsonObject> {
+        val list = mutableListOf<JsonObject>()
         for (i in 0 until length()) {
             list.add(get(i))
         }
