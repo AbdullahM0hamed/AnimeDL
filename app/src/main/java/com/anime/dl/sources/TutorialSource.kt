@@ -8,7 +8,7 @@ import com.anime.dl.sources.models.EpisodeInfo
 import org.json.JSONArray
 import org.json.JSONObject
 
-class TutorialSource : HttpSource {
+class TutorialSource : HttpSource() {
 
     override val id = 0L
 
@@ -25,7 +25,7 @@ class TutorialSource : HttpSource {
     override fun browseAnimeFromJson(json: String): List<AnimeInfo>? {
         val array = JSONArray(json)
 
-        return array.toList().map { info ->
+        return array.asSequence().toList().map { info ->
             val json = info as JSONObject
             AnimeInfo(
                 key="0",
@@ -33,14 +33,14 @@ class TutorialSource : HttpSource {
                 link=json.getString("link"),
                 description=json.getString("description"),
                 cover=json.getString("img"),
-                genres=json.getJSONArray("genres").toList()
+                genres=json.getJSONArray("genres").asSequence().toList()
             )
         }
     }
 
     override fun episodeListRequest(link: String, page: Int) = GET("https://raw.githubusercontent.com/AbdullahM0hamed/AnimeDL/dev/TutorialSourceData/Episodes.json")
 
-    override fun episodeListFromJson(link: String, json: String): List<EpisodeInfo>? {
+    override fun episodeListFromJson(link: String, json: String): List<EpisodeInfo> {
         val array = JSONObject(json)
         val pattern = "anime/([0-9]+)/".toRegex()
         val match = pattern.find(link)
@@ -54,7 +54,7 @@ class TutorialSource : HttpSource {
                 title=json.getString("number") + ". " + json.getString("title"),
                 dateUpload=System.currentTimeMillis(),
                 ep_number=-1f,
-                thumbnail=if (json.toMap().containsKey("thumbnail")) {
+                thumbnail=if (json.keys().asSequence().toList().contains("thumbnail")) {
                     json.getString("thumbnail")
                 } else {
                     ""
