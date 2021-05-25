@@ -62,7 +62,7 @@ class TutorialSource : HttpSource() {
     }
 
     fun JSONArray.asStringList(): List<String> {
-        val list: List<String> = mutableListOf<String>()
+        val list = mutableListOf<String>()
         for (i in 0 until length()) {
             list.add(get(i))
         }
@@ -70,8 +70,8 @@ class TutorialSource : HttpSource() {
         return list
     }
 
-    fun JSONArray.asJsonList(): List<JsonObject> {
-        val list = mutableListOf<JsonObject>()
+    fun JSONArray.asJsonList(): List<JSONObject> {
+        val list = mutableListOf<JSONObject>()
         for (i in 0 until length()) {
             list.add(get(i))
         }
