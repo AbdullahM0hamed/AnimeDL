@@ -122,7 +122,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
     }
 
     fun newState(state: BrowseAnimeState) {
-        hideProgresaBar()
+        hideProgressBar()
         val items = mutableListOf<GenericItem>()
 
         state.browseAnime?.anime?.map {
