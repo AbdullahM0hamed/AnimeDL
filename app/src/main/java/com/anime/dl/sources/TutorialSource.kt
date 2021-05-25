@@ -64,8 +64,8 @@ class TutorialSource : HttpSource() {
     }
 
     fun JSONArray.asList(): List<String> {
-        val list: List<String> = emptyList()
-        for (i in 0 until size) {
+        val list: List<String> = mutableList<String>()
+        for (i in 0 until length()) {
             list.add(get(i))
         }
 
