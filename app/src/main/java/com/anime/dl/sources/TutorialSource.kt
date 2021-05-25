@@ -63,8 +63,8 @@ class TutorialSource : HttpSource() {
         }
     }
 
-    fun JSONArray.asList(): List<Any> {
-        val list = emptyList()
+    fun JSONArray.asList(): List<String> {
+        val list: List<String> = emptyList()
         for (i in 0 until size) {
             list.add(get(i))
         }
