@@ -17,6 +17,7 @@ import com.anime.dl.R
 import com.anime.dl.actions.UpdateAnimeInfo
 import com.anime.dl.databinding.AnimeControllerBinding
 import com.anime.dl.sources.models.AnimeInfo
+import com.anime.dl.sources.models.EpisodeInfo
 import com.anime.dl.sources.Source
 import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.browse.source.EpisodeItem
@@ -102,7 +103,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
 
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = FastAdapter.with(listOf(itemAdapter))
-        storeSubscription = mainStore.subscribe { newState(mainStore.state.animeInfoState.anime) }
+        storeSubscription = mainStore.subscribe { newState(mainStore.state.animeInfoState.anime, mainAtore.state.animeInfoState.episodes) }
         binding.swipeRefresh.isRefreshing = true
         binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!)) }.launchIn(scope)
     }
@@ -140,14 +141,18 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    fun newState(anime: AnimeInfo?) {
+    fun newState(anime: AnimeInfo?, episodes: List<EpisodeInfo>?) {
         binding.swipeRefresh.isRefreshing = false
         binding.animeTitle.text = anime?.title
         binding.summaryText.text = anime?.description
 
         val items = mutableListOf<GenericItem>()
-        source?.getEpisodeList(anime!!, 1)?.map {
-            items.add(EpisodeItem(it))
+
+        source?.getEpisodeList(anime!!, 1)
+        if (episodes != null) {
+            episodes!!.map {
+                items.add(EpisodeItem(it))
+            }
         }
 
         itemAdapter.set(items)

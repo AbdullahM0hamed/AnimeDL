@@ -1,14 +1,15 @@
 package com.anime.dl.reducers
 
 import com.anime.dl.App
+import com.anime.dl.actions.AnimeInfoResult
 import com.anime.dl.actions.BrowseAnimeResult
 import com.anime.dl.actions.FindExtensions
 import com.anime.dl.actions.GetBrowseAnime
 import com.anime.dl.actions.InstallExtension
 import com.anime.dl.actions.UpdateAnimeInfo
 import com.anime.dl.extensions.ExtensionManager
-import com.anime.dl.states.AppState
 import com.anime.dl.states.AnimeInfoState
+import com.anime.dl.states.AppState
 import com.anime.dl.states.BrowseAnimeState
 import com.anime.dl.states.ExtensionListState
 import com.anime.dl.ui.main.mainStore
@@ -41,10 +42,12 @@ fun extensionListReducer(state: ExtensionListState, action: Any): ExtensionListS
 fun browseAnimeStateReducer(state: BrowseAnimeState, action: Any): BrowseAnimeState {
     var currentState = state
     if (action is GetBrowseAnime) {
-        Thread(Runnable {
-            val browseList = action.source.getAnimeList(action.page)
-            action.activity.runOnUiThread(Runnable { mainStore.dispatch(BrowseAnimeResult(browseList)) })
-        }).start()
+        Thread(
+            Runnable {
+                val browseList = action.source.getAnimeList(action.page)
+                action.activity.runOnUiThread(Runnable { mainStore.dispatch(BrowseAnimeResult(browseList)) })
+            }
+        ).start()
     } else if (action is BrowseAnimeResult) {
         currentState = currentState.copy(action.page)
     }
@@ -53,12 +56,18 @@ fun browseAnimeStateReducer(state: BrowseAnimeState, action: Any): BrowseAnimeSt
 }
 
 fun animeInfoStateReducer(state: AnimeInfoState, action: Any): AnimeInfoState {
+    var currentState = state
     if (action is UpdateAnimeInfo) {
-        var currentState = state
-        currentState = currentState.copy(action.source.getAnimeDetails(action.anime!!))
-
-        return currentState
+        Thread(
+            Runnable {
+                val anime = action.source.getAnimeDetails(action.anime!!)
+                val episodes = action.source.getEpisodeList(anime, 1)
+                action.activity.runOnUiThread(Runnable { mainStore.dispatch(AnimeInfoResult(anime, episodes)) })
+            }
+        ).start()
+    } else if (action is AnimeInfoResult) {
+        currentState = currentState.copy(action.anime, action.episodes)
     }
 
-    return state
+    return currentState
 }
