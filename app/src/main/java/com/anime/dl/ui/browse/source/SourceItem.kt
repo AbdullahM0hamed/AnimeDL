@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.anime.dl.App
 import com.anime.dl.R
+import com.anime.dl.action.AnimeInfoResult
 import com.anime.dl.databinding.SourceCompactGridItemBinding
 import com.anime.dl.sources.Source
 import com.anime.dl.sources.models.AnimeInfo
 import com.anime.dl.ui.anime.AnimeController
 import com.anime.dl.ui.browse.source.SourceController
+import com.anime.dl.ui.main.mainStore
 import com.anime.dl.widget.StateImageViewTarget
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -41,6 +43,7 @@ data class SourceItem(
         val context = App.applicationContext()
         binding.card.clipToOutline = true
         binding.root.setOnClickListener {
+            mainStore.dispatch(AnimeInfoResult(null, null))
             controller.router.pushController(RouterTransaction.with(AnimeController(anime, source)))
         }
 
