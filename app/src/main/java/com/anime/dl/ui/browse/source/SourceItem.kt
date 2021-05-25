@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.anime.dl.App
 import com.anime.dl.R
-import com.anime.dl.action.AnimeInfoResult
+import com.anime.dl.actions.AnimeInfoResult
 import com.anime.dl.databinding.SourceCompactGridItemBinding
 import com.anime.dl.sources.Source
 import com.anime.dl.sources.models.AnimeInfo
