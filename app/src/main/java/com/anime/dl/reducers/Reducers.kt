@@ -41,9 +41,9 @@ fun extensionListReducer(state: ExtensionListState, action: Any): ExtensionListS
 fun browseAnimeStateReducer(state: BrowseAnimeState, action: Any): BrowseAnimeState {
     var currentState = state
     if (action is GetBrowseAnime) {
-        action.activity.runOnUiThread(Runnable {
+        Thread(Runnable {
             val browseList = action.source.getAnimeList(action.page)
-            mainStore.dispatch(BrowseAnimeResult(browseList))
+            action.activity.runOnUiThread(Runnable { mainStore.dispatch(BrowseAnimeResult(browseList)) })
         })
     } else if (action is BrowseAnimeResult) {
         currentState = currentState.copy(action.page)
