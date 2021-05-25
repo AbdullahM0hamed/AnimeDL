@@ -115,7 +115,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         adapter = FastAdapter.with(listOf(itemAdapter))
         recycler?.adapter = adapter
         binding.catalogueView.addView(recycler)
-        mainStore.dispatch(GetBrowseAnime(source as Source, 1, activity!!))
+        mainStore.dispatch(GetBrowseAnime(source as Source, 1))
     }
 
     fun hideProgressBar() {
