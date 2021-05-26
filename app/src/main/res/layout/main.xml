@@ -32,6 +32,7 @@
             android:layout_height="?actionBarSize" 
             app:title="@string/app_name" 
             app:titleTextColor="@android:color/white"
+            app:collapseIcon="@drawable/ic_arrow_back_24dp"
             style="@style/Widget.MaterialComponents.Toolbar.Primary" />
 
     </com.google.android.material.appbar.AppBarLayout>
