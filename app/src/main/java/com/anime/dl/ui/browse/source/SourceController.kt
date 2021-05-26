@@ -85,7 +85,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
 
         searchItem.queryHint = resources!!.getString(R.string.action_search) + "..."
         
-        val id = resources.getIdentifier("android:id/search_src_text")
+        val id = resources!!.getIdentifier("android:id/search_src_text", null, null)
         val searchEditText = searchItem.findViewById(id)
         searchEditText?.gravity = Gravity.START
     }
