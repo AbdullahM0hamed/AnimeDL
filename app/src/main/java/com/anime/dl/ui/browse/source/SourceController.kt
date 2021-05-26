@@ -2,6 +2,7 @@ package com.anime.dl.ui.browse.source
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -73,6 +74,11 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
 
         super.onDestroyView(view)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.browse, menu)
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
