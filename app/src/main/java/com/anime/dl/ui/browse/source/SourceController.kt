@@ -80,7 +80,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         inflater.inflate(R.menu.browse, menu)
         val searchItem = menu.findItem(R.id.action_search)
 
-        search.setQueryHint(resources!!.getString(R.string.action_search) + "...")
+        searchItem.setQueryHint(resources!!.getString(R.string.action_search) + "...")
     }
 
 
