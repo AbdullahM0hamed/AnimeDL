@@ -100,7 +100,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
             }
         }
 
-        searchItem.setOnExpandActionListener(onActionExpandListener)
+        searchItem.setOnActionExpandListener(onActionExpandListener)
     }
 
 
