@@ -81,13 +81,26 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.browse, menu)
-        val searchItem = menu.findItem(R.id.action_search).actionView as SearchView
+        val searchItem = menu.findItem(R.id.action_search
+        val searchView = searchItem.actionView as SearchView
 
-        searchItem.queryHint = resources!!.getString(R.string.action_search) + "..."
-        
-        val id = resources!!.getIdentifier("android:id/search_src_text", null, null)
-        val searchEditText = searchItem.findViewById(id) as? EditText
-        searchEditText?.gravity = Gravity.START
+        searchView.queryHint = resources!!.getString(R.string.action_search) + "..."
+
+        val onActionExpandListener: MenuItem.OnActionExpandListener =
+        object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(menuItem: MenuItem): Boolean {
+                val id = resources!!.getIdentifier("android:id/search_src_text", null, null)
+                val searchEditText = searchView.findViewById(id) as? EditText
+                searchEditText?.gravity = Gravity.START
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(menuItem: MenuItem): Boolean {
+                return true
+            }
+        }
+
+        searchItem.setOnExpandActionListener(onActionExpandListener)
     }
 
 
