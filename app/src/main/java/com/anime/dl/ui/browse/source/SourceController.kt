@@ -86,6 +86,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         val searchView = searchItem.actionView as SearchView
 
         searchView.queryHint = resources!!.getString(R.string.action_search) + "..."
+        searchView.setIconifiedByDefault(false)
 
         val onActionExpandListener: MenuItem.OnActionExpandListener =
         object : MenuItem.OnActionExpandListener {
