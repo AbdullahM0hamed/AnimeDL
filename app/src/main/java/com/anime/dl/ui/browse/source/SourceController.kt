@@ -3,11 +3,13 @@ package com.anime.dl.ui.browse.source
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
-import android.view.MenuItem
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
@@ -80,11 +82,28 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.browse, menu)
-        val searchItem = menu.findItem(R.id.action_search).actionView as SearchView
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as SearchView
 
-        searchItem.queryHint = resources!!.getString(R.string.action_search) + "..."
-        searchItem.setIconifiedByDefault(false)
+        searchView.queryHint = resources!!.getString(R.string.action_search) + "..."
+
+        val onActionExpandListener: MenuItem.OnActionExpandListener =
+        object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(menuItem: MenuItem): Boolean {
+                val id = resources!!.getIdentifier("android:id/search_mag_icon", null, null)
+                val magIcon = searchView.findViewById(id) as? ImageView
+                magIcon?.setLayoutParams(LinearLayout.LayoutParams(0, 0))
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(menuItem: MenuItem): Boolean {
+                return true
+            }
+        }
+
+        searchItem.setOnActionExpandListener(onActionExpandListener)
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
