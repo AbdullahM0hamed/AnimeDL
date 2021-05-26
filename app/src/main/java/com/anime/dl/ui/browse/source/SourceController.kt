@@ -1,12 +1,14 @@
 package com.anime.dl.ui.browse.source
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
@@ -82,6 +84,10 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         val searchItem = menu.findItem(R.id.action_search).actionView as SearchView
 
         searchItem.queryHint = resources!!.getString(R.string.action_search) + "..."
+        
+        val id = resources.getIdentifier("android:id/search_src_text")
+        val searchEditText = searchItem.findViewById(id)
+        searchEditText?.gravity = Gravity.START
     }
 
 
