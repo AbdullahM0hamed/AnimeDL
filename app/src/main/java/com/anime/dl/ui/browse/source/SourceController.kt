@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -80,7 +81,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         inflater.inflate(R.menu.browse, menu)
         val searchItem = menu.findItem(R.id.action_search)
 
-        searchItem.getActionView().setQueryHint(resources!!.getString(R.string.action_search) + "...")
+        (searchItem.getActionView() as SearchView).setQueryHint(resources!!.getString(R.string.action_search) + "...")
     }
 
 
