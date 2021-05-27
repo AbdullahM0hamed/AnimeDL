@@ -87,6 +87,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 itemAdapter.clear()
+                binding.progress.isVisible = true
                 thread {
                     val browseList = source!!.getSearchList(query, 1)
                     activity!!.runOnUiThread {
