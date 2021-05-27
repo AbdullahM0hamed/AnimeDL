@@ -83,9 +83,6 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         val searchView = menu.findItem(R.id.action_search).actionView as SearchView
 
         searchView.queryHint = resources!!.getString(R.string.action_search) + "..."
-        val searchEditFrame = searchView!!.findViewById<View>(R.id.search_edit_frame) as LinearLayout
-        val layoutParams = searchEditFrame.layoutParams as LinearLayout.LayoutParams
-        layoutParams.leftMargin = -10
     }
 
 
