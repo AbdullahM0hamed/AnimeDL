@@ -85,7 +85,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         searchView.queryHint = resources!!.getString(R.string.action_search) + "..."
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQuerySubmit(query: String): Boolean {
+            override fun onQueryTextSubmit(query: String): Boolean {
                 itemAdapter.clear()
                 thread {
                     val browseList = source!!.getSearchList(query, 1)
