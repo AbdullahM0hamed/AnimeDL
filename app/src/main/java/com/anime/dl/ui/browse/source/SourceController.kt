@@ -149,7 +149,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
     }
 
     fun newState(state: BrowseAnimeState) {
-        if (state?.anime != null) {
+        if (state?.browseAnime != null) {
             hideProgressBar()
         }
 
