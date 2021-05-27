@@ -26,6 +26,7 @@ import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
+import kotlin.concurrent.thread
 import org.reduxkotlin.StoreSubscription
 
 class SourceController(val bundle: Bundle) : BaseController<SourceControllerBinding>() {
@@ -83,7 +84,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
 
         searchView.queryHint = resources!!.getString(R.string.action_search) + "..."
 
-        searchView.setOnQueryListener(object : SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQuerySubmit(query: String): Boolean {
                 itemAdapter.clear()
                 thread {
@@ -92,6 +93,8 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
                         mainStore.dispatch(BrowseAnimeResult(browseList))
                     }
                 }
+
+                return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean = true
