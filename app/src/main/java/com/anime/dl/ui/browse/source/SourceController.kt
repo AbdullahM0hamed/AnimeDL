@@ -127,7 +127,10 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         adapter = FastAdapter.with(listOf(itemAdapter))
         recycler?.adapter = adapter
         binding.catalogueView.addView(recycler)
-        getBrowseAnime()
+        
+        if (mainStore.state.browseAnimeState?.browseAnime == null) {
+            getBrowseAnime()
+        }
     }
 
     fun hideProgressBar() {
