@@ -13,7 +13,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anime.dl.App
 import com.anime.dl.R
-import com.anime.dl.actions.UpdateAnimeInfo
+import com.anime.dl.actions.AnimeInfoResult
 import com.anime.dl.databinding.AnimeControllerBinding
 import com.anime.dl.sources.Source
 import com.anime.dl.sources.models.AnimeInfo
@@ -104,13 +104,13 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         binding.recycler.adapter = FastAdapter.with(listOf(itemAdapter))
         storeSubscription = mainStore.subscribe { newState(mainStore.state.animeInfoState.anime, mainStore.state.animeInfoState.episodes) }
         binding.swipeRefresh.isRefreshing = true
-        binding.swipeRefresh.refreshes().onEach { mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!, activity!!)) }.launchIn(scope)
+        binding.swipeRefresh.refreshes().onEach { getAnimeInfo() }.launchIn(scope)
     }
 
     override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
         super.onChangeStarted(handler, type)
         if (type.isPush || type.isEnter) {
-            mainStore.dispatch(UpdateAnimeInfo(anime!!, source!!, activity!!))
+            getAnimeInfo()
         }
     }
 
@@ -137,6 +137,19 @@ class AnimeController : BaseController<AnimeControllerBinding> {
     override fun setActionBar() {
         actionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp)
         actionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    fun getAnimeInfo() {
+        binding.swipeRefresh.isRefreshing = true
+        Thread(
+            Runnable {
+                val info = source!!.getAnimeDetails(anime!!)
+                activity!!.runOnUiThread(Runnable { mainStore.dispatch(AnimeInfoResult(info, null)) })
+
+                val episodes = source!!.getEpisodeList(info, 1)
+                activity!!.runOnUiThread(Runnable { mainStore.dispatch(AnimeInfoResult(info, episodes)) })
+            }
+        ).start()
     }
 
     fun newState(anime: AnimeInfo?, episodes: List<EpisodeInfo>?) {

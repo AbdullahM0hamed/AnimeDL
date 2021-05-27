@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anime.dl.App
 import com.anime.dl.R
-import com.anime.dl.actions.GetBrowseAnime
+import com.anime.dl.actions.BrowseAnimeResult
 import com.anime.dl.databinding.SourceControllerBinding
 import com.anime.dl.extensions.ExtensionManager
 import com.anime.dl.extensions.models.Extension
@@ -127,17 +127,28 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         adapter = FastAdapter.with(listOf(itemAdapter))
         recycler?.adapter = adapter
         binding.catalogueView.addView(recycler)
-        mainStore.dispatch(GetBrowseAnime(source as Source, 1, activity!!))
+        getBrowseAnime()
     }
 
     fun hideProgressBar() {
         binding.progress.isVisible = false
     }
 
+    fun getBrowseAnime() {
+        Thread(
+            Runnable {
+                val browseList = source!!.getAnimeList(1)
+                activity.runOnUiThread(
+                    Runnable {
+                        mainStore.dispatch(BrowseAnimeResult(browseList))
+                    }
+                )
+            }
+        ).start()
+    }
+
     fun newState(state: BrowseAnimeState) {
-        if (state.browseAnime?.anime != null) {
-            hideProgressBar()
-        }
+        hideProgressBar()
 
         val items = mutableListOf<GenericItem>()
 

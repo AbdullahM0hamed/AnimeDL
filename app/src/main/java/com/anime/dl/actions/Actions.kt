@@ -10,8 +10,6 @@ import com.anime.dl.sources.models.EpisodeInfo
 // Extension Actions
 class FindExtensions
 data class InstallExtension(val extension: Extension)
-data class GetBrowseAnime(val source: Source, val page: Int, val activity: Activity)
 data class BrowseAnimeResult(val page: AnimePage)
-data class UpdateAnimeInfo(val anime: AnimeInfo, val source: Source, val activity: Activity)
 data class AnimeInfoResult(val anime: AnimeInfo, val episodes: List<EpisodeInfo>)
 class NullifyAnimeInfoState
