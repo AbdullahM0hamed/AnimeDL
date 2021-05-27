@@ -85,8 +85,6 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         val searchView = menu.findItem(R.id.action_search).actionView as SearchView
 
         searchView.queryHint = resources!!.getString(R.string.action_search) + "..."
-        searchView.setIconifiedByDefault(false)
-        searchView.setIconified(false)
     }
 
 
