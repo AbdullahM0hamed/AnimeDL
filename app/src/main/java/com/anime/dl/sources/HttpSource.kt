@@ -80,7 +80,7 @@ abstract class HttpSource : Source {
 
     open fun searchAnimeFromJson(query: String, json: String): List<AnimeInfo>? = null
 
-    open fun searchAnimeNextPageFromJson(): Boolean = false
+    open fun searchAnimeNextPageFromJson(json: String): Boolean = false
 
     open fun episodeListRequest(link: String, page: Int): Request = browseAnimeRequest(page)
 
@@ -124,13 +124,13 @@ abstract class HttpSource : Source {
             if (searchAnimeSelector() != null) {
                val document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
                anime = document.select(searchAnimeSelector()).map { element ->
-                   searchAnimeFromElement(element)!!
+                   searchAnimeFromElement(query, element)!!
                }
 
                hasNextPage = document.select(searchAnimeNextPageSelector()).first() != null
            } else {
                val json = response!!.body!!.string()
-               anime = searchAnimeFromJson(json)
+               anime = searchAnimeFromJson(query, json)
                hasNextPage = searchAnimeNextPageFromJson(json)
            }
        }
