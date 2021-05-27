@@ -154,7 +154,10 @@ class AnimeController : BaseController<AnimeControllerBinding> {
 
     fun newState(anime: AnimeInfo?, episodes: List<EpisodeInfo>?) {
         if (anime != null) {
-            binding.swipeRefresh.isRefreshing = false
+            if (episodes != null) {
+                binding.swipeRefresh.isRefreshing = false
+            }
+
             binding.animeTitle.text = anime?.title
             binding.summaryText.text = anime?.description
 
