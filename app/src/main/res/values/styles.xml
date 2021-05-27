@@ -22,7 +22,7 @@
     <style name="AppSearchViewStyle" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:searchIcon">@drawable/ic_search_24dp</item>
         <item name="android:queryHint">@string/search_hint</item>
-        <item name="android:background">@color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="Theme.Widget.Tabs" parent="@style/Widget.MaterialComponents.TabLayout">
