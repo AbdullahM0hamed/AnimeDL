@@ -135,6 +135,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
     }
 
     fun getBrowseAnime() {
+        binding.progress.isVisible = true
         Thread(
             Runnable {
                 val browseList = source!!.getAnimeList(1)
