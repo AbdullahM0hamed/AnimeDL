@@ -1,7 +1,7 @@
 package com.anime.dl.sources
 
-import com.anime.dl.sources.models.AnimePage
 import com.anime.dl.sources.models.AnimeInfo
+import com.anime.dl.sources.models.AnimePage
 import com.anime.dl.sources.models.EpisodeInfo
 import okhttp3.CacheControl
 import okhttp3.FormBody
@@ -12,7 +12,6 @@ import okhttp3.RequestBody
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
-import java.security.MessageDigest
 import java.util.concurrent.TimeUnit.MINUTES
 
 abstract class HttpSource : Source {
@@ -100,77 +99,77 @@ abstract class HttpSource : Source {
 
         client.newCall(browseAnimeRequest(page)).execute().let { response ->
             if (browseAnimeSelector() != null) {
-               val document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
-               anime = document.select(browseAnimeSelector()).map { element ->
-                   browseAnimeFromElement(element)!!
-               }
+                val document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
+                anime = document.select(browseAnimeSelector()).map { element ->
+                    browseAnimeFromElement(element)!!
+                }
 
-               hasNextPage = document.select(browseAnimeNextPageSelector()).first() != null
-           } else {
-               val json = response!!.body!!.string()
-               anime = browseAnimeFromJson(json)
-               hasNextPage = browseAnimeNextPageFromJson(json)
-           }
-       }
+                hasNextPage = document.select(browseAnimeNextPageSelector()).first() != null
+            } else {
+                val json = response!!.body!!.string()
+                anime = browseAnimeFromJson(json)
+                hasNextPage = browseAnimeNextPageFromJson(json)
+            }
+        }
 
-       return AnimePage(anime!!, hasNextPage)
-   }
+        return AnimePage(anime!!, hasNextPage)
+    }
 
-   override fun getSearchList(query: String, page: Int): AnimePage {
-      var anime: List<AnimeInfo>? = null
+    override fun getSearchList(query: String, page: Int): AnimePage {
+        var anime: List<AnimeInfo>? = null
         var hasNextPage: Boolean = false
 
         client.newCall(searchAnimeRequest(query, page)).execute().let { response ->
             if (searchAnimeSelector() != null) {
-               val document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
-               anime = document.select(searchAnimeSelector()).map { element ->
-                   searchAnimeFromElement(query, element)!!
-               }
+                val document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
+                anime = document.select(searchAnimeSelector()).map { element ->
+                    searchAnimeFromElement(query, element)!!
+                }
 
-               hasNextPage = document.select(searchAnimeNextPageSelector()).first() != null
-           } else {
-               val json = response!!.body!!.string()
-               anime = searchAnimeFromJson(query, json)
-               hasNextPage = searchAnimeNextPageFromJson(json)
-           }
-       }
+                hasNextPage = document.select(searchAnimeNextPageSelector()).first() != null
+            } else {
+                val json = response!!.body!!.string()
+                anime = searchAnimeFromJson(query, json)
+                hasNextPage = searchAnimeNextPageFromJson(json)
+            }
+        }
 
-       return AnimePage(anime!!, hasNextPage)
+        return AnimePage(anime!!, hasNextPage)
     }
 
-   override fun getEpisodeList(anime: AnimeInfo, page: Int): List<EpisodeInfo> {
-      var episodes: List<EpisodeInfo> = emptyList()
-      var pageCount: Int = page
+    override fun getEpisodeList(anime: AnimeInfo, page: Int): List<EpisodeInfo> {
+        var episodes: List<EpisodeInfo> = emptyList()
+        var pageCount: Int = page
 
-      client.newCall(episodeListRequest(anime.link, page)).execute().let { response ->
-         if (episodeListSelector() != null) {
-            var document: Document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
-            episodes = document!!.select(episodeListSelector()).map { element ->
-               episodeFromElement(element)!!
+        client.newCall(episodeListRequest(anime.link, page)).execute().let { response ->
+            if (episodeListSelector() != null) {
+                var document: Document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
+                episodes = document!!.select(episodeListSelector()).map { element ->
+                    episodeFromElement(element)!!
+                }
+
+                while (document!!.select(episodeListNextPageSelector()).first() != null) {
+                    pageCount += 1
+                    val response = client.newCall(episodeListRequest(anime.link, pageCount)).execute()
+                    document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
+
+                    episodes += document!!.select(episodeListSelector()).map { element ->
+                        episodeFromElement(element)!!
+                    }
+                }
+            } else {
+                var json = response!!.body!!.string()
+                episodes = episodeListFromJson(anime.link, json)
+
+                while (episodeListNextPageFromJson(json)) {
+                    pageCount += 1
+                    val response = client.newCall(episodeListRequest(anime.link, pageCount)).execute()
+                    json = response!!.body!!.string()
+                    episodes += episodeListFromJson(anime.link, json)
+                }
             }
+        }
 
-            while (document!!.select(episodeListNextPageSelector()).first() != null) {
-               pageCount += 1
-               val response = client.newCall(episodeListRequest(anime.link, pageCount)).execute()
-               document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
-
-               episodes += document!!.select(episodeListSelector()).map { element ->
-                  episodeFromElement(element)!!
-               }
-            }
-         } else {
-            var json = response!!.body!!.string()
-            episodes = episodeListFromJson(anime.link, json)
-
-            while (episodeListNextPageFromJson(json)) {
-               pageCount += 1 
-               val response = client.newCall(episodeListRequest(anime.link, pageCount)).execute()
-               json = response!!.body!!.string()
-               episodes += episodeListFromJson(anime.link, json)
-            }
-         }
-      }
-
-      return episodes!!
-   }
+        return episodes!!
+    }
 }

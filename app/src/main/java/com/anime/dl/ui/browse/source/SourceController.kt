@@ -7,7 +7,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
@@ -83,8 +82,21 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         val searchView = menu.findItem(R.id.action_search).actionView as SearchView
 
         searchView.queryHint = resources!!.getString(R.string.action_search) + "..."
-    }
 
+        searchView.setOnQueryListener(object : SearchView.OnQueryTextListener {
+            override fun onQuerySubmit(query: String): Boolean {
+                itemAdapter.clear()
+                thread {
+                    val browseList = source!!.getSearchList(query, 1)
+                    activity!!.runOnUiThread {
+                        mainStore.dispatch(BrowseAnimeResult(browseList))
+                    }
+                }
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean = true
+        })
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
@@ -127,7 +139,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         adapter = FastAdapter.with(listOf(itemAdapter))
         recycler?.adapter = adapter
         binding.catalogueView.addView(recycler)
-        
+
         if (mainStore.state.browseAnimeState?.browseAnime == null) {
             getBrowseAnime()
         }
@@ -139,16 +151,12 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
 
     fun getBrowseAnime() {
         binding.progress.isVisible = true
-        Thread(
-            Runnable {
-                val browseList = source!!.getAnimeList(1)
-                activity!!.runOnUiThread(
-                    Runnable {
-                        mainStore.dispatch(BrowseAnimeResult(browseList))
-                    }
-                )
+        thread {
+            val browseList = source!!.getAnimeList(1)
+            activity!!.runOnUiThread {
+                mainStore.dispatch(BrowseAnimeResult(browseList))
             }
-        ).start()
+        }
     }
 
     fun newState(state: BrowseAnimeState) {

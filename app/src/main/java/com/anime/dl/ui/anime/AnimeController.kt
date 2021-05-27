@@ -141,15 +141,13 @@ class AnimeController : BaseController<AnimeControllerBinding> {
 
     fun getAnimeInfo() {
         binding.swipeRefresh.isRefreshing = true
-        Thread(
-            Runnable {
-                val info = source!!.getAnimeDetails(anime!!)
-                activity!!.runOnUiThread(Runnable { mainStore.dispatch(AnimeInfoResult(info, mutableListOf<EpisodeInfo>())) })
+        thread {
+            val info = source!!.getAnimeDetails(anime!!)
+            activity!!.runOnUiThread { mainStore.dispatch(AnimeInfoResult(info, mutableListOf<EpisodeInfo>())) }
 
-                val episodes = source!!.getEpisodeList(info, 1)
-                activity!!.runOnUiThread(Runnable { mainStore.dispatch(AnimeInfoResult(info, episodes)) })
-            }
-        ).start()
+            val episodes = source!!.getEpisodeList(info, 1)
+            activity!!.runOnUiThread { mainStore.dispatch(AnimeInfoResult(info, episodes)) }
+        }
     }
 
     fun newState(anime: AnimeInfo?, episodes: List<EpisodeInfo>?) {
