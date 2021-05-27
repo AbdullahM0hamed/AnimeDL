@@ -82,27 +82,11 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.browse, menu)
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
+        val searchView = menu.findItem(R.id.action_search).actionView as SearchView
 
         searchView.queryHint = resources!!.getString(R.string.action_search) + "..."
         searchView.setIconifiedByDefault(false)
-
-        val onActionExpandListener: MenuItem.OnActionExpandListener =
-        object : MenuItem.OnActionExpandListener {
-            override fun onMenuItemActionExpand(menuItem: MenuItem): Boolean {
-                val id = resources!!.getIdentifier("android:id/search_mag_icon", null, null)
-                val magIcon = searchView.findViewById(id) as? ImageView
-                magIcon?.setLayoutParams(LinearLayout.LayoutParams(0, 0))
-                return true
-            }
-
-            override fun onMenuItemActionCollapse(menuItem: MenuItem): Boolean {
-                return true
-            }
-        }
-
-        searchItem.setOnActionExpandListener(onActionExpandListener)
+        searchView.setIconified(false)
     }
 
 
