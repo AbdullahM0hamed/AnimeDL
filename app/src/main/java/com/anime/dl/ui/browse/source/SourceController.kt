@@ -7,8 +7,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
@@ -85,6 +83,9 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         val searchView = menu.findItem(R.id.action_search).actionView as SearchView
 
         searchView.queryHint = resources!!.getString(R.string.action_search) + "..."
+        val searchEditFrame = searchView!!.findViewById<View>(R.id.search_edit_frame) as LinearLayout
+        val layoutParams = searchEditFrame.layoutParams as LinearLayout.LayoutParams
+        layoutParams.leftMargin = -10
     }
 
 
