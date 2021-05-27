@@ -144,7 +144,7 @@ class AnimeController : BaseController<AnimeControllerBinding> {
         Thread(
             Runnable {
                 val info = source!!.getAnimeDetails(anime!!)
-                activity!!.runOnUiThread(Runnable { mainStore.dispatch(AnimeInfoResult(info, null)) })
+                activity!!.runOnUiThread(Runnable { mainStore.dispatch(AnimeInfoResult(info, mutableListOf<EpisodeInfo>())) })
 
                 val episodes = source!!.getEpisodeList(info, 1)
                 activity!!.runOnUiThread(Runnable { mainStore.dispatch(AnimeInfoResult(info, episodes)) })

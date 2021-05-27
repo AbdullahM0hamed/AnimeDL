@@ -138,7 +138,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         Thread(
             Runnable {
                 val browseList = source!!.getAnimeList(1)
-                activity.runOnUiThread(
+                activity!!.runOnUiThread(
                     Runnable {
                         mainStore.dispatch(BrowseAnimeResult(browseList))
                     }
