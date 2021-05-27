@@ -2,6 +2,7 @@
 <resources>
     <style name="AppTheme" parent="@style/Theme.MaterialComponents.NoActionBar">
         <item name="chipStyle">@style/Theme.Widget.Chip</item>
+        <item name="searchViewStyle">@style/AppSearchViewStyle</item>
     </style>
 
     <style name="Theme.Widget.Chip" parent="Widget.MaterialComponents.Chip.Action">
@@ -16,6 +17,12 @@
 
         <!-- Collapse horizontal margin -->
         <item name="chipMinTouchTargetSize">30dp</item>
+    </style>
+
+    <style name="AppSearchViewStyle" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:searchIcon">@drawable/ic_search_24dp</item>
+        <item name="android:queryHint">@string/search_hint</item>
+        <item name="android:background">@color/transparent</item>
     </style>
 
     <style name="Theme.Widget.Tabs" parent="@style/Widget.MaterialComponents.TabLayout">

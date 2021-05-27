@@ -70,6 +70,18 @@ abstract class HttpSource : Source {
 
     open fun browseAnimeNextPageFromJson(json: String): Boolean = false
 
+    abstract fun searchAnimeRequest(query: String, page: Int): Request
+
+    open fun searchAnimeSelector(): String? = null
+
+    open fun searchAnimeFromElement(query: String, element: Element): AnimeInfo? = null
+
+    open fun searchAnimeNextPageSelector(): String? = null
+
+    open fun searchAnimeFromJson(query: String, json: String): List<AnimeInfo>? = null
+
+    open fun searchAnimeNextPageFromJson(): Boolean = false
+
     open fun episodeListRequest(link: String, page: Int): Request = browseAnimeRequest(page)
 
     open fun episodeListSelector(): String? = null
@@ -103,6 +115,28 @@ abstract class HttpSource : Source {
 
        return AnimePage(anime!!, hasNextPage)
    }
+
+   override fun getSearchList(query: String, page: Int): AnimePage {
+      var anime: List<AnimeInfo>? = null
+        var hasNextPage: Boolean = false
+
+        client.newCall(searchAnimeRequest(query, page)).execute().let { response ->
+            if (searchAnimeSelector() != null) {
+               val document = Jsoup.parse(response!!.body!!.string(), response.request.url.toString())
+               anime = document.select(searchAnimeSelector()).map { element ->
+                   searchAnimeFromElement(element)!!
+               }
+
+               hasNextPage = document.select(searchAnimeNextPageSelector()).first() != null
+           } else {
+               val json = response!!.body!!.string()
+               anime = searchAnimeFromJson(json)
+               hasNextPage = searchAnimeNextPageFromJson(json)
+           }
+       }
+
+       return AnimePage(anime!!, hasNextPage)
+    }
 
    override fun getEpisodeList(anime: AnimeInfo, page: Int): List<EpisodeInfo> {
       var episodes: List<EpisodeInfo> = emptyList()

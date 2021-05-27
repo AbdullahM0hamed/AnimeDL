@@ -37,6 +37,25 @@ class TutorialSource : HttpSource() {
         }
     }
 
+    override fun searchAnimeRequest(query: String, page: Int) = browseAnimeRequest(page)
+
+    override fun searchAnimeFromJson(query: String, json: String): List<AnimeInfo>? {
+        val array = JSONArray(json)
+
+        return array.asJsonList()
+            .filter { it.getString("title").contains(query, ignoreCase = true) }
+            .map { json ->
+                AnimeInfo(
+                key="0",
+                title=json.getString("title"),
+                link=json.getString("link"),
+                description=json.getString("description"),
+                cover=json.getString("img"),
+                genres=json.getJSONArray("genres").asStringList()
+            )
+        }
+    }
+
     override fun episodeListRequest(link: String, page: Int) = GET("https://raw.githubusercontent.com/AbdullahM0hamed/AnimeDL/dev/TutorialSourceData/Episodes.json")
 
     override fun episodeListFromJson(link: String, json: String): List<EpisodeInfo> {

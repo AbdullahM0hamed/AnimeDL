@@ -16,4 +16,5 @@
         <!-- Collapse horizontal margin -->
         <item name="chipMinTouchTargetSize">30dp</item>
     </style>
+
 </resources>
