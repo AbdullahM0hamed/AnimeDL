@@ -55,7 +55,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         return source?.name
     }
 
-    override fun handleBack() {
+    override fun handleBack(): Boolean {
         var isHandled = super.handleBack()
         if (isHandled) {
             mainStore.dispatch(ClearAnimeState())
