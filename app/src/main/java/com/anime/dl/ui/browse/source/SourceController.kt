@@ -106,6 +106,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         val webView = menu.findItem(R.id.action_open_in_webview).actionView
         webView.setOnClickListener {
             router.pushController(RouterTransaction.with(WebViewController(source?.title, source!!.baseUrl)))
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
