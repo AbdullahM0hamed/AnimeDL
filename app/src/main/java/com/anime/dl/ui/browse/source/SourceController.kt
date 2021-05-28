@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anime.dl.App
 import com.anime.dl.R
 import com.anime.dl.actions.BrowseAnimeResult
+import com.anime.dl.actions.ClearAnimeState
 import com.anime.dl.databinding.SourceControllerBinding
 import com.anime.dl.extensions.ExtensionManager
 import com.anime.dl.extensions.models.Extension
@@ -21,6 +22,8 @@ import com.anime.dl.sources.Source
 import com.anime.dl.states.BrowseAnimeState
 import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.main.mainStore
+import com.bluelinelabs.conductor.ControllerChangeHandler
+import com.bluelinelabs.conductor.ControllerChangeType
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.GenericItem
@@ -52,6 +55,14 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
 
     override fun getTitle(): String? {
         return source?.name
+    }
+
+    override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
+        if (isDestroyed) {
+            mainStore.dispatch(ClearAnimeState())
+        }
+
+        super.onChangeStarted(handler, type)
     }
 
     override fun onViewCreated(view: View) {
