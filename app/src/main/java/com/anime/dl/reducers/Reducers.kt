@@ -40,7 +40,7 @@ fun extensionListReducer(state: ExtensionListState, action: Any): ExtensionListS
 fun browseAnimeStateReducer(state: BrowseAnimeState, action: Any): BrowseAnimeState {
     var currentState = state
     if (action is BrowseAnimeResult) {
-        currentState = currentState.copy(action.page, actions?.query)
+        currentState = currentState.copy(action.page, action?.query)
     } 
 
     return currentState
