@@ -12,4 +12,4 @@ class FindExtensions
 data class InstallExtension(val extension: Extension)
 data class BrowseAnimeResult(val page: AnimePage)
 data class AnimeInfoResult(val anime: AnimeInfo, val episodes: List<EpisodeInfo>)
-class ClearAnimeInfoState
+class ClearAnimeState
