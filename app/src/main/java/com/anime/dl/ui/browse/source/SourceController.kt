@@ -102,18 +102,16 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
 
             override fun onQueryTextChange(newText: String): Boolean = true
         })
-
-        val webView = menu.findItem(R.id.action_open_in_web_view).actionView
-        webView.setOnClickListener {
-            router.pushController(RouterTransaction.with(WebViewController(source?.name, source!!.baseUrl)))
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            resetActionBar()
-            router.popCurrentController()
-            return true
+        when (item.itemId) {
+            android.R.id.home -> {
+                resetActionBar()
+                router.popCurrentController()
+                return true
+            }
+            R.id.action_open_in_webview -> router.pushController(RouterTransaction.with(WebViewController(source?.name, source!!.baseUrl)))
         }
 
         return super.onOptionsItemSelected(item)
