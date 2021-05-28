@@ -45,8 +45,6 @@ abstract class HttpSource : Source {
             .build()
     }
 
-    abstract val baseUrl: String
-
     open val versionId = 1
 
     val headers: Headers by lazy { headersBuilder().build() }

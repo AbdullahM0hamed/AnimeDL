@@ -21,6 +21,8 @@ import com.anime.dl.sources.Source
 import com.anime.dl.states.BrowseAnimeState
 import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.main.mainStore
+import com.anime.dl.ui.webview.WebViewController
+import com.bluelinelabs.conductor.RouterTransaction
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.GenericItem
@@ -100,6 +102,10 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
 
             override fun onQueryTextChange(newText: String): Boolean = true
         })
+
+        val webView = menu.findItem(R.id.action_open_in_webview).actionView
+        webView.setOnClickListener {
+            router.pushController(RouterTransaction.with(WebViewController(source?.title, source!!.baseUrl)))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
