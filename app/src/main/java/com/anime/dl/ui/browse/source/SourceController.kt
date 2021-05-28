@@ -111,7 +111,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
                 router.popCurrentController()
                 return true
             }
-            R.id.action_open_in_webview -> router.pushController(RouterTransaction.with(WebViewController(source?.name, source!!.baseUrl)))
+            R.id.action_open_in_web_view -> router.pushController(RouterTransaction.with(WebViewController(source?.name, source!!.baseUrl)))
         }
 
         return super.onOptionsItemSelected(item)
