@@ -17,7 +17,8 @@ data class ExtensionListState(
 )
 
 data class BrowseAnimeState(
-    val browseAnime: AnimePage? = null
+    val browseAnime: AnimePage? = null,
+    val query: String? = null
 )
 
 data class AnimeInfoState(

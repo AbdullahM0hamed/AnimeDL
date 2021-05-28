@@ -3,7 +3,6 @@ package com.anime.dl.reducers
 import com.anime.dl.App
 import com.anime.dl.actions.AnimeInfoResult
 import com.anime.dl.actions.BrowseAnimeResult
-import com.anime.dl.actions.ClearAnimeState
 import com.anime.dl.actions.FindExtensions
 import com.anime.dl.actions.InstallExtension
 import com.anime.dl.extensions.ExtensionManager
@@ -41,10 +40,8 @@ fun extensionListReducer(state: ExtensionListState, action: Any): ExtensionListS
 fun browseAnimeStateReducer(state: BrowseAnimeState, action: Any): BrowseAnimeState {
     var currentState = state
     if (action is BrowseAnimeResult) {
-        currentState = currentState.copy(action.page)
-    } else if (action is ClearAnimeState) {
-        currentState = BrowseAnimeState()
-    }
+        currentState = currentState.copy(action.page, actions?.query)
+    } 
 
     return currentState
 }

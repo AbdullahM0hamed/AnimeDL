@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anime.dl.App
 import com.anime.dl.R
 import com.anime.dl.actions.BrowseAnimeResult
-import com.anime.dl.actions.ClearAnimeState
 import com.anime.dl.databinding.SourceControllerBinding
 import com.anime.dl.extensions.ExtensionManager
 import com.anime.dl.extensions.models.Extension
@@ -55,15 +54,6 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         return source?.name
     }
 
-    override fun handleBack(): Boolean {
-        var isHandled = super.handleBack()
-        if (isHandled) {
-            mainStore.dispatch(ClearAnimeState())
-        }
-
-        return isHandled
-    }
-
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
 
@@ -101,7 +91,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
                 thread {
                     val browseList = source!!.getSearchList(query, 1)
                     activity!!.runOnUiThread {
-                        mainStore.dispatch(BrowseAnimeResult(browseList))
+                        mainStore.dispatch(BrowseAnimeResult(browseList, query))
                     }
                 }
 
@@ -154,7 +144,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         recycler?.adapter = adapter
         binding.catalogueView.addView(recycler)
 
-        if (mainStore.state.browseAnimeState?.browseAnime == null) {
+        if (mainStore.state.browseAnimeState?.browseAnime == null || mainStore.state.browseAnimeState?.query != null) {
             getBrowseAnime()
         }
     }
@@ -164,11 +154,12 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
     }
 
     fun getBrowseAnime() {
+        itemAdapter.clear()
         binding.progress.isVisible = true
         thread {
             val browseList = source!!.getAnimeList(1)
             activity!!.runOnUiThread {
-                mainStore.dispatch(BrowseAnimeResult(browseList))
+                mainStore.dispatch(BrowseAnimeResult(browseList, null))
             }
         }
     }
