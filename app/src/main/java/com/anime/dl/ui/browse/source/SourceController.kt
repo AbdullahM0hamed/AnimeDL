@@ -22,8 +22,6 @@ import com.anime.dl.sources.Source
 import com.anime.dl.states.BrowseAnimeState
 import com.anime.dl.ui.base.controller.BaseController
 import com.anime.dl.ui.main.mainStore
-import com.bluelinelabs.conductor.ControllerChangeHandler
-import com.bluelinelabs.conductor.ControllerChangeType
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.GenericItem
@@ -57,12 +55,13 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
         return source?.name
     }
 
-    override fun onChangeStarted(handler: ControllerChangeHandler, type: ControllerChangeType) {
-        if (isDestroyed) {
+    override fun handleBack() {
+        var isHandled = super.handleBack()
+        if (isHandled) {
             mainStore.dispatch(ClearAnimeState())
         }
 
-        super.onChangeStarted(handler, type)
+        return isHandled
     }
 
     override fun onViewCreated(view: View) {
