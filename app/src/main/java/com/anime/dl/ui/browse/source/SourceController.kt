@@ -103,9 +103,9 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
             override fun onQueryTextChange(newText: String): Boolean = true
         })
 
-        val webView = menu.findItem(R.id.action_open_in_webview).actionView
+        val webView = menu.findItem(R.id.action_open_in_web_view).actionView
         webView.setOnClickListener {
-            router.pushController(RouterTransaction.with(WebViewController(source?.title, source!!.baseUrl)))
+            router.pushController(RouterTransaction.with(WebViewController(source?.name, source!!.baseUrl)))
         }
     }
 
