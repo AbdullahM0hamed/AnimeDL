@@ -11,6 +11,7 @@ import com.anime.dl.states.AppState
 import com.anime.dl.ui.base.controller.PlaceholderController
 import com.anime.dl.ui.browse.BrowseController
 import com.anime.dl.ui.browse.extension.ExtensionItem
+import com.anime.dl.ui.settings.SettingsController
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction.with
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.nav_browse -> router.setRoot(with(BrowseController()))
                     R.id.nav_home -> router.setRoot(with(PlaceholderController()))
                     R.id.nav_downloads -> router.setRoot(with(PlaceholderController()))
-                    R.id.nav_settings -> router.setRoot(with(PlaceholderController()))
+                    R.id.nav_settings -> router.setRoot(with(SettingsController()))
                 }
             }
             true

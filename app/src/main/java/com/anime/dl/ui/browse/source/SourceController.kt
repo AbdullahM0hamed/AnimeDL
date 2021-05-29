@@ -81,7 +81,7 @@ class SourceController(val bundle: Bundle) : BaseController<SourceControllerBind
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.browse, menu)
+        inflater.inflate(R.menu.browse_menu, menu)
         val searchView = menu.findItem(R.id.action_search).actionView as SearchView
 
         searchView.queryHint = resources!!.getString(R.string.action_search) + "..."
