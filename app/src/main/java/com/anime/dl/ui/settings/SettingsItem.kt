@@ -12,13 +12,14 @@ data class SettingsItem(
 ) : AbstractBindingItem<SettingsItemBinding>() {
 
     override val type: Int = R.id.fastadapter_settings_item_id
+    lateinit var binding: SettingsItemBinding
 
     override fun createBinding(
         inflater: LayoutInflater,
         parent: ViewGroup?
     ): SettingsItemBinding {
         binding = SettingsItemBinding.inflate(inflater, parent, false)
-        return binding
+        return binding.root
     }
 
     override fun bindView(binding: SettingsItemBinding, payloads: List<Any>) {
