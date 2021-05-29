@@ -56,7 +56,7 @@
     <string name="settings_player">Player</string>
     <string name="settings_downloads">Downloads</string>
     <string name="settings_extensions">Extensions</string>
-    <string name="settings_backup">Backup</strings>
+    <string name="settings_backup">Backup</string>
     <string name="settings_advanced">Advanced</string>
 
 </resources>
