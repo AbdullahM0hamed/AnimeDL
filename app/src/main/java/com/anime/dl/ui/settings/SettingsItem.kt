@@ -19,7 +19,7 @@ data class SettingsItem(
         parent: ViewGroup?
     ): SettingsItemBinding {
         binding = SettingsItemBinding.inflate(inflater, parent, false)
-        return binding.root
+        return binding
     }
 
     override fun bindView(binding: SettingsItemBinding, payloads: List<Any>) {
