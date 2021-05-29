@@ -45,7 +45,7 @@
         android:layout_margin="16dp"
         android:gravity="center"
         android:text="Illusory placeholder text" 
-        app:layout_constraintBottom_toBottomOf="@id/monke_face_1" />
+        app:layout_constraintTop_toBottomOf="@id/monke_face_1" />
 
     <LinearLayout
         android:id="@+id/actions_container"
