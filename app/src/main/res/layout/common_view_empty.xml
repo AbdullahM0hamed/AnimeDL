@@ -21,8 +21,8 @@
     <ImageView
         android:id="@+id/monke_face_2"
         android:src="@drawable/monke_layer_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="@id/monke_face_1"
         app:layout_constraintEnd_toEndOf="@id/monke_face_1"
         app:layout_constraintTop_toTopOf="@id/monke_face_1"
@@ -31,8 +31,8 @@
     <ImageView
         android:id="@+id/monke_face_3"
         android:src="@drawable/monke_layer_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="@id/monke_face_1"
         app:layout_constraintEnd_toEndOf="@id/monke_face_1"
         app:layout_constraintTop_toTopOf="@id/monke_face_1"
