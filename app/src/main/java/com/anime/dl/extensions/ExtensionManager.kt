@@ -8,11 +8,6 @@ import com.anime.dl.sources.Source
 import com.anime.dl.sources.TutorialSource
 import dalvik.system.PathClassLoader
 import java.io.File
-import java.io.FileInputStream
-import java.net.URL
-import java.net.URLClassLoader
-import java.util.jar.JarEntry
-import java.util.jar.JarInputStream
 
 class ExtensionManager(private val context: Context) {
 
@@ -41,12 +36,12 @@ class ExtensionManager(private val context: Context) {
             installedExtensions
                 .add(
                     Extension.Installed(
-                        name="ryuanime",
-                        pkgName="com.anime.dl.sources.RyuAnime",
-                        lang="en",
-                        versionName="0.0",
-                        versionCode=1,
-                        isTutorial=false
+                        name = "ryuanime",
+                        pkgName = "com.anime.dl.sources.RyuAnime",
+                        lang = "en",
+                        versionName = "0.0",
+                        versionCode = 1,
+                        isTutorial = false
                     )
                 )
         } else {
@@ -88,7 +83,7 @@ class ExtensionManager(private val context: Context) {
         if (pkgName == "com.anime.dl.tutorial") {
             return TutorialSource()
         } else {
-            val file = File(context.filesDir, "${pkgName}.dex")
+            val file = File(context.filesDir, "$pkgName.dex")
             if (file.exists() && file.canRead()) {
                 return getSourceFromJar(pkgName, file)
             }
@@ -98,7 +93,7 @@ class ExtensionManager(private val context: Context) {
     }
 
     fun getSourceFromJar(pkgName: String, file: File): Source? {
-        val loader = PathClassLoader(file.absolutePath, null, context.classLoader
+        val loader = PathClassLoader(file.absolutePath, null, context.classLoader)
         var source: Source? = null
 
         when (val obj = Class.forName(pkgName, false, loader).newInstance()) {
@@ -108,5 +103,4 @@ class ExtensionManager(private val context: Context) {
 
         return source
     }
-
 }
