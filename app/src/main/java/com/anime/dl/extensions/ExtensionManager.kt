@@ -6,6 +6,7 @@ import com.anime.dl.R
 import com.anime.dl.extensions.models.Extension
 import com.anime.dl.sources.Source
 import com.anime.dl.sources.TutorialSource
+import dalvik.system.PathClassLoader
 import java.io.File
 import java.io.FileInputStream
 import java.net.URL
@@ -87,7 +88,7 @@ class ExtensionManager(private val context: Context) {
         if (pkgName == "com.anime.dl.tutorial") {
             return TutorialSource()
         } else {
-            val file = File(context.filesDir, "${pkgName}.jar")
+            val file = File(context.filesDir, "${pkgName}.dex")
             if (file.exists() && file.canRead()) {
                 return getSourceFromJar(pkgName, file)
             }
@@ -96,27 +97,10 @@ class ExtensionManager(private val context: Context) {
         return null
     }
 
-    fun getSourceFromJar(pkgName: String, file: File): Source? {
-        val jar = JarInputStream(FileInputStream(file.absolutePath))
-        var entry: JarEntry? = null
+    fun getSourceFromJar(pkgName: String, file: File): Source {
+        val loader = PathClassLoader("${pkgName}.dex", null, context.classLoader)
 
-        while (true) {
-            entry = jar.getNextJarEntry()
-            if (entry == null) {
-                break
-            }
-
-            val name = entry?.name
-
-            if ((name ?: "").startsWith("com/anime/dl/sources/") && (name ?: "").endsWith(".class")) {
-                val className = name?.substring(0, name?.length - 6)?.replace('/', '.')
-                val loader = URLClassLoader(arrayOf(URL("jar", "", "file:${file.absolutePath}!/")))
-
-                return loader.loadClass(className) as Source
-            }
-        }
-
-        return null
+        return Class.forName(pkgName, false, loader).newInstance() as Source
     }
 
 }
