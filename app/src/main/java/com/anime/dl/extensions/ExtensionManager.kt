@@ -73,14 +73,14 @@ class ExtensionManager(private val context: Context) {
         } else {
             val file = File(context.filesDir, "$pkgName.dex")
             if (file.exists() && file.canRead()) {
-                return getSourceFromJar(pkgName, file)
+                return getSourceFromDex(pkgName, file)
             }
         }
 
         return null
     }
 
-    fun getSourceFromJar(pkgName: String, file: File): Source? {
+    fun getSourceFromDex(pkgName: String, file: File): Source? {
         val loader = PathClassLoader(file.absolutePath, null, context.classLoader)
         var source: Source? = null
 
