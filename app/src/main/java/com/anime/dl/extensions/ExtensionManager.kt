@@ -108,10 +108,10 @@ class ExtensionManager(private val context: Context) {
             val name = entry?.name
 
             if ((name ?: "").startsWith("com/anime/dl/sources/") && (name ?: "").endsWith(".class")) {
-                val className = name?.substring(0, name?.length() - 6)?.replace('/', '.')
-                val loader = URLClassLoader(listOf(file.toURI().toURL()))
+                val className = name?.substring(0, name?.length - 6)?.replace('/', '.')
+                val loader = URLClassLoader(arrayOf(file.toURI().toURL()))
 
-                return Class.forName(name, true, loader)
+                return Class.forName(name, true, loader) as Source
             }
         }
 
