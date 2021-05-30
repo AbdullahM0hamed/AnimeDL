@@ -97,10 +97,16 @@ class ExtensionManager(private val context: Context) {
         return null
     }
 
-    fun getSourceFromJar(pkgName: String, file: File): Source {
-        val loader = PathClassLoader(file.absolutePath, null, context.classLoader)
+    fun getSourceFromJar(pkgName: String, file: File): Source? {
+        val loader = PathClassLoader(file.absolutePath, null, context.classLoader
+        var source: Source? = null
 
-        return Class.forName(pkgName, false, loader)
+        when (val obj = Class.forName(pkgName, false, loader).newInstance()) {
+            is Source -> source = obj
+            else -> source = null
+        }
+
+        return source
     }
 
 }
