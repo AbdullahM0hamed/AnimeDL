@@ -32,18 +32,6 @@ class ExtensionManager(private val context: Context) {
                         isTutorial = true
                     )
                 )
-
-            installedExtensions
-                .add(
-                    Extension.Installed(
-                        name = "ryuanime",
-                        pkgName = "com.anime.dl.sources.RyuAnime",
-                        lang = "en",
-                        versionName = "0.0",
-                        versionCode = 1,
-                        isTutorial = false
-                    )
-                )
         } else {
             availableExtensions
                 .add(
