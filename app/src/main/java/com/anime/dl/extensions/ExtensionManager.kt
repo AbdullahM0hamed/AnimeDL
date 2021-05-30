@@ -6,6 +6,11 @@ import com.anime.dl.R
 import com.anime.dl.extensions.models.Extension
 import com.anime.dl.sources.Source
 import com.anime.dl.sources.TutorialSource
+import java.io.File
+import java.io.FileInputStream
+import java.net.URLClassLoader
+import java.util.jar.JarEntry
+import java.util.jar.JarInputStream
 
 class ExtensionManager(private val context: Context) {
 
@@ -28,6 +33,18 @@ class ExtensionManager(private val context: Context) {
                         versionName = "0.0",
                         versionCode = 1,
                         isTutorial = true
+                    )
+                )
+
+            installedExtensions
+                .add(
+                    Extension.Installed(
+                        name="ryuanime",
+                        pkgName="com.anime.dl.ryuanime",
+                        lang="en",
+                        versionName="0.0",
+                        versionCode=1,
+                        isTutorial=false
                     )
                 )
         } else {
@@ -66,8 +83,39 @@ class ExtensionManager(private val context: Context) {
     }
 
     public fun getSource(pkgName: String): Source? {
-        if (pkgName == "com.anime.dl.tutorial") return TutorialSource()
+        if (pkgName == "com.anime.dl.tutorial") {
+            return TutorialSource()
+        } else {
+            val file = File(context.filesDir, "${pkgName}.jar")
+            if (file.exists() && file.canRead()) {
+                return getSourceFromJar(pkgName, file)
+            }
+        }
 
         return null
     }
+
+    fun getSourceFromJar(pkgName: String, file: File): Source? {
+        val jar = JarInputStream(FileInputStream(file.absolutePath))
+        var entry: JarEntry? = null
+
+        while (true) {
+            entry = jar.getNextJarEntry()
+            if (entry == null) {
+                break
+            }
+
+            val name = entry?.name
+
+            if ((name ?: "").startsWith("com/anime/dl/sources/") && (name ?: "").endsWith(".class")) {
+                val className = name?.substring(0, name?.length() - 6)?.replace('/', '.')
+                val loader = URLClassLoader(listOf(file.toURI().toURL()))
+
+                return Class.forName(name, true, loader)
+            }
+        }
+
+        return null
+    }
+
 }
