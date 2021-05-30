@@ -100,7 +100,7 @@ class ExtensionManager(private val context: Context) {
     fun getSourceFromJar(pkgName: String, file: File): Source {
         val loader = PathClassLoader("${pkgName}.dex", null, context.classLoader)
 
-        return Class.forName(pkgName, false, loader).newInstance() as Source
+        return Class.forName(pkgName, false, loader) as Source
     }
 
 }
