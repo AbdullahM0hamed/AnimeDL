@@ -66,7 +66,7 @@
 
     <string name="no_search_result_msg1">:monkecry: It looks like no anime with that name was found, please try searching with another name.</string>
     <string name="no_search_result_msg2">:monkecry: You are out of luch chief, no such anime was found.</string>
-    <string name="no_search_result_msg3">:monkecry: It looks like what you were looking for...can't be...found.</string>
+    <string name="no_search_result_msg3">:monkecry: It looks like what you were looking for...can\'t be...found.</string>
 
     <string name="failed_to_load_info_page_msg1">:monkewhat: It looks like this anime does not exist, maybe it was removed from the source?</string>
     <string name="failed_to_load_info_page_msg2">:monkewhat: That\'s weird, this should have not happened,\nthe only logical cause is that the anime was either removed from the source,\nor it was relocated to another page.</string>
