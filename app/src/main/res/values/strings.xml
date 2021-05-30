@@ -62,19 +62,19 @@
     <!--  String arrays  -->
     <string name="library_empty_msg1">:monkethreat: Your library is empty, go to the [sources] tab and find an anime to add to the library.</string>
     <string name="library_empty_msg2">:monkethreat: To keep track of your watch progress add an anime to the library!</string>
-    <string name="library_empty_msg3">:monkethreat: Ahoy! Don't just stand there! You must add an anime to the library first!</string>
+    <string name="library_empty_msg3">:monkethreat: Ahoy! Don\'t just stand there! You must add an anime to the library first!</string>
 
     <string name="no_search_result_msg1">:monkecry: It looks like no anime with that name was found, please try searching with another name.</string>
     <string name="no_search_result_msg2">:monkecry: You are out of luch chief, no such anime was found.</string>
     <string name="no_search_result_msg3">:monkecry: It looks like what you were looking for...can't be...found.</string>
 
     <string name="failed_to_load_info_page_msg1">:monkewhat: It looks like this anime does not exist, maybe it was removed from the source?</string>
-    <string name="failed_to_load_info_page_msg2">:monkewhat: That's weird, this should have not happened,\nthe only logical cause is that the anime was either removed from the source,\nor it was relocated to another page.</string>
+    <string name="failed_to_load_info_page_msg2">:monkewhat: That\'s weird, this should have not happened,\nthe only logical cause is that the anime was either removed from the source,\nor it was relocated to another page.</string>
     <string name="failed_to_load_info_page_msg3">:monkewhat: Now that was unexpected! Try refreshing, it might help!</string>
 
 
     <string name="no_extensions_found_msg1">:monkthink: Weird...all the extensions are gone, try checking your connection status.</string>
     <string name="no_extensions_found_msg2">:monkthink: Sources went brrr</string>
-    <string name="no_extensions_found_msg3">:monkthink: Well that's embarashing...you weren't supposed to see this message...</string>
+    <string name="no_extensions_found_msg3">:monkthink: Well that\'s embarashing...you weren't supposed to see this message...</string>
 
 </resources>
