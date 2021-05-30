@@ -6,6 +6,8 @@ import com.anime.dl.R
 import com.anime.dl.extensions.models.Extension
 import com.anime.dl.sources.Source
 import com.anime.dl.sources.TutorialSource
+import dalvik.system.PathClassLoader
+import java.io.File
 
 class ExtensionManager(private val context: Context) {
 
@@ -66,8 +68,27 @@ class ExtensionManager(private val context: Context) {
     }
 
     public fun getSource(pkgName: String): Source? {
-        if (pkgName == "com.anime.dl.tutorial") return TutorialSource()
+        if (pkgName == "com.anime.dl.tutorial") {
+            return TutorialSource()
+        } else {
+            val file = File(context.filesDir, "$pkgName.dex")
+            if (file.exists() && file.canRead()) {
+                return getSourceFromDex(pkgName, file)
+            }
+        }
 
         return null
+    }
+
+    fun getSourceFromDex(pkgName: String, file: File): Source? {
+        val loader = PathClassLoader(file.absolutePath, null, context.classLoader)
+        var source: Source? = null
+
+        when (val obj = Class.forName(pkgName, false, loader).newInstance()) {
+            is Source -> source = obj
+            else -> source = null
+        }
+
+        return source
     }
 }
