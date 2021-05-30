@@ -42,7 +42,7 @@ class ExtensionManager(private val context: Context) {
                 .add(
                     Extension.Installed(
                         name="ryuanime",
-                        pkgName="com.anime.dl.ryuanime",
+                        pkgName="com.anime.dl.sources.RyuAnime",
                         lang="en",
                         versionName="0.0",
                         versionCode=1,
