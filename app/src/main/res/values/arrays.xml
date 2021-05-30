@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<<resources>
+
+    <string-array name="empty_library">
+        <item>@string/library_empty_msg1</item>
+        <item>@string/library_empty_msg2</item>
+        <item>@string/library_empty_msg3</item>
+    </string-array>
+
+    <string-array name="no_search_results">
+        <item>@string/no_search_result_msg1</item>
+        <item>@string/no_search_result_msg2</item>
+        <item>@string/no_search_result_msg3</item>
+    </string-array>
+
+    <string-array name="anime_info_failed_to_load">
+        <item>@string/failed_to_load_info_page_msg1</item>
+        <item>@string/failed_to_load_info_page_msg2</item>
+        <item>@string/failed_to_load_info_page_msg3</item>
+    </string-array>
+
+    <string-array name="no_extensions_found">
+        <item>@string/no_extensions_found_msg1</item>
+        <item>@string/no_extensions_found_msg2</item>
+        <item>@string/no_extensions_found_msg3</item>
+    </string-array>
+
+</resources>
