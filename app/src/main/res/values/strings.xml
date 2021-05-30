@@ -75,6 +75,6 @@
 
     <string name="no_extensions_found_msg1">:monkthink: Weird...all the extensions are gone, try checking your connection status.</string>
     <string name="no_extensions_found_msg2">:monkthink: Sources went brrr</string>
-    <string name="no_extensions_found_msg3">:monkthink: Well that\'s embarashing...you weren't supposed to see this message...</string>
+    <string name="no_extensions_found_msg3">:monkthink: Well that\'s embarashing...you weren\'t supposed to see this message...</string>
 
 </resources>
