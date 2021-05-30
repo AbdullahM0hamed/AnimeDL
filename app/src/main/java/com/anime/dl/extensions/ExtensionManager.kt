@@ -8,6 +8,7 @@ import com.anime.dl.sources.Source
 import com.anime.dl.sources.TutorialSource
 import java.io.File
 import java.io.FileInputStream
+import java.net.URL
 import java.net.URLClassLoader
 import java.util.jar.JarEntry
 import java.util.jar.JarInputStream
@@ -109,9 +110,9 @@ class ExtensionManager(private val context: Context) {
 
             if ((name ?: "").startsWith("com/anime/dl/sources/") && (name ?: "").endsWith(".class")) {
                 val className = name?.substring(0, name?.length - 6)?.replace('/', '.')
-                val loader = URLClassLoader(arrayOf(file.toURI().toURL()))
+                val loader = URLClassLoader(arrayOf(URL("jar", "", "file:${file.absolutePath}!/")))
 
-                return Class.forName(name, true, loader) as Source
+                return loader.loadClass(className) as Source
             }
         }
 
