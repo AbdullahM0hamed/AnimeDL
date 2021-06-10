@@ -30,7 +30,6 @@
             android:background="@android:color/black"
             android:layout_width="fill_parent" 
             android:layout_height="?actionBarSize" 
-            app:layout_scrollFlags="scroll|enterAlways"
             app:title="@string/app_name" 
             app:titleTextColor="@android:color/white"
             app:collapseIcon="@drawable/ic_arrow_back_24dp"
