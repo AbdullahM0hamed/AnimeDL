@@ -4,4 +4,7 @@
 <color name="fullRippleColor">#ffc2c2c2</color>
 <color name="actionBarTintColor">#c8ffffff</color>
 <color name="gray_button">#ff404040</color>
+<color name="monke_dark_grey">#ff31373d</color>
+<color name="monke_grey">#ff66757f</color>
+<color name="monke_light_grey">#ff99aab5</color>
 </resources>
