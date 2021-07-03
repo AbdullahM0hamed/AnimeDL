@@ -27,7 +27,7 @@ class EmptyView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             )
         )
             
-        val colors = arrayOf(
+        val colors = intArrayOf(
             0xff31373d,
             0xff31373d,
             0xff31373d,
