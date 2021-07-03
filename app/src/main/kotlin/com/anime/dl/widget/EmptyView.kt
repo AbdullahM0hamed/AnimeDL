@@ -28,12 +28,12 @@ class EmptyView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         )
             
         val colors = intArrayOf(
-            0xff31373d,
-            0xff31373d,
-            0xff31373d,
-            0xff31373d,
-            0xff31373d,
-            0xff31373d
+            0xff31373d.toInt(),
+            0xff31373d.toInt(),
+            0xff31373d.toInt(),
+            0xff31373d.toInt(),
+            0xff31373d.toInt(),
+            0xff31373d.toInt()
         )
 
         binding.monkeFaceOne.setFillColors(colors)
