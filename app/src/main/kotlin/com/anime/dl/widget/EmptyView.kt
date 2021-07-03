@@ -8,8 +8,10 @@ import com.anime.dl.databinding.CommonViewEmptyBinding
 
 class EmptyView @JvmOverloads constructor(context: Context, attrs: AttributeSet?) : RelativeLayout(context, attrs) {
 
+    private lateinit var binding: CommonViewEmptyBinding
+
     init {
-        val binding = CommonViewEmptyBinding.inflate(LayoutInflater.from(context), this, true)
+        binding = CommonViewEmptyBinding.inflate(LayoutInflater.from(context), this, true)
         drawMonke()
     }
 
