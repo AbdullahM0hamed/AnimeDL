@@ -8,6 +8,7 @@ import com.anime.dl.sources.Source
 import com.anime.dl.sources.TutorialSource
 import dalvik.system.PathClassLoader
 import java.io.File
+import javax.script.ScriptEngineManager
 
 class ExtensionManager(private val context: Context) {
 
