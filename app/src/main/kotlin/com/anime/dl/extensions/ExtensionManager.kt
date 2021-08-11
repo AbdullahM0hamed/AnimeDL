@@ -15,6 +15,7 @@ class ExtensionManager(private val context: Context) {
     var installedExtensions = mutableListOf<Extension.Installed>()
     var availableExtensions = mutableListOf<Extension.Available>()
     var prefs = PreferenceManager.getDefaultSharedPreferences(context)
+    val engine = new ScriptEngineManager().getEngineByName("kts")!!
 
     init {
         initExtensions()
