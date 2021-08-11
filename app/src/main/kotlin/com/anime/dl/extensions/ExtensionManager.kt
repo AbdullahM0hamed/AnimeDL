@@ -6,7 +6,6 @@ import com.anime.dl.R
 import com.anime.dl.extensions.models.Extension
 import com.anime.dl.sources.Source
 import com.anime.dl.sources.TutorialSource
-import dalvik.system.PathClassLoader
 import java.io.File
 import javax.script.ScriptEngineManager
 
@@ -15,7 +14,6 @@ class ExtensionManager(private val context: Context) {
     var installedExtensions = mutableListOf<Extension.Installed>()
     var availableExtensions = mutableListOf<Extension.Available>()
     var prefs = PreferenceManager.getDefaultSharedPreferences(context)
-    val engine = ScriptEngineManager().getEngineByName("kts")!!
 
     init {
         initExtensions()
@@ -32,6 +30,17 @@ class ExtensionManager(private val context: Context) {
                         versionName = "0.0",
                         versionCode = 1,
                         isTutorial = true
+                    )
+                )
+            installedExtensions
+                .add(
+                    Extension.Installed(
+                        name="RyuAnime",
+                        pkgName="com.anime.dl.ryuanime",
+                        lang="en",
+                        versionName="0.0",
+                        versionCode=1,
+                        isTutorial=false
                     )
                 )
         } else {
@@ -73,24 +82,27 @@ class ExtensionManager(private val context: Context) {
         if (pkgName == "com.anime.dl.tutorial") {
             return TutorialSource()
         } else {
-            val file = File(context.filesDir, "$pkgName.dex")
+            val file = File(context.filesDir, "$pkgName.kts")
             if (file.exists() && file.canRead()) {
-                return getSourceFromDex(pkgName, file)
+                return getSourceFromKts(pkgName, file)
             }
         }
 
         return null
     }
 
-    fun getSourceFromDex(pkgName: String, file: File): Source? {
-        val loader = PathClassLoader(file.absolutePath, null, context.classLoader)
-        var source: Source? = null
-
-        when (val obj = Class.forName(pkgName, false, loader).newInstance()) {
-            is Source -> source = obj
-            else -> source = null
+    fun getSourceFromKts(pkgName: String, file: File): Source? {
+        val engine = ScriptEngineManager().getEngineByName("kts")!!
+        val name = pkgName.substringAfterLast(".")
+        val code = file.readText()
+        engine.eval(code)
+        
+        val source = engine.eval("${name}()")
+        
+        if (source is Source) {
+            return source
         }
 
-        return source
+        return null
     }
 }
