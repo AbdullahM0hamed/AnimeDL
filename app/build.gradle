@@ -50,7 +50,13 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:4.12.0"
 
     implementation 'com.jaredrummler:animated-svg-view:1.0.6'
-    compile 'io.apisense:rhino-android:1.1.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    compile "org.jetbrains.kotlin:kotlin-compiler-embeddable"
+    compile "org.jetbrains.kotlin:kotlin-script-util"
+    compile "org.jetbrains.kotlin:kotlin-script-runtime"
+
+    runtime "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable"
 
     final coroutines_version = '1.4.2'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
