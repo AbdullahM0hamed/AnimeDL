@@ -95,8 +95,7 @@ class ExtensionManager(private val context: Context) {
     fun getSourceFromKts(pkgName: String, file: File): Source? {
         val name = pkgName.substringAfterLast(".")
         val code = file.readText()
-        val execute = name.replaceFirstChar { it.uppercase() }
-        code.plus("\n$execute()")
+        code.plus("\n${name.capitalize()}()")
 
         val source = KtsObjectLoader().load<Source>(code)
         return source
