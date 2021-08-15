@@ -95,9 +95,10 @@ class ExtensionManager(private val context: Context) {
     fun getSourceFromKts(pkgName: String, file: File): Source? {
         val name = pkgName.substringAfterLast(".")
         val code = file.readText()
-        code.plus("\n${name.replaceFirstChar { it.uppercase() }}()")
+        val execute = name.replaceFirstChar { it.uppercase() }
+        code.plus("\n$execute()")
 
-        val source = KtsObjectLoader().load<Source>(code
+        val source = KtsObjectLoader().load<Source>(code)
         return source
     }
 }
