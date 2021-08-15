@@ -52,11 +52,7 @@ dependencies {
     implementation 'com.jaredrummler:animated-svg-view:1.0.6'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
-    compile "org.jetbrains.kotlin:kotlin-compiler-embeddable"
-    compile "org.jetbrains.kotlin:kotlin-script-util"
-    compile "org.jetbrains.kotlin:kotlin-script-runtime"
-
-    runtime "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable"
+    implementation 'com.github.s1monw1:KtsRunner:0.0.9'
 
     final coroutines_version = '1.4.2'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"

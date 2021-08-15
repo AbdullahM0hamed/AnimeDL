@@ -6,8 +6,8 @@ import com.anime.dl.R
 import com.anime.dl.extensions.models.Extension
 import com.anime.dl.sources.Source
 import com.anime.dl.sources.TutorialSource
+import de.swirtz.ktsrunner.objectloader.KtsObjectLoader
 import java.io.File
-import javax.script.ScriptEngineManager
 
 class ExtensionManager(private val context: Context) {
 
@@ -91,18 +91,13 @@ class ExtensionManager(private val context: Context) {
         return null
     }
 
+     // A wise man once said: "i can smell the security vulnerabilities from miles away"
     fun getSourceFromKts(pkgName: String, file: File): Source? {
-        val engine = ScriptEngineManager().getEngineByName("kts")!!
         val name = pkgName.substringAfterLast(".")
         val code = file.readText()
-        engine.eval(code)
-        
-        val source = engine.eval("${name}()")
-        
-        if (source is Source) {
-            return source
-        }
+        code.plus("\n${name.replaceFirstChar { it.uppercase() }}()")
 
-        return null
+        val source = KtsObjectLoader().load<Source>(code
+        return source
     }
 }
