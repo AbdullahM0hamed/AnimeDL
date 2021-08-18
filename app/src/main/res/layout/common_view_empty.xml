@@ -8,62 +8,44 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <com.jaredrummler.android.widget.AnimatedSvgView
-        android:id="@+id/monke_face_two"
+    <ImageView
+        android:id="@+id/monke_face_2"
         android:layout_width="109dp"
         android:layout_height="102dp"
-        app:animatedSvgGlyphStrings="@array/monke_layer_2"
-        app:animatedSvgFillColors="@array/monke_layer_2_colors"
-        app:animatedSvgFillStart="1200"
-        app:animatedSvgFillTime="1000"
-        app:animatedSvgImageSizeX="400"
-        app:animatedSvgImageSizeY="400"
-        app:animatedSvgTraceTime="2000"
-        app:animatedSvgTraceTimePerGlyph="1000"
-        app:layout_constraintBottom_toBottomOf="@+id/monke_face_one"
-        app:layout_constraintEnd_toEndOf="@+id/monke_face_one"
+        android:src="@drawable/monke_layer_2"
+        app:tint="#ff66757f"
+        app:layout_constraintBottom_toBottomOf="@+id/monke_face_1"
+        app:layout_constraintEnd_toEndOf="@+id/monke_face_1"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/monke_face_one"
-        app:layout_constraintTop_toTopOf="@+id/monke_face_one"
+        app:layout_constraintStart_toStartOf="@+id/monke_face_1"
+        app:layout_constraintTop_toTopOf="@+id/monke_face_1"
         app:layout_constraintVertical_bias="0.629" />
 
-    <com.jaredrummler.android.widget.AnimatedSvgView
-        android:id="@+id/monke_face_one"
+    <ImageView
+        android:id="@+id/monke_face_1"
         android:layout_width="109dp"
         android:layout_height="102dp"
         android:gravity="center"
+        android:src="@drawable/monke_layer_1"
         android:visibility="visible"
-        app:animatedSvgGlyphStrings="@array/monke_layer_1"
-        app:animatedSvgFillColors="@array/monke_layer_1_colors"
-        app:animatedSvgFillStart="1200"
-        app:animatedSvgFillTime="1000"
-        app:animatedSvgImageSizeX="400"
-        app:animatedSvgImageSizeY="400"
-        app:animatedSvgTraceTime="2000"
-        app:animatedSvgTraceTimePerGlyph="1000"
+        app:tint="#ff31373d"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.584" />
 
-    <com.jaredrummler.android.widget.AnimatedSvgView
-        android:id="@+id/monke_face_three"
+    <ImageView
+        android:id="@+id/monke_face_3"
         android:layout_width="103dp"
         android:layout_height="164dp"
+        android:src="@drawable/monke_layer_3"
         android:visibility="visible"
-        app:animatedSvgGlyphStrings="@array/monke_layer_3"
-        app:animatedSvgFillColors="@array/monke_layer_3_colors"
-        app:animatedSvgFillStart="1200"
-        app:animatedSvgFillTime="1000"
-        app:animatedSvgImageSizeX="400"
-        app:animatedSvgImageSizeY="400"
-        app:animatedSvgTraceTime="2000"
-        app:animatedSvgTraceTimePerGlyph="1000"
-        app:layout_constraintBottom_toBottomOf="@+id/monke_face_two"
-        app:layout_constraintEnd_toEndOf="@+id/monke_face_two"
-        app:layout_constraintStart_toStartOf="@+id/monke_face_two"
-        app:layout_constraintTop_toTopOf="@+id/monke_face_two" />
+        app:tint="#ff99aab5"
+        app:layout_constraintBottom_toBottomOf="@+id/monke_face_2"
+        app:layout_constraintEnd_toEndOf="@+id/monke_face_2"
+        app:layout_constraintStart_toStartOf="@+id/monke_face_2"
+        app:layout_constraintTop_toTopOf="@+id/monke_face_2" />
 
     <TextView
         android:id="@+id/text_label"
@@ -74,7 +56,7 @@
         android:text="Illusory placeholder text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monke_face_two" />
+        app:layout_constraintTop_toBottomOf="@+id/monke_face_2" />
 
     <LinearLayout
         android:id="@+id/actions_container"
