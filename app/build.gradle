@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.anime.dl"
-        minSdkVersion 24
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -27,6 +27,10 @@ android {
     }
     sourceSets {
         main.java.srcDirs = ['src/main/kotlin']
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
 }
 
