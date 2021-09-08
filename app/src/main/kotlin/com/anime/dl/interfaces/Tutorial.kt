@@ -23,7 +23,7 @@ interface Tutorial {
             object : TapTargetView.Listener() {
                 override fun onTargetClick(view: TapTargetView?) {
                     super.onTargetClick(view)
-                    view.performClick()
+                    view?.performClick()
                 }
             }
         )
