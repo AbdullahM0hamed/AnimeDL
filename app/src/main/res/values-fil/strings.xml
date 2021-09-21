@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="action_webview">WebView</string>
+    <string name="tutorial_source">Sangguniang sa Paggamit ng mga Pinagkukuhanan ng Panonoorin</string>
+    <string name="settings_player">Player</string>
+    <string name="settings_backup">Backup</string>
+    <string name="settings_appearance">Hitsura</string>
+    <string name="app_name">AnimeDL</string>
+    <string name="settings_advanced">Advanced</string>
+    <string name="information_webview_required">Ang WebView ay kinakailangan ng AnimeDL para sa ibang pinagkukunan ng panonoorin</string>
+    <string name="tutorial_click_source">Upang makapag tingin-tingin ng mga palabas sa nahihiligang pinagkukunan ng panonoorin, pumindot kahit saan sa nasabing pinagkukunan (maliban sa icon)</string>
+    <string name="tutorial_browse">Makakahanap ka ng pinagkukunan ng panonoorin sa bahaging \"Mag-browse\"</string>
+    <string name="ext_available">Magagamit</string>
+    <string name="ext_version">Bersyon: %1$s</string>
+    <string name="status_unknown">Hindi Batid</string>
+    <string name="tutorial_download_ext">Ang mga pindutang pang-download sa listahan ay nagbibigay-kakayahan na kumuha ng mga Anime sa kinakaukulang pook-sapot.</string>
+    <string name="sources">Pinagkukunan ng Panonoorin</string>
+    <string name="settings">Mga Opsyon</string>
+    <string name="search_hint">Maghanap...</string>
+    <string name="action_search">Maghanap</string>
+    <string name="action_open_in_web_view">Buksan sa WebView</string>
+    <string name="more">Ipakita</string>
+    <string name="less">Itago</string>
+    <string name="ext_lang">Wika: %1$s</string>
+    <string name="ext_installed">Naka-install</string>
+    <string name="home">Tambayan</string>
+    <string name="tutorial_understood">NAIINTINDIHAN KO</string>
+    <string name="settings_general">Pangkalahatan</string>
+    <string name="settings_extensions">Mga Extension</string>
+    <string name="extensions">Mga Extension</string>
+    <string name="extension_info">Inpormasyon ng Extensiyon</string>
+    <string name="settings_downloads">Mga Download</string>
+    <string name="download">Mga Download</string>
+    <string name="status_completed">Natapos na</string>
+    <string name="status_cancelled">Kinansela</string>
+    <string name="browse">Mag-browse</string>
+    <string name="animeTitle">Titulo ng Anime</string>
+    <string name="status_airing">Pinapalabas</string>
+    <string name="add_to_list">Idagdag sa listahan</string>
+    <string name="episodes_count">ika-%1d Episode</string>
+</resources>
