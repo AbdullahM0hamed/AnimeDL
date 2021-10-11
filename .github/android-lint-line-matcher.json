@@ -1,0 +1,17 @@
+{
+    "problemMatcher": [
+      {
+        "owner": "android-lint-line",
+        "pattern": [
+          {
+            "regexp": "^(.+):(\\d+):\\s+(Warning|Error):\\s+(.+)\\s+\\[(.+)\\]$",
+            "file": 1,
+            "line": 2,
+            "severity": 3,
+            "message": 4,
+            "code": 5
+          }
+        ]
+      }
+    ]
+}

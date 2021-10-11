@@ -37,12 +37,13 @@ jobs:
           java-version: 1.8
 
       - name: Build app
-        uses: eskatos/gradle-command-action@v1
-        with:
-          arguments: assembleRelease
-          wrapper-cache-enabled: true
-          dependencies-cache-enabled: true
-          configuration-cache-enabled: true
+        run: |
+          echo "::add-matcher::.github/android-lint-file-matcher.json"
+          echo "::add-matcher::.github/android-lint-line-matcher.json"
+          echo "::add-matcher::.github/gradle-matcher.json"
+          echo "::add-matcher::.github/kotlin-error-matcher.json"
+          echo "::add-matcher::.github/kotlin-warning-matcher.json"
+          ./gradlew assembleRelease
 
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1
