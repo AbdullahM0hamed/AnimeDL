@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity(), Tutorial {
 
     public lateinit var binding: MainBinding
     private lateinit var router: Router
-    val gonnaBreak = 0
-    gonnaBreak = 1
 
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
