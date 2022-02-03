@@ -97,7 +97,6 @@
                                 android:ellipsize="end"
                                 android:layout_gravity="start|center"
                                 android:maxLines="1"
-                                android:textColor="?actionBarTintColor"
                                 android:textSize="12sp"
                                 tools:text="Title Text" />
                         </LinearLayout>
