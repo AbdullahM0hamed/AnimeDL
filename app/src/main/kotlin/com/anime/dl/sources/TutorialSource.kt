@@ -24,6 +24,7 @@ class TutorialSource : HttpSource() {
 
     override fun browseAnimeFromJson(json: String): List<AnimeInfo>? {
         val array = JSONArray(json)
+        throw Exception(array.toString())
 
         return array.asJsonList().map { json ->
             AnimeInfo(

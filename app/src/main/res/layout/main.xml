@@ -35,6 +35,76 @@
             app:collapseIcon="@drawable/ic_arrow_back_24dp"
             style="@style/Widget.MaterialComponents.Toolbar.Primary" />
 
+        <FrameLayout
+            android:id="@+id/card_frame"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize" >
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_view"
+                android:layout_width="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                app:strokeWidth="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="24dp"
+                android:layout_height="match_parent" >
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/card_toolbar"
+                    tools:title="Search Library..."
+                    app:contentInsetStartWithNavigation="0dp"
+                    app:contentInsetEndWithActions="0dp"
+                    app:contentInsetStart="0dp"
+                    app:contentInsetEnd="0dp"
+                    android:background="@drawable/rect_ripple"
+                    app:navigationIcon="@drawable/ic_search_24dp"
+                    app:subtitleTextAppearance="?textAppearanceBodySmall"
+                    app:collapseIcon="@drawable/ic_arrow_back_24dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="start|center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="start|center"
+                            android:orientation="vertical">
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/card_title"
+                                style="?textAppearanceTitleLarge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:layout_gravity="center"
+                                android:maxLines="1"
+                                android:textSize="20sp"
+                                tools:drawableEnd="@drawable/ic_arrow_drop_down_24dp"
+                                tools:drawableStart="@drawable/ic_blank_24dp"
+                                tools:text="Title Text" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/card_subtitle"
+                                style="?textAppearanceTitleLarge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:layout_gravity="start|center"
+                                android:maxLines="1"
+                                android:textColor="?actionBarTintColor"
+                                android:textSize="12sp"
+                                tools:text="Title Text" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.appbar.MaterialToolbar>
+            </com.google.android.material.card.MaterialCardView>
+        </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
