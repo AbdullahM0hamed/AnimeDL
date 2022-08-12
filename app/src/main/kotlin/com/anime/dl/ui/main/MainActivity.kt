@@ -18,7 +18,7 @@ import org.reduxkotlin.createThreadSafeStore
 
 val mainStore = createThreadSafeStore(::appStateReducer, AppState())
 
-class MainActivity : AppCompatActivity(), Tutorial {
+class MainActivity : AppCompatActivity() {
 
     public lateinit var binding: MainBinding
     private lateinit var router: Router
