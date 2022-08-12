@@ -5,7 +5,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.anime.dl.R
 import com.anime.dl.databinding.MainBinding
-import com.anime.dl.interfaces.Tutorial
 import com.anime.dl.reducers.appStateReducer
 import com.anime.dl.states.AppState
 import com.anime.dl.ui.base.controller.PlaceholderController
@@ -55,13 +54,6 @@ class MainActivity : AppCompatActivity(), Tutorial {
         if (!router.hasRootController()) {
             binding.bottomNavigation.selectedItemId = R.id.nav_home
         }
-
-        tutorial(
-            this, 
-            binding.bottomNavigation.findViewById(R.id.nav_browse),
-            R.string.browse,
-            R.string.tutorial_browse
-        )
     }
 
     override fun onBackPressed() {
