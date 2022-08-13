@@ -9,24 +9,11 @@
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/monke_face_2"
-        android:layout_width="109dp"
-        android:layout_height="102dp"
-        android:src="@drawable/monke_layer_2"
-        app:tint="#ff66757f"
-        app:layout_constraintBottom_toBottomOf="@+id/monke_face_1"
-        app:layout_constraintEnd_toEndOf="@+id/monke_face_1"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/monke_face_1"
-        app:layout_constraintTop_toTopOf="@+id/monke_face_1"
-        app:layout_constraintVertical_bias="0.629" />
-
-    <ImageView
-        android:id="@+id/monke_face_1"
+        android:id="@+id/monke_face"
         android:layout_width="109dp"
         android:layout_height="102dp"
         android:gravity="center"
-        android:src="@drawable/monke_layer_1"
+        android:src="@drawable/monke"
         android:visibility="visible"
         app:tint="#ff31373d"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,18 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.584" />
-
-    <ImageView
-        android:id="@+id/monke_face_3"
-        android:layout_width="103dp"
-        android:layout_height="164dp"
-        android:src="@drawable/monke_layer_3"
-        android:visibility="visible"
-        app:tint="#ff99aab5"
-        app:layout_constraintBottom_toBottomOf="@+id/monke_face_2"
-        app:layout_constraintEnd_toEndOf="@+id/monke_face_2"
-        app:layout_constraintStart_toStartOf="@+id/monke_face_2"
-        app:layout_constraintTop_toTopOf="@+id/monke_face_2" />
 
     <TextView
         android:id="@+id/text_label"
