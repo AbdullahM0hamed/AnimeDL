@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigation.selectedItemId = R.id.nav_home
         }
 
-        val svgView = findViewById<AnimatedSvgView>(R.id.monke)
+        val svgView = findViewById<AnimatedSvgView>(R.id.monke_face)
         svgView.start()
     }
 
