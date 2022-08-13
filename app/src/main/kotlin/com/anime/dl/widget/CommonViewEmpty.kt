@@ -12,7 +12,7 @@ class CommonViewEmpty(
     atrrs: AttributeSet? = null
 ) : FrameLayout(context, atrrs) {
 
-    lateinit var binding
+    lateinit var binding: CommonViewEmptyBinding
 
     init {
         binding = CommonViewEmptyBinding.inflate(LayoutInflater.from(context), this, true)
