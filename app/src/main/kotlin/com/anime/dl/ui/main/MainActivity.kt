@@ -14,7 +14,6 @@ import com.anime.dl.ui.settings.SettingsController
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction.with
-import com.jaredrummler.android.widget.AnimatedSvgView
 import org.reduxkotlin.createThreadSafeStore
 
 val mainStore = createThreadSafeStore(::appStateReducer, AppState())
@@ -55,9 +54,6 @@ class MainActivity : AppCompatActivity() {
         if (!router.hasRootController()) {
             binding.bottomNavigation.selectedItemId = R.id.nav_home
         }
-
-        val svgView = findViewById<AnimatedSvgView>(R.id.monke_face)
-        svgView.start()
     }
 
     override fun onBackPressed() {
