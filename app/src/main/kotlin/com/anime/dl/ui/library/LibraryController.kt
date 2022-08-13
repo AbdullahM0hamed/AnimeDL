@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import com.anime.dl.R
 import com.anime.dl.databinding.LibraryControllerBinding
 import com.anime.dl.ui.base.controller.BaseController
-import com.jaredrummler.android.widget.AnimatedSvgView
 
 class LibraryController : BaseController<LibraryControllerBinding>() {
     
@@ -24,10 +23,4 @@ class LibraryController : BaseController<LibraryControllerBinding>() {
     override fun onAttach(view: View) {
         super.onAttach(view)
     }
-
-    fun animate() {
-        val svg = findViewById<AnimatedSvgView>(R.id.monke_face)
-        svg.start()
-    }
-
 }

@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.anime.dl.databinding.CommonViewEmptyBinding
 
-class CommonViewEmpty : FrameLayout(
+class CommonViewEmpty(
     context: Context,
     atrrs: AttributeSet? = null
-) {
-    private lateinit var binding
+) : FrameLayout(context, atrrs) {
+
+    lateinit var binding
 
     init {
         binding = CommonViewEmptyBinding.inflate(LayoutInflater.from(context), this, true)
