@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <com.jaredrummler.android.widget.AnimatedSvgView
+    <ImageView
         android:id="@+id/monke_face"
         android:layout_width="109dp"
         android:layout_height="102dp"
@@ -16,14 +16,6 @@
         android:src="@drawable/monke"
         android:visibility="visible"
         app:tint="#ff31373d"
-        app:animatedSvgFillColors="@array/google_glyph_colors"
-        app:animatedSvgGlyphStrings="@array/monke"
-        app:animatedSvgFillStart="1200"
-        app:animatedSvgFillTime="1000"
-        app:animatedSvgImageSizeX="800"
-        app:animatedSvgImageSizeY="800"
-        app:animatedSvgTraceTime="2000"
-        app:animatedSvgTraceTimePerGlyph="1000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

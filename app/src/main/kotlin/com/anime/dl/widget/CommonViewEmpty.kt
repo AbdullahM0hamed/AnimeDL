@@ -16,12 +16,10 @@ class CommonViewEmpty(
 
     init {
         binding = CommonViewEmptyBinding.inflate(LayoutInflater.from(context), this, true)
-        binding.monkeFace.start()
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        binding.monkeFace.start()
     }
 
     public fun setText(text: String) {
