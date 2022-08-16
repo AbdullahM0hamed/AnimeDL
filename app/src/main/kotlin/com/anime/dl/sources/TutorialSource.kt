@@ -68,6 +68,7 @@ class TutorialSource : HttpSource() {
         return array.getJSONArray(aniId).asJsonList().map { json ->
             EpisodeInfo(
                 key=json.getString("number"),
+                url=link,
                 title=json.getString("number") + ". " + json.getString("title"),
                 dateUpload=System.currentTimeMillis(),
                 ep_number=-1f,

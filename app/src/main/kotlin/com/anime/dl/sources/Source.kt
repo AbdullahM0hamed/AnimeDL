@@ -21,4 +21,6 @@ interface Source {
     fun getAnimeList(page: Int): AnimePage
 
     fun getSearchList(query: String, page: Int): AnimePage
+
+    fun getLinksList(episode: EpisodeInfo): List<String, String>
 }
