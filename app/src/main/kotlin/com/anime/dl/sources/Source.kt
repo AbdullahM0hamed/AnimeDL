@@ -6,8 +6,6 @@ import com.anime.dl.sources.models.EpisodeInfo
 
 interface Source {
 
-    val id: Long
-    
     val baseUrl: String
 
     val name: String

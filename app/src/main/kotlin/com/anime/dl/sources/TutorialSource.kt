@@ -10,8 +10,6 @@ import org.json.JSONObject
 
 class TutorialSource : HttpSource() {
 
-    override val id = 0L
-
     override val name = App.applicationContext().getString(R.string.tutorial_source)
 
     override val lang = "all"
