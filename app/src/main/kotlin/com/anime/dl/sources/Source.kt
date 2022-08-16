@@ -22,5 +22,5 @@ interface Source {
 
     fun getSearchList(query: String, page: Int): AnimePage
 
-    fun getLinksList(episode: EpisodeInfo): List<String, String>
+    fun getLinksList(episode: EpisodeInfo): Map<String, String>
 }

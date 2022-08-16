@@ -81,6 +81,8 @@ class TutorialSource : HttpSource() {
         }
     }
 
+    override fun getLinksList(episode: EpisodeInfo) = mapOf("illusion" to episode.url)
+
     fun JSONArray.asStringList(): List<String> {
         val list = mutableListOf<String>()
         for (i in 0 until length()) {
